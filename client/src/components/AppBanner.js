@@ -11,6 +11,11 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import PersonIcon from '@mui/icons-material/Person';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import MeetingRoomSharpIcon from '@mui/icons-material/MeetingRoomSharp';
+import { ListItemIcon, ListItemText } from '@mui/material';
 
 export default function AppBanner() {
     const { auth } = useContext(AuthContext);
@@ -54,12 +59,24 @@ export default function AppBanner() {
             }}
             open={isMenuOpen}
             onClose={handleMenuClose}
-        >  
-            <MenuItem onClick={handleMenuClose}><Link to='/login/'>Login</Link></MenuItem>
-            <MenuItem onClick={handleMenuClose}><Link to='/register/'>Create New Account</Link></MenuItem>
+        >
+            <MenuItem onClick={handleMenuClose} component={Link} to={'/login/'} >
+                <ListItemIcon>
+                    <PersonIcon />
+                </ListItemIcon>
+                <ListItemText>Login</ListItemText>
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose} component={Link} to='/register/'>
+                <ListItemIcon><PersonAddAlt1Icon /></ListItemIcon>
+                <ListItemText>Create New Account</ListItemText>
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose} component={Link} to='/guest/'>
+                <ListItemIcon><PersonSearchIcon /></ListItemIcon>
+                <ListItemText>Continue as Guest</ListItemText>
+            </MenuItem>
         </Menu>
     );
-    const loggedInMenu = 
+    const loggedInMenu =
         <Menu
             anchorEl={anchorEl}
             anchorOrigin={{
@@ -75,8 +92,11 @@ export default function AppBanner() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        </Menu>        
+            <MenuItem onClick={handleLogout}>
+                <ListItemIcon><MeetingRoomSharpIcon/></ListItemIcon>
+                <ListItemText>Logout</ListItemText>
+            </MenuItem>
+        </Menu>
 
     let editToolbar = "";
     let menu = loggedOutMenu;
@@ -86,7 +106,7 @@ export default function AppBanner() {
             editToolbar = <EditToolbar />;
         }
     }
-    
+
     function getAccountMenu(loggedIn) {
         if (loggedIn) {
             let firstInitial = auth.user.firstName.charAt(0).toUpperCase()
@@ -101,12 +121,12 @@ export default function AppBanner() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography                        
+                    <Typography
                         variant="h4"
                         noWrap
                         component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}     
-                        onClick={handleTop5L}                  
+                        sx={{ display: { xs: 'none', sm: 'block' } }}
+                        onClick={handleTop5L}
                     >
                         <Link style={{ textDecoration: 'none', color: 'white' }} to='/'>T<sup>5</sup>L</Link>
                     </Typography>
@@ -121,7 +141,7 @@ export default function AppBanner() {
                             onClick={handleProfileMenuOpen}
                             color="inherit"
                         >
-                            { getAccountMenu(auth.loggedIn) }
+                            {getAccountMenu(auth.loggedIn)}
                         </IconButton>
                     </Box>
                 </Toolbar>

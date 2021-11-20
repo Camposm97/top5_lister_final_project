@@ -114,7 +114,7 @@ export default function AppBanner() {
             let initials = firstInitial + lastInitial;
             return <span>{initials}</span>
         }
-        return <AccountCircle />;
+        return <AccountCircle fontSize='large'/>;
     }
 
     return (

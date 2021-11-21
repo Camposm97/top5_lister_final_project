@@ -2,10 +2,12 @@ import { useContext, useState } from 'react'
 import { GlobalStoreContext } from '../store'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import { Button, Grid } from '@mui/material';
 import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 function ListCard(props) {
     const { store } = useContext(GlobalStoreContext);
@@ -52,57 +54,59 @@ function ListCard(props) {
     }
 
     let cardElement =
-        <ListItem
-            disabled={store.isListNameEditActive}
-            id={idNamePair._id}
-            key={idNamePair._id}
-            sx={{ marginTop: '15px', display: 'flex', p: 1 }}
-            button
-            onClick={(event) => {
-                handleLoadList(event, idNamePair._id)
-            }
-            }
-            style={{
-                fontSize: '48pt',
-                width: '100%'
+        <Grid container direction='column' spacing={0}
+            sx={{
+                display: 'flex',
+                border: 1,
+                borderRadius: 5,
+                mb: 1,
+                backgroundColor: 'white'
             }}
         >
-            <Box sx={{ p: 1, flexGrow: 1 }}>{idNamePair.name}</Box>
-            <Box sx={{ p: 1 }}>
-                <IconButton
-                    // disabled={store.isListNameEditActive}
-                    onClick={handleToggleEdit}
-                    aria-label='edit'>
-                    <EditIcon style={{ fontSize: '48pt' }} />
-                </IconButton>
-            </Box>
-            <Box sx={{ p: 1 }}>
-                <IconButton
-                    // disabled={store.isListNameEditActive}
-                    onClick={(event) => {
-                        handleDeleteList(event, idNamePair._id)
-                    }}
-                    aria-label='delete'>
-                    <DeleteIcon style={{ fontSize: '48pt' }} />
-                </IconButton>
-            </Box>
-        </ListItem>
-
+            <ListItem
+                disabled={store.isListNameEditActive}
+                id={idNamePair._id}
+                key={idNamePair._id}
+                onClick={(event) => {
+                    handleLoadList(event, idNamePair._id)
+                }}
+                style={{ fontSize: '18pt' }}>
+                <Box sx={{ flexGrow: 1 }}>
+                    {idNamePair.name}
+                </Box>
+                <Box>
+                    <IconButton>
+                        <ThumbUpIcon fontSize='large' />
+                    </IconButton>
+                </Box >
+                <Box>
+                    <IconButton>
+                        <ThumbDownIcon fontSize='large' />
+                    </IconButton>
+                </Box >
+                <Box>
+                    <IconButton
+                        onClick={(event) => { handleDeleteList(event, idNamePair._id) }}>
+                        <DeleteIcon fontSize='large' />
+                    </IconButton>
+                </Box>
+            </ListItem>
+            <ListItem>
+                <Button variant='contained' sx={{ fontSize: '8pt' }} onClick={handleToggleEdit}>Edit</Button>
+            </ListItem>
+        </Grid>
     if (editActive) {
         cardElement =
             <TextField
                 margin="normal"
-                required
                 fullWidth
                 id={"list-" + idNamePair._id}
                 label="Top 5 List Name"
-                name="name"
                 autoComplete="Top 5 List Name"
-                className='list-card'
                 onKeyPress={handleKeyPress}
                 defaultValue={idNamePair.name}
-                InputProps={{ style: { fontSize: 48 } }}
-                InputLabelProps={{ style: { fontSize: 24 } }}
+                InputProps={{ style: { fontSize: '18pt' } }}
+                InputLabelProps={{ style: { fontSize: '18pt' } }}
                 autoFocus
             />
     }

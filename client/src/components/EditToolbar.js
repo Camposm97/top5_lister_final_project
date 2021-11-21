@@ -28,7 +28,7 @@ function EditToolbar() {
         editStatus = true
     }
     return (
-        <div id="edit-toolbar">
+        <div style={{float: 'right'}}>
             <Button
                 id='undo-button'
                 disabled={!store.canUndo() || editStatus}

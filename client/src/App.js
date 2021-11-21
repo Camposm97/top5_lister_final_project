@@ -7,7 +7,6 @@ import {
     AppBanner,
     HomeWrapper,
     RegisterScreen,
-    Statusbar,
     WorkspaceScreen
 } from './components'
 import SignIn from './components/SignIn';
@@ -24,7 +23,7 @@ const App = () => {
                         <Route path="/register/" exact component={RegisterScreen} />
                         <Route path="/top5list/:id" exact component={WorkspaceScreen} />
                     </Switch>
-                    <Statusbar />
+                    {/* <Statusbar /> */}
                 </GlobalStoreContextProvider>
             </AuthContextProvider>
         </BrowserRouter>

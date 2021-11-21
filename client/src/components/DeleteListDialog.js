@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import GlobalStoreContext from '../store';
-import { SlideDownTransition } from '../util/CamposAnims'
+import { SLIDE_DOWN_TRANSITION } from '../util/CamposConsts'
 
 export default function DeleteListDialog(props) {
     const { store } = React.useContext(GlobalStoreContext)
@@ -26,7 +26,7 @@ export default function DeleteListDialog(props) {
                 open={props.showAlert}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-desc"
-                TransitionComponent={SlideDownTransition}
+                TransitionComponent={SLIDE_DOWN_TRANSITION}
             >
                 <DialogTitle id="alert-dialog-title">
                     {"Confirmation"}

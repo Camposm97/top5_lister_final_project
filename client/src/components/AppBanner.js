@@ -15,13 +15,13 @@ import PersonIcon from '@mui/icons-material/Person';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import MeetingRoomSharpIcon from '@mui/icons-material/MeetingRoomSharp';
-import { ListItemIcon, ListItemText } from '@mui/material';
+import { MENU_PAPER_PROPS } from '../util/CamposConsts';
 
 export default function AppBanner() {
     const { auth } = useContext(AuthContext);
     const { store } = useContext(GlobalStoreContext);
     const [anchorEl, setAnchorEl] = useState(null);
-    const isMenuOpen = Boolean(anchorEl);
+    const open = Boolean(anchorEl);
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -43,59 +43,30 @@ export default function AppBanner() {
         }
     }
 
-    const menuId = 'primary-search-account-menu';
     const loggedOutMenu = (
         <Menu
             anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={isMenuOpen}
+            open={open}
             onClose={handleMenuClose}
+            PaperProps={MENU_PAPER_PROPS}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-            <MenuItem onClick={handleMenuClose} component={Link} to={'/login/'} >
-                <ListItemIcon>
-                    <PersonIcon />
-                </ListItemIcon>
-                <ListItemText>Login</ListItemText>
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} component={Link} to='/register/'>
-                <ListItemIcon><PersonAddAlt1Icon /></ListItemIcon>
-                <ListItemText>Create New Account</ListItemText>
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} component={Link} to='/guest/'>
-                <ListItemIcon><PersonSearchIcon /></ListItemIcon>
-                <ListItemText>Continue as Guest</ListItemText>
-            </MenuItem>
+            <MenuItem onClick={handleMenuClose} component={Link} to={'/login/'} ><PersonIcon />Login</MenuItem>
+            <MenuItem onClick={handleMenuClose} component={Link} to='/register/'><PersonAddAlt1Icon />Create New Account</MenuItem>
+            <MenuItem onClick={handleMenuClose} component={Link} to='/guest/'><PersonSearchIcon />Continue as Guest</MenuItem>
         </Menu>
-    );
+    )
     const loggedInMenu =
         <Menu
             anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={isMenuOpen}
+            open={open}
             onClose={handleMenuClose}
+            PaperProps={MENU_PAPER_PROPS}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-            <MenuItem onClick={handleLogout}>
-                <ListItemIcon><MeetingRoomSharpIcon/></ListItemIcon>
-                <ListItemText>Logout</ListItemText>
-            </MenuItem>
+            <MenuItem onClick={handleLogout}><MeetingRoomSharpIcon />Logout</MenuItem>
         </Menu>
 
     let editToolbar = "";
@@ -114,7 +85,7 @@ export default function AppBanner() {
             let initials = firstInitial + lastInitial;
             return <span>{initials}</span>
         }
-        return <AccountCircle fontSize='large'/>;
+        return <AccountCircle fontSize='large' />;
     }
 
     return (
@@ -136,7 +107,6 @@ export default function AppBanner() {
                             size="large"
                             edge="end"
                             aria-label="account of current user"
-                            aria-controls={menuId}
                             aria-haspopup="true"
                             onClick={handleProfileMenuOpen}
                             color="inherit"

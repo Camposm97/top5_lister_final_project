@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { SlideDownTransition } from '../util/CamposAnims'
+import { SLIDE_DOWN_TRANSITION } from '../util/CamposConsts'
 
 const errTitles = [
     "Uh oh.  Something went wrong...", 
@@ -41,7 +41,7 @@ export default function ErrorDialog(props) {
                 open={props.showAlert}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-desc"
-                TransitionComponent={SlideDownTransition}
+                TransitionComponent={SLIDE_DOWN_TRANSITION}
             >
                 <DialogTitle id="alert-dialog-title">
                     {errTitle}

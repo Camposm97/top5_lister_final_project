@@ -2,13 +2,17 @@ import { useContext } from 'react'
 import HomeScreen from './HomeScreen'
 import SplashScreen from './SplashScreen'
 import AuthContext from '../auth'
+import NavigationBar from './NavigationBar'
 
 export default function HomeWrapper() {
     const { auth } = useContext(AuthContext);
-    // console.log("HomeWrapper auth.loggedIn: " + auth.loggedIn);
-    
     if (auth.loggedIn)
-        return <HomeScreen />
+        return (
+            <div>
+                <NavigationBar />
+                <HomeScreen />
+            </div>
+        )
     else
         return <SplashScreen />
 }

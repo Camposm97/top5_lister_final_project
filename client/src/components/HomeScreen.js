@@ -42,7 +42,10 @@ export default function HomeScreen() {
                 name={listName}
                 setShowAlertCallback={setShowAlert}
             />
-            <div id="list-selector-heading">
+            <div id="list-selector-list">
+                {listCards}
+            </div>
+            <div id="list-selector-bottom">
                 <Fab size='small'
                     disabled={store.isListNameEditActive}
                     color="primary"
@@ -50,9 +53,6 @@ export default function HomeScreen() {
                     <AddIcon fontSize='medium' />
                 </Fab>
                 <Typography variant="h4">Your Lists</Typography>
-            </div>
-            <div id="list-selector-list">
-                {listCards}
             </div>
         </div>
     )

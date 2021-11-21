@@ -2,14 +2,17 @@ import { useContext, useState } from 'react'
 import { GlobalStoreContext } from '../store'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { Button, Grid } from '@mui/material';
+import { Accordion, Button, Grid, Typography } from '@mui/material';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
 import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import ExpandMore from '@mui/icons-material/ExpandMore'
 
-function ListCard(props) {
+export default function ListCard(props) {
     const { store } = useContext(GlobalStoreContext);
     const [editActive, setEditActive] = useState(false);
     const { idNamePair } = props;
@@ -51,52 +54,9 @@ function ListCard(props) {
             store.changeListName(id, newText);
             toggleEdit();
         }
-    }
-
-    let cardElement =
-        <Grid container direction='column' spacing={0}
-            sx={{
-                display: 'flex',
-                border: 1,
-                borderRadius: 5,
-                mb: 1,
-                backgroundColor: 'white'
-            }}
-        >
-            <ListItem
-                disabled={store.isListNameEditActive}
-                id={idNamePair._id}
-                key={idNamePair._id}
-                onClick={(event) => {
-                    handleLoadList(event, idNamePair._id)
-                }}
-                style={{ fontSize: '18pt' }}>
-                <Box sx={{ flexGrow: 1 }}>
-                    {idNamePair.name}
-                </Box>
-                <Box>
-                    <IconButton>
-                        <ThumbUpIcon fontSize='large' />
-                    </IconButton>
-                </Box >
-                <Box>
-                    <IconButton>
-                        <ThumbDownIcon fontSize='large' />
-                    </IconButton>
-                </Box >
-                <Box>
-                    <IconButton
-                        onClick={(event) => { handleDeleteList(event, idNamePair._id) }}>
-                        <DeleteIcon fontSize='large' />
-                    </IconButton>
-                </Box>
-            </ListItem>
-            <ListItem>
-                <Button variant='contained' sx={{ fontSize: '8pt' }} onClick={handleToggleEdit}>Edit</Button>
-            </ListItem>
-        </Grid>
+    }        
     if (editActive) {
-        cardElement =
+        return (
             <TextField
                 margin="normal"
                 fullWidth
@@ -109,10 +69,52 @@ function ListCard(props) {
                 InputLabelProps={{ style: { fontSize: '18pt' } }}
                 autoFocus
             />
+        )
     }
     return (
-        cardElement
-    );
+        <Accordion>
+            <AccordionSummary  expandIcon={<ExpandMore />}>
+                <Grid container direction='column' spacing={0}>
+                    <ListItem
+                        disabled={store.isListNameEditActive}
+                        id={idNamePair._id}
+                        key={idNamePair._id}
+                        onClick={(event) => {
+                            handleLoadList(event, idNamePair._id)
+                        }}
+                        style={{ fontSize: '18pt' }}>
+                        <Box sx={{ flexGrow: 1 }}>
+                            <Typography variant='h5'>{idNamePair.name}</Typography>
+                        </Box>
+                        <Box>
+                            <IconButton>
+                                <ThumbUpIcon color='primary' fontSize='large' />
+                            </IconButton>
+                        </Box >
+                        <Box>
+                            <IconButton>
+                                <ThumbDownIcon color='secondary' fontSize='large' />
+                            </IconButton>
+                        </Box >
+                        <Box>
+                            <IconButton
+                                onClick={(event) => { handleDeleteList(event, idNamePair._id) }}>
+                                <DeleteForeverIcon fontSize='large' style={{ color: 'red' }} />
+                            </IconButton>
+                        </Box>
+                    </ListItem>
+                    <ListItem>
+                        <Button variant='contained' sx={{ fontSize: '8pt' }} 
+                        onClick={function(event) {
+                            event.stopPropagation();
+                            
+                        }}>Edit</Button>
+                    </ListItem>
+                </Grid >
+            </AccordionSummary>
+            <AccordionDetails>
+                TODO
+            </AccordionDetails>
+        </Accordion>
+    )
 }
-
-export default ListCard;

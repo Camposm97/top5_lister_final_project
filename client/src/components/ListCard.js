@@ -22,8 +22,18 @@ export default function ListCard(props) {
     //         store.setCurrentList(id);
     //     }
     // }
+    function like(event) {
+        event.stopPropagation()
+    }
+    function dislike(event) {
+        event.stopPropagation()
+    }
+    function edit(event) {
+        event.stopPropagation()
+        store.setCurrentList(idNamePair._id)
+    }
     async function handleDeleteList(event, id) {
-        event.stopPropagation();
+        event.stopPropagation()
         store.markListForDeletion(id).then(() => {
             props.setShowAlertCallback(true)
             props.setListNameCallback(idNamePair.name)
@@ -39,10 +49,10 @@ export default function ListCard(props) {
                                 {idNamePair.name}
                             </Typography>
                         </Box>
-                        <IconButton>
+                        <IconButton onClick={like}>
                             <ThumbUpIcon color='primary' fontSize='large' />
                         </IconButton>
-                        <IconButton>
+                        <IconButton onClick={dislike}>
                             <ThumbDownIcon color='secondary' fontSize='large' />
                         </IconButton>
                         <IconButton
@@ -56,10 +66,7 @@ export default function ListCard(props) {
                         </Typography>
                     </ListItem>
                     <ListItem>
-                        <Button variant='text' sx={{ fontSize: '8pt' }}
-                            onClick={function (event) {
-                                event.stopPropagation();
-                            }}>Edit</Button>
+                        <Button variant='text' sx={{ fontSize: '8pt' }} onClick={edit}>Edit</Button>
                     </ListItem>
                 </Grid >
             </AccordionSummary>

@@ -19,7 +19,7 @@ import { MENU_PAPER_PROPS } from '../util/CamposConsts';
 
 export default function AppBanner() {
     const { auth } = useContext(AuthContext);
-    const { store } = useContext(GlobalStoreContext);
+    // const { store } = useContext(GlobalStoreContext);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -34,14 +34,14 @@ export default function AppBanner() {
     const handleLogout = () => {
         handleMenuClose();
         auth.logoutUser();
-        store.closeCurrentList()
+        // store.closeCurrentList()
     }
 
-    const handleTop5L = () => {
-        if (!store.isListNameEditActive) {
-            store.closeCurrentList()
-        }
-    }
+    // const handleTop5L = () => {
+    //     if (!store.isListNameEditActive) {
+    //         store.closeCurrentList()
+    //     }
+    // }
 
     const loggedOutMenu = (
         <Menu
@@ -97,7 +97,7 @@ export default function AppBanner() {
                         noWrap
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block', flexGrow: 1 } }}
-                        onClick={handleTop5L}
+                        // onClick={handleTop5L}
                     >
                         <Link style={{ textDecoration: 'none', color: 'white' }} to='/'>T<sup>5</sup>L</Link>
                     </Typography>

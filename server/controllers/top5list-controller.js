@@ -10,7 +10,7 @@ createTop5List = (req, res) => {
                 error: 'You must provide a Top 5 List',
             })
         }
-
+        
         const top5List = new Top5List(body);
         console.log("creating top5List: " + JSON.stringify(top5List));
         if (!top5List) {

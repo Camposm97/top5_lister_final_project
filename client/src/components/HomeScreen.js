@@ -4,6 +4,7 @@ import ListCard from './ListCard.js'
 import { Fab, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import List from '@mui/material/List';
+import ListEditorModal from './ListEditorModal'
 import DeleteListModal from './DeleteListModal'
 
 export default function HomeScreen() {
@@ -37,6 +38,7 @@ export default function HomeScreen() {
     }
     return (
         <div id="top5-list-selector">
+            <ListEditorModal />
             <DeleteListModal showAlert={showAlert} name={listName} setShowAlertCallback={setShowAlert} />
             <div id="list-selector-list">
                 {listCards}

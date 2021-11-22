@@ -15,48 +15,110 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 export default function ListCard(props) {
     const { auth } = useContext(AuthContext);
     const { store } = useContext(GlobalStoreContext);
-    const { idNamePair } = props;
+    const { top5List } = props;
 
-    // function handleLoadList(event, id) {
-    //     if (!event.target.disabled) {
-    //         store.setCurrentList(id);
-    //     }
-    // }
     function like(event) {
         event.stopPropagation()
+        store.likeTop5List(top5List)
     }
     function dislike(event) {
         event.stopPropagation()
+        store.dislikeTop5List(top5List)
     }
     function edit(event) {
         event.stopPropagation()
-        store.setCurrentList(idNamePair._id)
+        store.setCurrentList(top5List._id)
     }
-    async function handleDeleteList(event, id) {
+    function handleDeleteList(event, id) {
         event.stopPropagation()
-        store.markListForDeletion(id).then(() => {
-            props.setShowAlertCallback(true)
-            props.setListNameCallback(idNamePair.name)
-        })
+        store.markListForDeletion(id)
+    }
+
+    function formatDate() {
+        let date = new Date(top5List.publishDate)
+        let strDate = null
+        switch (date.getUTCMonth()) {
+            case 0:
+                strDate = 'Jan'
+                break;
+            case 1:
+                strDate = 'Feb'
+                break;
+            case 2:
+                strDate = 'Mar'
+                break;
+            case 3:
+                strDate = 'Apr'
+                break;
+            case 4:
+                strDate = 'May'
+                break;
+            case 5:
+                strDate = 'Jun'
+                break;
+            case 6:
+                strDate = 'Jul'
+                break;
+            case 7:
+                strDate = 'Aug'
+                break;
+            case 8:
+                strDate = 'Sep'
+                break;
+            case 9:
+                strDate = 'Oct'
+                break;
+            case 10:
+                strDate = 'Nov'
+                break;
+            case 11:
+                strDate = 'Dec'
+                break;
+            default:
+                strDate = null
+        }
+        strDate = strDate + ' ' + date.getUTCDate() + ', ' + date.getUTCFullYear()
+        return strDate
+    }
+
+    let elementA =
+        <ListItem>
+            <Button variant='text' sx={{ fontSize: '8pt' }} onClick={edit}>Edit</Button>
+        </ListItem>
+    let socialElements = <Box></Box>
+    let accordionDetailsElement = <Box></Box>
+    if (top5List.isPublished) {
+        elementA =
+            <ListItem>
+                <Typography variant='caption' fontWeight='fontWeightBold'>Published:</Typography>
+                <Typography variant='caption' marginLeft={1} color='green'>{formatDate()}</Typography>
+            </ListItem>
+        socialElements =
+            <Box>
+                <IconButton onClick={like}>
+                    <ThumbUpIcon color='primary' fontSize='large' />
+                    <Typography variant='h6' marginLeft={1} >{top5List.likes.length}</Typography>
+                </IconButton>
+                <IconButton onClick={dislike}>
+                    <ThumbDownIcon color='secondary' fontSize='large' />
+                    <Typography variant='h6' marginLeft={1} >{top5List.dislikes.length}</Typography>
+                </IconButton>
+            </Box>
+        accordionDetailsElement = <AccordionDetails></AccordionDetails>
     }
     return (
         <Accordion>
             <AccordionSummary expandIcon={<ExpandMore />}>
                 <Grid container direction='column'>
-                    <ListItem disabled={store.isListNameEditActive} >
+                    <ListItem >
                         <Box sx={{ flexGrow: 1 }}>
-                            <Typography variant='h6'>
-                                {idNamePair.name}
+                            <Typography variant='h6' fontWeight='fontWeightBold' >
+                                {top5List.name}
                             </Typography>
                         </Box>
-                        <IconButton onClick={like}>
-                            <ThumbUpIcon color='primary' fontSize='large' />
-                        </IconButton>
-                        <IconButton onClick={dislike}>
-                            <ThumbDownIcon color='secondary' fontSize='large' />
-                        </IconButton>
+                        {socialElements}
                         <IconButton
-                            onClick={(event) => { handleDeleteList(event, idNamePair._id) }}>
+                            onClick={(event) => { handleDeleteList(event, top5List._id) }}>
                             <DeleteForeverIcon fontSize='large' style={{ color: 'red' }} />
                         </IconButton>
                     </ListItem>
@@ -65,16 +127,10 @@ export default function ListCard(props) {
                             By {auth.user.username}
                         </Typography>
                     </ListItem>
-                    <ListItem>
-                        <Button variant='text' sx={{ fontSize: '8pt' }} onClick={edit}>Edit</Button>
-                    </ListItem>
+                    {elementA}
                 </Grid >
             </AccordionSummary>
-            <AccordionDetails>
-                <ListItem>
-                    <Typography>TODO</Typography>
-                </ListItem>
-            </AccordionDetails>
+            {accordionDetailsElement}
         </Accordion >
     )
 }

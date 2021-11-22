@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { GlobalStoreContext } from '../store'
 import ListCard from './ListCard.js'
 import { Fab, Typography } from '@mui/material'
@@ -9,11 +9,10 @@ import DeleteListModal from './DeleteListModal'
 
 export default function HomeScreen() {
     const { store } = useContext(GlobalStoreContext);
-    const [showAlert, setShowAlert] = useState(false)
-    const [listName, setListName] = useState('')
 
     useEffect(() => {
-        store.loadIdNamePairs();
+        store.loadTop5Lists();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     function handleCreateNewList() {
@@ -23,23 +22,19 @@ export default function HomeScreen() {
     if (store) {
         listCards =
             <List sx={{ width: '90%', left: '5%' }}>
-                {
-                    store.idNamePairs.map((pair) => (
+                {store.top5Lists.map((top5List) => (
                         <ListCard
-                            key={pair._id}
-                            idNamePair={pair}
+                            key={top5List._id}
+                            top5List={top5List}
                             selected={false}
-                            setShowAlertCallback={setShowAlert}
-                            setListNameCallback={setListName}
                         />
-                    ))
-                }
+                    ))}
             </List>
     }
     return (
         <div id="top5-list-selector">
             <ListEditorModal />
-            <DeleteListModal showAlert={showAlert} name={listName} setShowAlertCallback={setShowAlert} />
+            <DeleteListModal />
             <div id="list-selector-list">
                 {listCards}
             </div>

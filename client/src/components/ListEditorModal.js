@@ -6,8 +6,6 @@ import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import { SLIDE_UP_TRANSITION } from '../util/CamposConsts';
 import { TextField } from '@mui/material';
 import { GlobalStoreContext } from '../store'
@@ -15,24 +13,35 @@ import Card from '@mui/material/Card';
 
 export default function ListEditorModal() {
   const { store } = React.useContext(GlobalStoreContext)
-  // const close = (event) => {
-  //   store.closeCurrentList()
-  // };
-  const save = (event) => {
-    console.log('saving')
-    store.updateCurrentList().then(() => store.closeCurrentList())
+  let listNameElement = <ListItem></ListItem>
+  let itemElements = <List></List>
 
+  const save = (event) => {
+    store.updateCurrentList()
+      .then(() => store.closeCurrentList())
   }
   const publish = (event) => {
-    console.log('publish')
-    store.closeCurrentList()
+    store.publishCurrentList()
+      .then(() => store.updateCurrentList()
+        .then(() => store.closeCurrentList()))
   }
-  let listName = ''
-  let itemElements = <List></List>
+
   if (store.currentList) {
     let i = 0
-    listName = store.currentList.name
-    const items = store.currentList.items;
+    listNameElement =
+      <ListItem>
+        <Card style={{ flex: 1 }}>
+          <TextField
+            onChange={(event) => {
+              let newName = event.target.value
+              store.currentList.name = newName
+            }}
+            variant='outlined'
+            InputProps={{ style: { fontSize: 40, fontWeight: 'bold' } }}
+            fullWidth
+            defaultValue={store.currentList.name} />
+        </Card>
+      </ListItem>
     itemElements =
       <List>
         {store.currentList.items.map(item => (
@@ -48,7 +57,7 @@ export default function ListEditorModal() {
                   let index = parseInt(strId.slice(-1))
                   let newText = event.target.value
                   console.log('ListEditorModal: id=' + index + ', newText=' + newText)
-                  items[index] = newText
+                  store.currentList.items[index] = newText
                 }}
                 InputProps={{ style: { fontSize: 40 } }}
                 fullWidth
@@ -63,19 +72,10 @@ export default function ListEditorModal() {
       <Dialog
         fullScreen
         open={Boolean(store.currentList)}
-        // onClose={close}
         TransitionComponent={SLIDE_UP_TRANSITION}
       >
         <AppBar sx={{ position: 'relative' }}>
           <Toolbar>
-            {/* <IconButton
-              edge="start"
-              color="inherit"
-              onClick={close}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton> */}
             <Typography variant='h6' sx={{ ml: 2, flex: 1 }}>List Editor Mode</Typography>
             <Button color="inherit" onClick={save}>
               Save
@@ -87,19 +87,7 @@ export default function ListEditorModal() {
         </AppBar>
         <Card style={{ backgroundColor: '#1976d2', margin: 30 }}>
           <List>
-            <ListItem>
-              <Card style={{ flex: 1 }}>
-                <TextField 
-                  onChange={(event) => {
-                    let newName = event.target.value
-                    store.currentList.name = newName
-                  }}
-                  variant='outlined'
-                  InputProps={{ style: { fontSize: 40, fontWeight: 'bold' } }}
-                  fullWidth
-                  defaultValue={listName} />
-              </Card>
-            </ListItem>
+            {listNameElement}
             {itemElements}
           </List>
         </Card>

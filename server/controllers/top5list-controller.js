@@ -56,19 +56,23 @@ updateTop5List = async (req, res) => {
                     message: 'Top 5 List not found!',
                 })
             }
-
             top5List.name = body.name
             top5List.items = body.items
-            top5List
-                .save()
-                .then(() => {
+            top5List.isPublished = body.isPublished
+            if (top5List.isPublished) {
+                top5List.publishDate = Date.now()
+            }
+            top5List.comments = body.comments
+            top5List.likes = body.likes
+            top5List.dislikes = body.dislikes
+            top5List.views = body.views
+            top5List.save().then(() => {
                     return res.status(200).json({
                         success: true,
                         id: top5List._id,
                         message: 'Top 5 List updated!',
                     })
-                })
-                .catch(error => {
+                }).catch(error => {
                     console.log("FAILURE: " + JSON.stringify(error));
                     return res.status(404).json({
                         error,
@@ -103,6 +107,7 @@ getTop5ListById = async (req, res) => {
         return res.status(200).json({ success: true, top5List: list })
     }).catch(err => console.log(err))
 }
+
 getTop5Lists = async (req, res) => {
     await Top5List.find({}, (err, top5Lists) => {
         if (err) {
@@ -135,7 +140,15 @@ getTop5ListPairs = async (req, res) => {
                 let list = top5Lists[key];
                 let pair = {
                     _id: list._id,
-                    name: list.name
+                    name: list.name,
+                    items: list.items,
+                    owner: list.owner,
+                    isPublished: list.isPublished,
+                    publishDate: list.publishDate,
+                    comments: list.comments,
+                    likes: list.likes,
+                    dislikes: list.dislikes,
+                    views: list.views
                 };
                 if (list.owner === req.body.owner) {
                     pairs.push(pair);

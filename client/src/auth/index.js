@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom'
 import api from '../api'
-import {getCookie, setCookie} from '../util/Cookies'
+import { getCookie, setCookie } from '../util/Cookies'
 
 const AuthContext = createContext();
 
@@ -22,10 +22,10 @@ function AuthContextProvider(props) {
 
     useEffect(() => {
         let loggedIn = getCookie('loggedIn')
-        console.log('effect:loggedIn=' + loggedIn)
         if (loggedIn) {
             auth.getLoggedIn();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const authReducer = (action) => {

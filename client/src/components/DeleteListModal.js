@@ -8,22 +8,26 @@ import DialogTitle from '@mui/material/DialogTitle';
 import GlobalStoreContext from '../store';
 import { SLIDE_DOWN_TRANSITION } from '../util/CamposConsts'
 
-export default function DeleteListModal(props) {
+export default function DeleteListModal() {
     const { store } = React.useContext(GlobalStoreContext)
 
     function closeDialog() {
-        props.setShowAlertCallback(false)
+        store.unmarkListForDeletion()
     }
 
     function deleteList() {
-        props.setShowAlertCallback(false)
         store.deleteMarkedList()
+    }
+
+    let listName = '[List-Name]'
+    if (store.listMarkedForDeletion) {
+        listName = store.listMarkedForDeletion.name
     }
 
     return (
         <div>
             <Dialog
-                open={props.showAlert}
+                open={Boolean(store.listMarkedForDeletion)}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-desc"
                 TransitionComponent={SLIDE_DOWN_TRANSITION}
@@ -33,7 +37,7 @@ export default function DeleteListModal(props) {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-desc">
-                        {'Are you sure you want delete Top 5 ' + props.name + ' List?'}
+                        {'Are you sure you want delete Top 5 ' + listName + ' List?'}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

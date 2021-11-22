@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import { Typography } from '@mui/material'
+import { Typography, useTheme } from '@mui/material'
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import AppBar from '@mui/material/AppBar';
@@ -12,6 +12,7 @@ import { GlobalStoreContext } from '../../store'
 import Card from '@mui/material/Card';
 
 export default function WorkspaceModal() {
+  const theme = useTheme()
   const { store } = React.useContext(GlobalStoreContext)
   let listTitleElement = <ListItem></ListItem>
   let top5itemElements = <List></List>
@@ -92,7 +93,7 @@ export default function WorkspaceModal() {
             </Button>
           </Toolbar>
         </AppBar>
-        <Card style={{ backgroundColor: '#1976d2', margin: 30 }}>
+        <Card style={{ backgroundColor: theme.palette.primary, margin: 30 }}>
           <List>
             {listTitleElement}
             {top5itemElements}

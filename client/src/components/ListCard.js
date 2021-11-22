@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { GlobalStoreContext } from '../store'
 import Box from '@mui/material/Box';
-import { List, Card, CardContent,  Accordion, Button, Grid, Typography, TextField } from '@mui/material';
+import { List, Card, CardContent, Accordion, Button, Grid, Typography, TextField, colors } from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ListItem from '@mui/material/ListItem';
@@ -10,8 +10,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ExpandMore from '@mui/icons-material/ExpandMore'
-
+import { useTheme } from '@mui/material';
 export default function ListCard(props) {
+    const theme = useTheme()
     const { store } = useContext(GlobalStoreContext);
     const { top5List, expanded, handleAccorChangeCallback } = props;
 
@@ -122,29 +123,35 @@ export default function ListCard(props) {
         accorDetailsElement =
             <AccordionDetails>
                 <Grid container direction='row'>
-                    <Card style={{ flex: 1 }}>
-                        <List>
-                            {top5List.items.map(item => (
-                                <ListItem key={'item-pub-' + i}>
-                                    <Typography variant='h5' >{(++i) + '. ' + item}</Typography>
-                                </ListItem>
-                            ))}
-                        </List>
-                    </Card>
-                    <Grid sx={{ flex: 1, marginLeft: 2 }}>
-                        <List sx={{ marginBottom: 5, height: 250, overflow: 'auto' }}>
+                    <Grid sx={{ flex: 1, mb: 1, boxShadow: 5 }}>
+                        <Card>
+                            <CardContent>
+                                <List>
+                                    {top5List.items.map(item => (
+                                        <ListItem key={'item-pub-' + i} sx={{ mb: 3 }}>
+                                            <Typography variant='h5' >{(++i) + '. ' + item}</Typography>
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid sx={{ flex: 1, ml: 1 }}>
+                        <Grid sx={{ ml: 1, mr: 1 }}>
+                            <TextField fullWidth label='Add Comment' onKeyPress={addComment} />
+                        </Grid>
+                        <Grid sx={{ overflow: 'auto', height: 350 }}>
                             {top5List.comments.map(comment => (
-                                <ListItem key={'comment-' + (j++)}>
-                                    <Card sx={{flex: 1}}>
+                                <Grid>
+                                    <Card key={'comment-' + (j++)} sx={{ flex: 1, m: 1, boxShadow: 5 }}>
                                         <CardContent>
-                                        <Typography variant='caption' color='blue'>{comment.username}</Typography>
-                                        <Typography variant='body2'>{comment.message}</Typography>
+                                            <Typography variant='caption' color='blue'>{comment.username}</Typography>
+                                            <Typography variant='body2'>{comment.message}</Typography>
                                         </CardContent>
                                     </Card>
-                                </ListItem>
+                                </Grid>
                             ))}
-                        </List>
-                        <TextField label='Add Comment' onKeyPress={addComment} fullWidth />
+                        </Grid>
                     </Grid>
                 </Grid>
             </AccordionDetails>

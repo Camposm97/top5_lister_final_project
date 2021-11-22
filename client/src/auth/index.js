@@ -82,7 +82,7 @@ function AuthContextProvider(props) {
             if (err.response.status === 400) {
                 return err.response.data.errorMessage
             }
-            return 'I\' not sure what happened...'
+            return 'I\'m not sure what happened...'
         }
     }
 
@@ -106,7 +106,7 @@ function AuthContextProvider(props) {
                         user: res.data.user
                     }
                 });
-                console.log('Logged in as: ' + res.data.user.email + ', ' + res.data.loggedIn)
+                console.log('Logged in as: ' + res.data.user.username + ', ' + res.data.loggedIn)
             }
         } catch (err) {
             console.log('Failed to get logged in... ' + err)

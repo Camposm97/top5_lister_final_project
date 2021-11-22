@@ -12,7 +12,8 @@ getLoggedIn = async (req, res) => {
                 user: {
                     firstName: loggedInUser.firstName,
                     lastName: loggedInUser.lastName,
-                    email: loggedInUser.email
+                    email: loggedInUser.email,
+                    username: loggedInUser.username
                 }
             }).send()
         } catch (err) {
@@ -22,22 +23,25 @@ getLoggedIn = async (req, res) => {
 
 loginUser = async (req, res) => {
     try {
-        const enteredEmail = req.body.email
+        const enteredOwner = req.body.owner
         const enteredPassword = req.body.password
 
-        if (!enteredEmail || !enteredPassword) {
-            return res
-                .status(400)
-                .json({ errorMessage: "Please enter all required fields" })
+        if (!enteredOwner || !enteredPassword) {
+            return res.status(400).json({ errorMessage: "Please enter all required fields." })
         }
 
-        const user = await User.findOne({ email: enteredEmail });
-        const salt = await bcrypt.getSalt(user.passwordHash);
-        const passwordHash = await bcrypt.hash(enteredPassword, salt);
-
-        if (passwordHash == user.passwordHash) {
-            console.log("logging in user: " + user.email)
-            const token = auth.signToken(user);
+        let existingUser = await User.findOne({ email: enteredOwner })
+        if (!existingUser) {
+            existingUser = await User.findOne({ username: enteredOwner })
+            if (!existingUser) {
+                return res.status(400).json({ errorMessage: 'Email/Username ' + enteredOwner + ' does not exist!' })
+            }
+        }
+        
+        const correctPassword = bcrypt.compare(enteredPassword, existingUser.passwordHash)
+        if (correctPassword) {
+            console.log("logging in user: " + existingUser.email)
+            const token = auth.signToken(existingUser);
 
             await res.cookie("token", token, {
                 httpOnly: true,
@@ -46,9 +50,10 @@ loginUser = async (req, res) => {
             }).status(200).json({
                 success: true,
                 user: {
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    email: user.email
+                    firstName: existingUser.firstName,
+                    lastName: existingUser.lastName,
+                    email: existingUser.email,
+                    username: existingUser.username
                 }
             }).send();
         } else {
@@ -78,34 +83,29 @@ registerUser = async (req, res) => {
     try {
         const { firstName, lastName, email, username, password, passwordVerify } = req.body;
         if (!firstName || !lastName || !email || !username || !password || !passwordVerify) {
-            return res
-                .status(400)
-                .json({ errorMessage: "Please enter all required fields." });
+            return res.status(400).json({ errorMessage: "Please enter all required fields." })
         }
         if (password.length < 8) {
-            return res
-                .status(400)
-                .json({
-                    errorMessage: "Please enter a password of at least 8 characters."
-                });
+            return res.status(400).json({ errorMessage: "Please enter a password of at least 8 characters." })
         }
         if (password !== passwordVerify) {
-            return res
-                .status(400)
-                .json({
-                    errorMessage: "Please enter the same password twice."
-                })
+            return res.status(400).json({ errorMessage: "Please enter the same password twice." })
         }
-        const existingUser = await User.findOne({ email: email });
-        if (existingUser) {
-            return res
-                .status(400)
-                .json({
-                    success: false,
-                    errorMessage: "An account with this email address already exists."
-                })
+        const existingUser1 = await User.findOne({ email: email })
+        if (existingUser1) {
+            return res.status(400).json({
+                success: false,
+                errorMessage: "An account with this email address already exists."
+            })
         }
-        
+        const existingUser2 = await User.findOne({ username: username })
+        if (existingUser2) {
+            return res.status(400).json({
+                success: false,
+                errorMessage: "An account with this username already exists."
+            })
+        }
+
         const saltRounds = 10;
         const salt = await bcrypt.genSalt(saltRounds);
         const passwordHash = await bcrypt.hash(password, salt);

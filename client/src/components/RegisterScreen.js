@@ -32,6 +32,7 @@ export default function RegisterScreen() {
             firstName: formData.get('firstName'),
             lastName: formData.get('lastName'),
             email: formData.get('email'),
+            username: formData.get('username'),
             password: formData.get('password'),
             passwordVerify: formData.get('passwordVerify')
         }, store).then(value => {
@@ -94,7 +95,14 @@ export default function RegisterScreen() {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField required fullWidth id='username' label='Username' name='username' autoComplete='username' />
+                            <TextField
+                                required
+                                fullWidth
+                                id='username'
+                                label='Username'
+                                name='username'
+                                autoComplete='username'
+                            />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField

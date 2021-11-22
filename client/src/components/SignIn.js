@@ -31,7 +31,7 @@ export default function SignIn() {
     const rememberMe = formData.get('remember_me') === 'on' ? true : false
 
     auth.loginUser({
-      email: formData.get('email'),
+      owner: formData.get('email'),
       password: formData.get('password'),
     }, rememberMe).then(value => {
       if (value) {
@@ -69,7 +69,7 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email / Username"
             name="email"
             autoComplete="email"
             autoFocus

@@ -176,9 +176,8 @@ export default function ListCard(props) {
                         </IconButton>
                     </ListItem>
                     <ListItem>
-                        <Typography variant='caption'>
-                            By {top5List.owner}
-                        </Typography>
+                        <Typography variant='caption'>By</Typography>
+                        <Typography variant='caption' color='blue' sx={{ml: 1}}>{top5List.owner}</Typography>
                     </ListItem>
                     {elementA}
                 </Grid >

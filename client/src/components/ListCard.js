@@ -1,8 +1,7 @@
 import { useContext } from 'react'
-import AuthContext from '../auth';
 import { GlobalStoreContext } from '../store'
 import Box from '@mui/material/Box';
-import { Accordion, Button, Grid, Typography } from '@mui/material';
+import { List, Card, CardContent,  Accordion, Button, Grid, Typography, TextField } from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ListItem from '@mui/material/ListItem';
@@ -13,10 +12,18 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ExpandMore from '@mui/icons-material/ExpandMore'
 
 export default function ListCard(props) {
-    const { auth } = useContext(AuthContext);
     const { store } = useContext(GlobalStoreContext);
-    const { top5List } = props;
+    const { top5List, expanded, handleAccorChangeCallback } = props;
 
+    function addComment(event) {
+        if (event.key === 'Enter') {
+            let comment = event.target.value
+            if (comment) {
+                store.addComment(top5List, comment)
+                event.target.value = ''
+            }
+        }
+    }
     function like(event) {
         event.stopPropagation()
         store.likeTop5List(top5List)
@@ -29,11 +36,15 @@ export default function ListCard(props) {
         event.stopPropagation()
         store.setCurrentList(top5List._id)
     }
+    function view(event) {
+        if (top5List.isPublished) {
+            store.view(top5List)
+        }
+    }
     function handleDeleteList(event, id) {
         event.stopPropagation()
         store.markListForDeletion(id)
     }
-
     function formatDate() {
         let date = new Date(top5List.publishDate)
         let strDate = null
@@ -88,10 +99,13 @@ export default function ListCard(props) {
     let socialElements = <Box></Box>
     let accordionDetailsElement = <Box></Box>
     if (top5List.isPublished) {
+        let i = 0
         elementA =
             <ListItem>
                 <Typography variant='caption' fontWeight='fontWeightBold'>Published:</Typography>
-                <Typography variant='caption' marginLeft={1} color='green'>{formatDate()}</Typography>
+                <Typography flex={1} variant='caption' marginLeft={1} color='green'>{formatDate()}</Typography>
+                <Typography variant='caption' fontWeight='fontWeightBold'>Views:</Typography>
+                <Typography variant='caption' marginLeft={1} marginRight={15} color='red'>{top5List.views}</Typography>
             </ListItem>
         socialElements =
             <Box>
@@ -104,10 +118,42 @@ export default function ListCard(props) {
                     <Typography variant='h6' marginLeft={1} >{top5List.dislikes.length}</Typography>
                 </IconButton>
             </Box>
-        accordionDetailsElement = <AccordionDetails></AccordionDetails>
+        let j = 0
+        accordionDetailsElement =
+            <AccordionDetails>
+                <Grid container direction='row'>
+                    <Card style={{ flex: 1 }}>
+                        <List>
+                            {top5List.items.map(item => (
+                                <ListItem key={'item-pub-' + i}>
+                                    <Typography variant='h5' >{(++i) + '. ' + item}</Typography>
+                                </ListItem>
+                            ))}
+                        </List>
+                    </Card>
+                    <Grid sx={{ flex: 1, marginLeft: 2 }}>
+                        <List sx={{ marginBottom: 5, height: 250, overflow: 'auto' }}>
+                            {top5List.comments.map(comment => (
+                                <ListItem key={'comment-' + (j++)}>
+                                    <Card sx={{flex: 1}}>
+                                        <CardContent>
+                                        <Typography variant='caption' color='blue'>{comment.username}</Typography>
+                                        <Typography variant='body2'>{comment.message}</Typography>
+                                        </CardContent>
+                                    </Card>
+                                </ListItem>
+                            ))}
+                        </List>
+                        <TextField label='Add Comment' onKeyPress={addComment} fullWidth />
+                    </Grid>
+                </Grid>
+            </AccordionDetails>
     }
     return (
-        <Accordion>
+        <Accordion
+            expanded={expanded === top5List._id}
+            onChange={handleAccorChangeCallback(top5List._id)}
+            onClick={view}>
             <AccordionSummary expandIcon={<ExpandMore />}>
                 <Grid container direction='column'>
                     <ListItem >
@@ -123,8 +169,8 @@ export default function ListCard(props) {
                         </IconButton>
                     </ListItem>
                     <ListItem>
-                        <Typography variant='body1'>
-                            By {auth.user.username}
+                        <Typography variant='caption'>
+                            By {top5List.owner}
                         </Typography>
                     </ListItem>
                     {elementA}

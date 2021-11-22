@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { GlobalStoreContext } from '../store'
 import ListCard from './ListCard.js'
 import { Fab, Typography } from '@mui/material'
@@ -9,6 +9,11 @@ import DeleteListModal from './DeleteListModal'
 
 export default function HomeScreen() {
     const { store } = useContext(GlobalStoreContext);
+    const [expanded, setExpanded] = useState(false)
+
+    const handleAccorChange = (panel) => (event, isExpanaded) => {
+        setExpanded(isExpanaded ? panel : false)
+    }
 
     useEffect(() => {
         store.loadTop5Lists();
@@ -23,12 +28,14 @@ export default function HomeScreen() {
         listCards =
             <List sx={{ width: '90%', left: '5%' }}>
                 {store.top5Lists.map((top5List) => (
-                        <ListCard
-                            key={top5List._id}
-                            top5List={top5List}
-                            selected={false}
-                        />
-                    ))}
+                    <ListCard
+                        key={top5List._id}
+                        top5List={top5List}
+                        selected={false}
+                        expanded={expanded}
+                        handleAccorChangeCallback={handleAccorChange}
+                    />
+                ))}
             </List>
     }
     return (

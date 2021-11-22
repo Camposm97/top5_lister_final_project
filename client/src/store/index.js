@@ -205,6 +205,14 @@ function GlobalStoreContextProvider(props) {
         }
     }
 
+    store.addComment = async function (top5List, comment) {
+        top5List.comments.unshift({
+            username: auth.user.username,
+            message: comment
+        })
+        store.updateTop5ListById(top5List)
+    }
+
     store.likeTop5List = async function (top5List) {
         const username = auth.user.username
         if (!top5List.dislikes.includes(username)) {
@@ -227,6 +235,11 @@ function GlobalStoreContextProvider(props) {
             }
             store.updateTop5ListById(top5List)
         }
+    }
+
+    store.view = async function (top5List) {
+        top5List.views = top5List.views + 1
+        store.updateTop5ListById(top5List)
     }
 
     store.updateTop5ListById = async function (top5List) {

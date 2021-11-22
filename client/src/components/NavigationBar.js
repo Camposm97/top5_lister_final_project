@@ -44,7 +44,7 @@ export default function NavigationBar() {
                     <FunctionsSharpIcon fontSize='large' />
                 </IconButton>
             </Tooltip>
-            <FormControl sx={{ width: '300px' }}>
+            <FormControl sx={{ flexGrow: 1 }}>
                 <TextField
                     InputProps={{ startAdornment: (<InputAdornment position="start"><SearchSharpIcon /></InputAdornment>) }}
                     variant='outlined'

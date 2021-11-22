@@ -6,16 +6,21 @@ import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import { SLIDE_UP_TRANSITION } from '../util/CamposConsts';
+import { SLIDE_UP_TRANSITION } from '../../util/CamposConsts';
 import { TextField } from '@mui/material';
-import { GlobalStoreContext } from '../store'
+import { GlobalStoreContext } from '../../store'
 import Card from '@mui/material/Card';
 
-export default function ListEditorModal() {
+export default function WorkspaceModal() {
   const { store } = React.useContext(GlobalStoreContext)
-  let listNameElement = <ListItem></ListItem>
-  let itemElements = <List></List>
+  let listTitleElement = <ListItem></ListItem>
+  let top5itemElements = <List></List>
 
+  const handleOnKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      save(event)
+    }
+  }
   const save = (event) => {
     store.updateCurrentList()
       .then(() => store.closeCurrentList())
@@ -28,10 +33,11 @@ export default function ListEditorModal() {
 
   if (store.currentList) {
     let i = 0
-    listNameElement =
+    listTitleElement =
       <ListItem>
         <Card style={{ flex: 1 }}>
           <TextField
+            onKeyPress={handleOnKeyPress}
             onChange={(event) => {
               let newName = event.target.value
               store.currentList.name = newName
@@ -42,7 +48,7 @@ export default function ListEditorModal() {
             defaultValue={store.currentList.name} />
         </Card>
       </ListItem>
-    itemElements =
+    top5itemElements =
       <List>
         {store.currentList.items.map(item => (
           <ListItem key={'item-' + i}>
@@ -52,6 +58,7 @@ export default function ListEditorModal() {
             <Card style={{ flex: 1 }}>
               <TextField
                 id={'item-' + (i++)}
+                onKeyPress={handleOnKeyPress}
                 onChange={(event) => {
                   let strId = event.target.id
                   let index = parseInt(strId.slice(-1))
@@ -76,7 +83,7 @@ export default function ListEditorModal() {
       >
         <AppBar sx={{ position: 'relative' }}>
           <Toolbar>
-            <Typography variant='h6' sx={{ ml: 2, flex: 1 }}>List Editor Mode</Typography>
+            <Typography variant='h6' sx={{ ml: 2, flex: 1 }}>Workspace</Typography>
             <Button color="inherit" onClick={save}>
               Save
             </Button>
@@ -87,8 +94,8 @@ export default function ListEditorModal() {
         </AppBar>
         <Card style={{ backgroundColor: '#1976d2', margin: 30 }}>
           <List>
-            {listNameElement}
-            {itemElements}
+            {listTitleElement}
+            {top5itemElements}
           </List>
         </Card>
       </Dialog>

@@ -13,7 +13,7 @@ import Container from '@mui/material/Container';
 import { useState, useContext } from 'react';
 import AuthContext from '../auth';
 import Copyright from './Copyright'
-import ErrorModal from './ErrorModal'
+import ErrorModal from './modal/ErrorModal'
 
 export default function SignIn() {
   const { auth } = useContext(AuthContext)

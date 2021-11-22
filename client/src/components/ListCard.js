@@ -37,7 +37,7 @@ export default function ListCard(props) {
         store.setCurrentList(top5List._id)
     }
     function view(event) {
-        if (top5List.isPublished) {
+        if (top5List.isPublished && !expanded) {
             store.view(top5List)
         }
     }
@@ -97,7 +97,7 @@ export default function ListCard(props) {
             <Button variant='text' sx={{ fontSize: '8pt' }} onClick={edit}>Edit</Button>
         </ListItem>
     let socialElements = <Box></Box>
-    let accordionDetailsElement = <Box></Box>
+    let accorDetailsElement = <Box></Box>
     if (top5List.isPublished) {
         let i = 0
         elementA =
@@ -119,7 +119,7 @@ export default function ListCard(props) {
                 </IconButton>
             </Box>
         let j = 0
-        accordionDetailsElement =
+        accorDetailsElement =
             <AccordionDetails>
                 <Grid container direction='row'>
                     <Card style={{ flex: 1 }}>
@@ -176,7 +176,7 @@ export default function ListCard(props) {
                     {elementA}
                 </Grid >
             </AccordionSummary>
-            {accordionDetailsElement}
+            {accorDetailsElement}
         </Accordion >
     )
 }

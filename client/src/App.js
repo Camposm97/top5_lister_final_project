@@ -7,7 +7,6 @@ import {
     AppBanner,
     HomeWrapper,
     RegisterScreen,
-    WorkspaceScreen
 } from './components'
 import SignIn from './components/SignIn';
 
@@ -21,7 +20,6 @@ const App = () => {
                         <Route path="/" exact component={HomeWrapper} />
                         <Route path="/login/" exact component={SignIn} />
                         <Route path="/register/" exact component={RegisterScreen} />
-                        <Route path="/top5list/:id" exact component={WorkspaceScreen} />
                     </Switch>
                     {/* <Statusbar /> */}
                 </GlobalStoreContextProvider>

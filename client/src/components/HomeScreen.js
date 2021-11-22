@@ -4,8 +4,8 @@ import ListCard from './ListCard.js'
 import { Fab, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import List from '@mui/material/List';
-import ListEditorModal from './ListEditorModal'
-import DeleteListModal from './DeleteListModal'
+import WorkspaceModal from './modal/WorkspaceModal'
+import DeleteListModal from './modal/DeleteListModal'
 
 export default function HomeScreen() {
     const { store } = useContext(GlobalStoreContext);
@@ -40,7 +40,7 @@ export default function HomeScreen() {
     }
     return (
         <div id="top5-list-selector">
-            <ListEditorModal />
+            <WorkspaceModal />
             <DeleteListModal />
             <div id="list-selector-list">
                 {listCards}

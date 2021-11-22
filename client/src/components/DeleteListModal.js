@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import GlobalStoreContext from '../store';
 import { SLIDE_DOWN_TRANSITION } from '../util/CamposConsts'
 
-export default function DeleteListDialog(props) {
+export default function DeleteListModal(props) {
     const { store } = React.useContext(GlobalStoreContext)
 
     function closeDialog() {

@@ -29,7 +29,7 @@ function initErrTitle() {
     return errTitles[Math.floor(Math.random() * errTitles.length)]
 }
 
-export default function ErrorDialog(props) {
+export default function ErrorModal(props) {
 
     if (props.showAlert) {
         errTitle = initErrTitle()

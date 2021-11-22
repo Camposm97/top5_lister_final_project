@@ -13,8 +13,7 @@ import Container from '@mui/material/Container';
 import { useState, useContext } from 'react';
 import AuthContext from '../auth';
 import Copyright from './Copyright'
-
-import ErrorDialog from './ErrorDialog'
+import ErrorModal from './ErrorModal'
 
 export default function SignIn() {
   const { auth } = useContext(AuthContext)
@@ -43,11 +42,7 @@ export default function SignIn() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <ErrorDialog
-        showAlert={showAlert}
-        errMsg={errMsg}
-        handleCloseDialog={handleCloseDialog}
-      />
+      <ErrorModal showAlert={showAlert} errMsg={errMsg} handleCloseDialog={handleCloseDialog} />
       <CssBaseline />
       <Box
         sx={{

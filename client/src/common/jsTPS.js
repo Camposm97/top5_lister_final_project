@@ -5,6 +5,7 @@
  * jsTPS one should create objects that define these two methods, doTransaction
  * and undoTransaction, which will update the application state accordingly.
  * 
+ * @deprecated since version 6.0
  * @author THE McKilla Gorilla (accept no imposters)
  * @version 1.0
  */

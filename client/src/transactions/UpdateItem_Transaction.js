@@ -5,8 +5,8 @@ import jsTPS_Transaction from "../common/jsTPS.js"
  * 
  * This class represents a transaction that updates the text
  * for a given item. It will be managed by the transaction stack.
-    
-    @author McKilla Gorilla
+ *  @deprecated since version 6.0
+ *  @author McKilla Gorilla
  */
 export default class UpdateItem_Transaction extends jsTPS_Transaction {
     constructor(initStore, initIndex, initOldText, initNewText) {

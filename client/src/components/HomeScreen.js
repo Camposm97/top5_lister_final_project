@@ -16,7 +16,7 @@ export default function HomeScreen() {
     }, []);
 
     function handleCreateNewList() {
-        store.createNewList();
+        store.createNewList()
     }
     let listCards = "";
     if (store) {

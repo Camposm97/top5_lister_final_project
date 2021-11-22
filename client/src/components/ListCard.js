@@ -17,11 +17,11 @@ export default function ListCard(props) {
     const { store } = useContext(GlobalStoreContext);
     const { idNamePair } = props;
 
-    function handleLoadList(event, id) {
-        if (!event.target.disabled) {
-            store.setCurrentList(id);
-        }
-    }
+    // function handleLoadList(event, id) {
+    //     if (!event.target.disabled) {
+    //         store.setCurrentList(id);
+    //     }
+    // }
     async function handleDeleteList(event, id) {
         event.stopPropagation();
         store.markListForDeletion(id).then(() => {
@@ -35,7 +35,7 @@ export default function ListCard(props) {
                 <Grid container direction='column'>
                     <ListItem disabled={store.isListNameEditActive} >
                         <Box sx={{ flexGrow: 1 }}>
-                            <Typography variant='h6' onClick={(event) => { handleLoadList(event, idNamePair._id) }}>
+                            <Typography variant='h6'>
                                 {idNamePair.name}
                             </Typography>
                         </Box>

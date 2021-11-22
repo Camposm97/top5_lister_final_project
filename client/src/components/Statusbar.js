@@ -3,11 +3,10 @@ import { GlobalStoreContext } from '../store'
 import { Typography } from '@mui/material'
 import AuthContext from '../auth';
 
-/*
-    Our Status bar React component goes at the bottom of our UI.
-    
-    @author McKilla Gorilla
-*/
+/**
+ * 
+ * @deprecated since version 6.0
+ */
 function Statusbar() {
     const { auth } = useContext(AuthContext)
     const { store } = useContext(GlobalStoreContext);

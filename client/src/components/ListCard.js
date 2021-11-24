@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { GlobalStoreContext } from '../store'
 import Box from '@mui/material/Box';
-import { List, Card, CardContent, Accordion, Button, Grid, Typography, TextField, colors } from '@mui/material';
+import { List, Card, CardContent, Accordion, Button, Grid, Typography, TextField } from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ListItem from '@mui/material/ListItem';
@@ -10,12 +10,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import { useTheme } from '@mui/material';
 export default function ListCard(props) {
-    const theme = useTheme()
     const { store } = useContext(GlobalStoreContext);
     const { top5List, expanded, handleAccorChangeCallback } = props;
-
     function addComment(event) {
         if (event.key === 'Enter') {
             let comment = event.target.value
@@ -100,7 +97,6 @@ export default function ListCard(props) {
     let socialElements = <Box></Box>
     let accorDetailsElement = <Box></Box>
     if (top5List.isPublished) {
-        let i = 0
         elementA =
             <ListItem>
                 <Typography variant='caption' fontWeight='fontWeightBold'>Published:</Typography>
@@ -119,11 +115,16 @@ export default function ListCard(props) {
                     <Typography variant='h6' marginLeft={1} >{top5List.dislikes.length}</Typography>
                 </IconButton>
             </Box>
+        let i = 0
         let j = 0
         accorDetailsElement =
             <AccordionDetails>
-                <Grid container direction='row'>
-                    <Grid sx={{ flex: 1, mb: 1, boxShadow: 5 }}>
+                <Grid
+                    key={'accor-details-grid-root-' + top5List._id + '-' + props.i}
+                    container direction='row'>
+                    <Grid
+                        key={'accor-details-grid-child-1-' + top5List._id + '-' + props.i}
+                        sx={{ flex: 1, mb: 1, boxShadow: 5 }}>
                         <Card>
                             <CardContent>
                                 <List>
@@ -136,20 +137,25 @@ export default function ListCard(props) {
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid sx={{ flex: 1, ml: 1 }}>
-                        <Grid sx={{ ml: 1, mr: 1 }}>
+                    <Grid
+                        key={'accor-details-grid-child-2-' + top5List._id + '-' + props.i}
+                        sx={{ flex: 1, ml: 1 }}>
+                        <Grid
+                            key={'accor-details-grid-child-2-1-' + top5List._id + '-' + props.i}
+                            sx={{ ml: 1, mr: 1 }}>
                             <TextField fullWidth label='Add Comment' onKeyPress={addComment} />
                         </Grid>
-                        <Grid sx={{ overflow: 'auto', height: 350 }}>
+                        <Grid
+                            key={'accor-details-grid-child-2-2-' + top5List._id + '-' + props.i}
+                            sx={{ overflow: 'auto', height: 350 }}>
                             {top5List.comments.map(comment => (
-                                <Grid>
-                                    <Card key={'comment-' + (j++)} sx={{ flex: 1, m: 1, boxShadow: 5 }}>
-                                        <CardContent>
-                                            <Typography variant='caption' color='blue'>{comment.username}</Typography>
-                                            <Typography variant='body2'>{comment.message}</Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
+                                <Card
+                                    key={'comment-' + top5List._id + '-' + (j++)} sx={{ flex: 1, m: 1, boxShadow: 5 }}>
+                                    <CardContent>
+                                        <Typography variant='caption' color='blue'>{comment.username}</Typography>
+                                        <Typography variant='body2'>{comment.message}</Typography>
+                                    </CardContent>
+                                </Card>
                             ))}
                         </Grid>
                     </Grid>
@@ -158,12 +164,15 @@ export default function ListCard(props) {
     }
     return (
         <Accordion
+            key={'accor-' + top5List.id}
             expanded={expanded === top5List._id}
             onChange={handleAccorChangeCallback(top5List._id)}
             onClick={view}>
             <AccordionSummary expandIcon={<ExpandMore />}>
-                <Grid container direction='column'>
-                    <ListItem >
+                <Grid
+                    key={'accor-summary-grid-' + top5List._id}
+                    container direction='column'>
+                    <ListItem>
                         <Box sx={{ flexGrow: 1 }}>
                             <Typography variant='h6' fontWeight='fontWeightBold' >
                                 {top5List.name}
@@ -177,7 +186,7 @@ export default function ListCard(props) {
                     </ListItem>
                     <ListItem>
                         <Typography variant='caption'>By</Typography>
-                        <Typography variant='caption' color='blue' sx={{ml: 1}}>{top5List.owner}</Typography>
+                        <Typography variant='caption' color='blue' sx={{ ml: 1 }}>{top5List.owner}</Typography>
                     </ListItem>
                     {elementA}
                 </Grid >

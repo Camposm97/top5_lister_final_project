@@ -10,7 +10,7 @@ createTop5List = (req, res) => {
                 error: 'You must provide a Top 5 List',
             })
         }
-        
+
         const top5List = new Top5List(body);
         console.log("creating top5List: " + JSON.stringify(top5List));
         if (!top5List) {
@@ -67,18 +67,18 @@ updateTop5List = async (req, res) => {
             top5List.dislikes = body.dislikes
             top5List.views = body.views
             top5List.save().then(() => {
-                    return res.status(200).json({
-                        success: true,
-                        id: top5List._id,
-                        message: 'Top 5 List updated!',
-                    })
-                }).catch(error => {
-                    console.log("FAILURE: " + JSON.stringify(error));
-                    return res.status(404).json({
-                        error,
-                        message: 'Top 5 List not updated!',
-                    })
+                return res.status(200).json({
+                    success: true,
+                    id: top5List._id,
+                    message: 'Top 5 List updated!',
                 })
+            }).catch(error => {
+                console.log("FAILURE: " + JSON.stringify(error));
+                return res.status(404).json({
+                    error,
+                    message: 'Top 5 List not updated!',
+                })
+            })
         })
     })
 }
@@ -124,37 +124,46 @@ getTop5Lists = async (req, res) => {
 
 getTop5ListPairs = async (req, res) => {
     await Top5List.find({}, (err, top5Lists) => {
+        const { owner, query, queryType } = req.body
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
         if (!top5Lists) {
-            console.log("!top5Lists.length");
             return res
                 .status(404)
                 .json({ success: false, error: 'Top 5 Lists not found' })
-        }
-        else {
+        } else {
             // PUT ALL THE LISTS INTO ID, NAME PAIRS
-            let pairs = [];
+            let top5ListArr = [];
             for (let key in top5Lists) {
                 let list = top5Lists[key];
-                let pair = {
-                    _id: list._id,
-                    name: list.name,
-                    items: list.items,
-                    owner: list.owner,
-                    isPublished: list.isPublished,
-                    publishDate: list.publishDate,
-                    comments: list.comments,
-                    likes: list.likes,
-                    dislikes: list.dislikes,
-                    views: list.views
+                let top5List = {
+                    _id: list._id, name: list.name, 
+                    items: list.items, owner: list.owner,
+                    isPublished: list.isPublished, publishDate: list.publishDate,
+                    comments: list.comments, likes: list.likes,
+                    dislikes: list.dislikes, views: list.views
                 };
-                if (list.owner === req.body.owner) {
-                    pairs.push(pair);
+                switch (queryType) {
+                    case 'HOME':
+                        if (list.owner === owner) {
+                            top5ListArr.push(top5List)
+                        }
+                        break;
+                    case 'ALL_LISTS':
+                        if (list.name.includes(query)) {
+                            top5ListArr.push(top5List);
+                        }
+                        break;
+                    case 'USERS':
+                        if (list.owner.includes(query)) {
+                            top5ListArr.push(top5List);
+                        }
+                        break;
                 }
             }
-            return res.status(200).json({ success: true, idNamePairs: pairs });
+            console.log((JSON.stringify(req.body)) + ' found ' + top5ListArr.length + ' lists')
+            return res.status(200).json({ success: true, top5Lists: top5ListArr });
         }
     }).catch(err => console.log(err))
 }

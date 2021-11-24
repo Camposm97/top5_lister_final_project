@@ -19,14 +19,14 @@ export default function WorkspaceModal() {
 
   const handleOnKeyPress = (event) => {
     if (event.key === 'Enter') {
-      save(event)
+      save()
     }
   }
-  const save = (event) => {
+  const save = () => {
     store.updateCurrentList()
       .then(() => store.closeCurrentList())
   }
-  const publish = (event) => {
+  const publish = () => {
     store.publishCurrentList()
       .then(() => store.updateCurrentList()
         .then(() => store.closeCurrentList()))

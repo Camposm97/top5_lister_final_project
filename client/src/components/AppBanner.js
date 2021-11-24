@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'
+import GlobalStoreContext from '../store';
 import AuthContext from '../auth';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -17,7 +18,7 @@ import { MENU_PAPER_PROPS } from '../util/CamposConsts';
 
 export default function AppBanner() {
     const { auth } = useContext(AuthContext);
-    // const { store } = useContext(GlobalStoreContext);
+    const { store } = useContext(GlobalStoreContext);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -30,8 +31,9 @@ export default function AppBanner() {
     };
 
     const handleLogout = () => {
-        handleMenuClose();
-        auth.logoutUser();
+        handleMenuClose()
+        auth.logoutUser()
+        store.clearTop5Lists()
         // store.closeCurrentList()
     }
 

@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Box, FormControl, Grid, Menu, MenuItem } from '@mui/material';
+import { useContext, useState } from 'react';
+import { Box, FormControl, Grid, Menu, MenuItem, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -10,45 +10,101 @@ import FunctionsSharpIcon from '@mui/icons-material/FunctionsSharp';
 import SearchSharpIcon from '@mui/icons-material/SearchSharp';
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
-import { TextField } from "@mui/material";
+import { TextField } from '@mui/material';
 import { MENU_PAPER_PROPS } from '../util/CamposConsts';
+import GlobalStoreContext from '../store';
+import { QUERY_TYPE } from '../store';
 
 export default function NavigationBar() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null)
+    const { store } = useContext(GlobalStoreContext)
+    const [alignment, setAlignment] = useState('home')
     const open = Boolean(anchorEl);
-    const handleSortMenuClick = (event) => {
+    function updateAlignment(e, newAlignment) {
+        setAlignment(newAlignment)
+    }
+    function handleHomeClick() {
+        store.setQueryType(QUERY_TYPE.HOME)
+    }
+    function handleAllListsClick() {
+        store.setQueryType(QUERY_TYPE.ALL_LISTS)
+    }
+    function handleUsersClick() {
+        store.setQueryType(QUERY_TYPE.USERS)
+    }
+    function handleCommunityListsClick() {
+        store.setQueryType(QUERY_TYPE.COMMUNITY_LISTS)
+    }
+    function handleQueryFieldKeyPress(event) {
+        if (event.key === 'Enter') {
+            console.log('query=' + store.query + ', queryType=' + store.queryType)
+            store.loadTop5Lists()
+        }
+    }
+    function handleSortByDateNewest() {
+        console.log('Sort by Date Newest')
+        handleSortMenuClose()
+    }
+    function handleSortByDateOldest() {
+        console.log('Sort by Date Oldest')
+        handleSortMenuClose()
+    }
+    function handleSortByViews() {
+        console.log('Sort by Views')
+        handleSortMenuClose()
+    }
+    function handleSortByLikes() {
+        console.log('Sort by Likes')
+        handleSortMenuClose()
+    }
+    function handleSortByDislikes() {
+        console.log('Sort by Dislikes')
+        handleSortMenuClose()
+    }
+    function handleSortMenuClick(event) {
         setAnchorEl(event.currentTarget);
-    };
-    const handleSortMenuClose = () => {
+    }
+    function handleSortMenuClose() {
         setAnchorEl(null);
-    };
+    }
     return (
         <Grid container direction='row' alignItems='center' justifyItems='flex-end' style={{ padding: '10px' }}>
-            <Tooltip title='Home' arrow>
-                <IconButton color='inherit'>
-                    <HomeSharpIcon fontSize='large' />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title='All Lists' arrow>
-                <IconButton color='inherit'>
-                    <GroupsSharpIcon fontSize='large' />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title='Users' arrow>
-                <IconButton color='inherit'>
-                    <PersonSharpIcon fontSize='large' />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title='Community Lists' arrow>
-                <IconButton color='inherit'>
-                    <FunctionsSharpIcon fontSize='large' />
-                </IconButton>
-            </Tooltip>
-            <FormControl sx={{ flexGrow: 1 }}>
+            <ToggleButtonGroup
+                color='primary'
+                value={alignment}
+                sx={{ marginRight: 1 }}
+                exclusive
+                onChange={updateAlignment}
+            >
+                <ToggleButton value='home' onClick={handleHomeClick}>
+                    <Tooltip title='Home' arrow>
+                        <HomeSharpIcon fontSize='large' />
+                    </Tooltip>
+                </ToggleButton>
+                <ToggleButton value='all-lists' onClick={handleAllListsClick}>
+                    <Tooltip title='All Lists' arrow>
+                        <GroupsSharpIcon fontSize='large' />
+                    </Tooltip>
+                </ToggleButton>
+                <ToggleButton value='users' onClick={handleUsersClick}>
+                    <Tooltip title='Users' arrow>
+
+                        <PersonSharpIcon fontSize='large' />
+                    </Tooltip>
+                </ToggleButton>
+                <ToggleButton value='comm-lists' onClick={handleCommunityListsClick}>
+                    <Tooltip title='Community Lists' arrow>
+                        <FunctionsSharpIcon fontSize='large' />
+                    </Tooltip>
+                </ToggleButton>
+            </ToggleButtonGroup>
+            <FormControl sx={{ flexGrow: 1, backgroundColor: 'white', borderRadius: 1 }}>
                 <TextField
-                    InputProps={{ startAdornment: (<InputAdornment position="start"><SearchSharpIcon /></InputAdornment>) }}
+                    InputProps={{ startAdornment: (<InputAdornment position='start'><SearchSharpIcon /></InputAdornment>) }}
                     variant='outlined'
                     size='small'
+                    onChange={(event) => store.setQuery(event.target.value)}
+                    onKeyPress={handleQueryFieldKeyPress}
                 />
             </FormControl>
             <Box sx={{ paddingLeft: '15px', display: 'flex', alignItems: 'center', }}>
@@ -65,11 +121,11 @@ export default function NavigationBar() {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem>Publish Date (Newest)</MenuItem>
-                <MenuItem>Publish Date (Oldest)</MenuItem>
-                <MenuItem>Views</MenuItem>
-                <MenuItem>Likes</MenuItem>
-                <MenuItem>Dislikes</MenuItem>
+                <MenuItem onClick={handleSortByDateNewest} >Publish Date (Newest)</MenuItem>
+                <MenuItem onClick={handleSortByDateOldest} >Publish Date (Oldest)</MenuItem>
+                <MenuItem onClick={handleSortByViews} >Views</MenuItem>
+                <MenuItem onClick={handleSortByLikes} >Likes</MenuItem>
+                <MenuItem onClick={handleSortByDislikes} >Dislikes</MenuItem>
             </Menu>
         </Grid >
     )

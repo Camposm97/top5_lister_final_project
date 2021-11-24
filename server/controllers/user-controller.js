@@ -40,7 +40,7 @@ loginUser = async (req, res) => {
         
         const correctPassword = bcrypt.compare(enteredPassword, existingUser.passwordHash)
         if (correctPassword) {
-            console.log("logging in user: " + existingUser.email)
+            console.log("Logging in user: " + existingUser.email)
             const token = auth.signToken(existingUser);
 
             await res.cookie("token", token, {
@@ -113,10 +113,12 @@ registerUser = async (req, res) => {
             firstName, lastName, email, username, passwordHash
         });
         const savedUser = await newUser.save();
+        
+        console.log('Registered user: ' + email)        
 
         // LOGIN THE USER
         const token = auth.signToken(savedUser);
-
+        
         await res.cookie("token", token, {
             httpOnly: true,
             secure: true,
@@ -126,7 +128,8 @@ registerUser = async (req, res) => {
             user: {
                 firstName: savedUser.firstName,
                 lastName: savedUser.lastName,
-                email: savedUser.email
+                email: savedUser.email,
+                username: savedUser.username
             }
         }).send();
     } catch (err) {

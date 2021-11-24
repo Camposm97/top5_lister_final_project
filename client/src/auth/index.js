@@ -87,12 +87,10 @@ function AuthContextProvider(props) {
     }
 
     auth.logoutUser = async function () {
-        console.log('logging out user...')
         api.logoutUser()
-        history.push('/')
         authReducer({
             type: AuthActionType.SET_LOGGED_OUT
-        })
+        })   
     }
 
     auth.getLoggedIn = async function () {
@@ -124,21 +122,19 @@ function AuthContextProvider(props) {
                     }
                 })
                 history.push("/");
-                store.loadIdNamePairs();
             }
             return ''
         } catch (err) {
+            console.log(err)
             if (err.response.status === 400) {
                 return err.response.data.errorMessage
             }
-            return null
+            return 'Something is wrong with the server...'
         }
     }
 
     return (
-        <AuthContext.Provider value={{
-            auth
-        }}>
+        <AuthContext.Provider value={{auth}}>
             {props.children}
         </AuthContext.Provider>
     );

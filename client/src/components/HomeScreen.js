@@ -16,19 +16,21 @@ export default function HomeScreen() {
     }
 
     useEffect(() => {
-        store.loadTop5Lists();
+        store.loadTop5Lists()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, []); // Empty Array tells React to run this function only once
 
     function handleCreateNewList() {
         store.createNewList()
     }
     let listCards = "";
-    if (store) {
+    let id = 0
+    if (store.top5Lists) {
         listCards =
             <List sx={{ width: '90%', left: '5%' }}>
                 {store.top5Lists.map((top5List) => (
                     <ListCard
+                        i={(id++)}
                         key={top5List._id}
                         top5List={top5List}
                         selected={false}

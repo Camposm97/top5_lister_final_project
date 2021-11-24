@@ -12,7 +12,6 @@ createTop5List = (req, res) => {
         }
 
         const top5List = new Top5List(body);
-        console.log("creating top5List: " + JSON.stringify(top5List));
         if (!top5List) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -40,7 +39,6 @@ createTop5List = (req, res) => {
 updateTop5List = async (req, res) => {
     auth.verify(req, res, async function () {
         const body = req.body
-        console.log("updateTop5List: " + body.name);
         if (!body) {
             return res.status(400).json({
                 success: false,
@@ -49,7 +47,6 @@ updateTop5List = async (req, res) => {
         }
 
         Top5List.findOne({ _id: req.params.id }, (err, top5List) => {
-            console.log("top5List found: " + top5List.name);
             if (err) {
                 return res.status(404).json({
                     err,
@@ -124,7 +121,6 @@ getTop5Lists = async (req, res) => {
 
 getTop5ListPairs = async (req, res) => {
     await Top5List.find({}, (err, top5Lists) => {
-        const { owner, query, queryType } = req.body
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -133,39 +129,49 @@ getTop5ListPairs = async (req, res) => {
                 .status(404)
                 .json({ success: false, error: 'Top 5 Lists not found' })
         } else {
-            // PUT ALL THE LISTS INTO ID, NAME PAIRS
-            let top5ListArr = [];
-            for (let key in top5Lists) {
-                let list = top5Lists[key];
-                let top5List = {
-                    _id: list._id, name: list.name, 
-                    items: list.items, owner: list.owner,
-                    isPublished: list.isPublished, publishDate: list.publishDate,
-                    comments: list.comments, likes: list.likes,
-                    dislikes: list.dislikes, views: list.views
-                };
-                switch (queryType) {
-                    case 'HOME':
-                        if (list.owner === owner) {
-                            top5ListArr.push(top5List)
-                        }
-                        break;
-                    case 'ALL_LISTS':
-                        if (list.name.includes(query)) {
-                            top5ListArr.push(top5List);
-                        }
-                        break;
-                    case 'USERS':
-                        if (list.owner.includes(query)) {
-                            top5ListArr.push(top5List);
-                        }
-                        break;
-                }
-            }
-            console.log((JSON.stringify(req.body)) + ' found ' + top5ListArr.length + ' lists')
+            let top5ListArr = filterTop5Lists(top5Lists, req)
+            console.log('Found ' + top5ListArr.length + ' list(s) ' + JSON.stringify(req.body))
             return res.status(200).json({ success: true, top5Lists: top5ListArr });
         }
     }).catch(err => console.log(err))
+}
+
+filterTop5Lists = function(top5Lists, req) {
+    const { owner, query, queryType } = req.body
+    let resultList = []
+    for (let key in top5Lists) {
+        let list = top5Lists[key];
+        let top5List = {
+            _id: list._id, 
+            name: list.name,
+            items: list.items, 
+            owner: list.owner,
+            isPublished: list.isPublished, 
+            publishDate: list.publishDate,
+            comments: list.comments, 
+            likes: list.likes,
+            dislikes: list.dislikes, 
+            views: list.views
+        };
+        switch (queryType) {
+            case 'HOME':
+                if (list.owner === owner) {
+                    resultList.push(top5List)
+                }
+                break;
+            case 'ALL_LISTS':
+                if (list.name.includes(query)) {
+                    resultList.push(top5List);
+                }
+                break;
+            case 'USERS':
+                if (list.owner.includes(query)) {
+                    resultList.push(top5List);
+                }
+                break;
+        }
+    }
+    return resultList
 }
 
 module.exports = {

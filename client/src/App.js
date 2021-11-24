@@ -9,20 +9,22 @@ import {
     RegisterScreen,
 } from './components'
 import SignIn from './components/SignIn';
+import { QueryContextProvider } from './query';
 
 const App = () => {
     return (
         <BrowserRouter>
             <AuthContextProvider>
-                <GlobalStoreContextProvider>              
-                    <AppBanner />
-                    <Switch>
-                        <Route path="/" exact component={HomeWrapper} />
-                        <Route path="/login/" exact component={SignIn} />
-                        <Route path="/register/" exact component={RegisterScreen} />
-                    </Switch>
-                    {/* <Statusbar /> */}
-                </GlobalStoreContextProvider>
+                <QueryContextProvider>
+                    <GlobalStoreContextProvider>
+                        <AppBanner />
+                        <Switch>
+                            <Route path="/" exact component={HomeWrapper} />
+                            <Route path="/login/" exact component={SignIn} />
+                            <Route path="/register/" exact component={RegisterScreen} />
+                        </Switch>
+                    </GlobalStoreContextProvider>
+                </QueryContextProvider>
             </AuthContextProvider>
         </BrowserRouter>
     )

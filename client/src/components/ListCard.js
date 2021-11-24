@@ -34,7 +34,7 @@ export default function ListCard(props) {
         event.stopPropagation()
         store.setCurrentList(top5List._id)
     }
-    function view(event) {
+    function view() {
         if (top5List.isPublished && !expanded) {
             store.view(top5List)
         }

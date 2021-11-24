@@ -2,20 +2,15 @@ import { createContext, useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import api from '../api'
 import AuthContext from '../auth'
+import QueryContext from '../query'
+import { QUERY_TYPE } from '../query'
 import Cookies from '../util/Cookies'
 
 export const GlobalStoreContext = createContext({});
 
-export const QUERY_TYPE = {
-    HOME: 'HOME',
-    ALL_LISTS: 'ALL_LISTS',
-    USERS: 'USERS',
-    COMMUNITY_LISTS: 'COMMUNITY_LISTS'
-}
-
 export const GlobalStoreActionType = {
-    SET_QUERY: 'SET_QUERY',
-    SET_QUERY_TYPE: "SET_QUERY_TYPE",
+    // SET_QUERY: 'SET_QUERY',
+    // SET_QUERY_TYPE: "SET_QUERY_TYPE",
     CLOSE_CURRENT_LIST: "CLOSE_CURRENT_LIST",
     CREATE_NEW_LIST: "CREATE_NEW_LIST",
     LOAD_TOP_5_LISTS: "LOAD_TOP_5_LISTS",
@@ -35,28 +30,29 @@ function GlobalStoreContextProvider(props) {
 
     const history = useHistory();
     const { auth } = useContext(AuthContext);
+    const { queryState } = useContext(QueryContext)
 
     const storeReducer = (action) => {
         const { type, payload } = action;
         switch (type) {
-            case GlobalStoreActionType.SET_QUERY: {
-                return setStore({
-                    query: payload,
-                    queryType: store.queryType,
-                    top5Lists: store.top5Lists,
-                    currentList: null,
-                    listMarkedForDeletion: null
-                })
-            }
-            case GlobalStoreActionType.SET_QUERY_TYPE: {
-                return setStore({
-                    query: store.query,
-                    queryType: payload,
-                    top5Lists: store.top5Lists,
-                    currentList: null,
-                    listMarkedForDeletion: null
-                })
-            }
+            // case GlobalStoreActionType.SET_QUERY: {
+            //     return setStore({
+            //         query: payload,
+            //         queryType: store.queryType,
+            //         top5Lists: store.top5Lists,
+            //         currentList: null,
+            //         listMarkedForDeletion: null
+            //     })
+            // }
+            // case GlobalStoreActionType.SET_QUERY_TYPE: {
+            //     return setStore({
+            //         query: store.query,
+            //         queryType: payload,
+            //         top5Lists: store.top5Lists,
+            //         currentList: null,
+            //         listMarkedForDeletion: null
+            //     })
+            // }
             case GlobalStoreActionType.CLOSE_CURRENT_LIST: {
                 return setStore({
                     query: store.query,
@@ -116,26 +112,26 @@ function GlobalStoreContextProvider(props) {
         }
     }
 
-    store.setQuery = async function (query) {
-        storeReducer({
-            type: GlobalStoreActionType.SET_QUERY,
-            payload: query
-        })
-    }
+    // store.setQuery = function (query) {
+    //     storeReducer({
+    //         type: GlobalStoreActionType.SET_QUERY,
+    //         payload: query
+    //     })
+    // }
 
-    store.setQueryType = async function (queryType) {
-        storeReducer({
-            type: GlobalStoreActionType.SET_QUERY_TYPE,
-            payload: queryType
-        })
-    }
+    // store.setQueryType = function (queryType) {
+    //     storeReducer({
+    //         type: GlobalStoreActionType.SET_QUERY_TYPE,
+    //         payload: queryType
+    //     })
+    // }
 
     store.closeCurrentList = async function () {
         storeReducer({
             type: GlobalStoreActionType.CLOSE_CURRENT_LIST,
             payload: {}
         })
-        store.loadTop5Lists()
+        store.loadTop5Lists() // Call this to display new created list in HomeScreen
     }
 
     store.createNewList = async function () {
@@ -179,12 +175,15 @@ function GlobalStoreContextProvider(props) {
 
     /**
      * Retrieves Top5Lists based on store query and queryType
+     * @param {String} query
+     * @param {QUERY_TYPE} queryType
      */
-    store.loadTop5Lists = async function () {
-        const response = await api.getTop5ListPairs({
+    store.loadTop5Lists = async function (query = queryState.query, queryType = queryState.queryType) {
+        console.log(queryState)
+        let response = await api.getTop5ListPairs({
             owner: auth.user.username,
-            query: store.query,
-            queryType: store.queryType
+            query: query,
+            queryType: queryType
         })
         if (response.data.success) {
             let top5Lists = response.data.top5Lists;
@@ -192,8 +191,7 @@ function GlobalStoreContextProvider(props) {
                 type: GlobalStoreActionType.LOAD_TOP_5_LISTS,
                 payload: top5Lists
             });
-        }
-        else {
+        } else {
             console.log("API FAILED TO GET THE LIST PAIRS");
         }
     }
@@ -290,9 +288,13 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.updateTop5ListById = async function (top5List) {
+        // Update the top5List on the server-side
         const response = await api.updateTop5ListById(top5List._id, top5List)
         if (response.data.success) {
-            store.loadTop5Lists()
+            storeReducer({ // Update top5Lists with updated list client-side
+                type: GlobalStoreActionType.LOAD_TOP_5_LISTS,
+                payload: store.top5Lists
+            })
         }
     }
 

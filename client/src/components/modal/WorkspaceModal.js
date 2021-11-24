@@ -64,7 +64,6 @@ export default function WorkspaceModal() {
                   let strId = event.target.id
                   let index = parseInt(strId.slice(-1))
                   let newText = event.target.value
-                  console.log('ListEditorModal: id=' + index + ', newText=' + newText)
                   store.currentList.items[index] = newText
                 }}
                 InputProps={{ style: { fontSize: 40 } }}

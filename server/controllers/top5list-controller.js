@@ -160,12 +160,12 @@ filterTop5Lists = function(top5Lists, req) {
                 }
                 break;
             case 'ALL_LISTS':
-                if (list.name.includes(query)) {
+                if (list.name.toLowerCase().includes(query.toLowerCase()) && list.isPublished) {
                     resultList.push(top5List);
                 }
                 break;
             case 'USERS':
-                if (list.owner.includes(query)) {
+                if (list.owner.toLowerCase().includes(query.toLowerCase()) && list.isPublished) {
                     resultList.push(top5List);
                 }
                 break;

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import api from '../api'
 import AuthContext from '../auth'
 import QueryContext from '../query'
-import { QUERY_TYPE } from '../query'
+// import { QUERY_TYPE } from '../query'
 import Cookies from '../util/Cookies'
 
 export const GlobalStoreContext = createContext({});
@@ -21,8 +21,8 @@ export const GlobalStoreActionType = {
 
 function GlobalStoreContextProvider(props) {
     const [store, setStore] = useState({
-        query: '',
-        queryType: QUERY_TYPE.HOME,
+        // query: '',
+        // queryType: QUERY_TYPE.HOME,
         top5Lists: [],
         currentList: null,
         listMarkedForDeletion: null,
@@ -55,8 +55,8 @@ function GlobalStoreContextProvider(props) {
             // }
             case GlobalStoreActionType.CLOSE_CURRENT_LIST: {
                 return setStore({
-                    query: store.query,
-                    queryType: store.queryType,
+                    // query: store.query,
+                    // queryType: store.queryType,
                     top5Lists: store.top5Lists,
                     currentList: null,
                     listMarkedForDeletion: null,
@@ -64,8 +64,8 @@ function GlobalStoreContextProvider(props) {
             }
             case GlobalStoreActionType.CREATE_NEW_LIST: {
                 return setStore({
-                    query: store.query,
-                    queryType: store.queryType,
+                    // query: store.query,
+                    // queryType: store.queryType,
                     top5Lists: store.top5Lists,
                     currentList: payload,
                     listMarkedForDeletion: null
@@ -73,8 +73,8 @@ function GlobalStoreContextProvider(props) {
             }
             case GlobalStoreActionType.LOAD_TOP_5_LISTS: {
                 return setStore({
-                    query: store.query,
-                    queryType: store.queryType,
+                    // query: store.query,
+                    // queryType: store.queryType,
                     top5Lists: payload,
                     currentList: null,
                     listMarkedForDeletion: null
@@ -82,8 +82,8 @@ function GlobalStoreContextProvider(props) {
             }
             case GlobalStoreActionType.MARK_LIST_FOR_DELETION: {
                 return setStore({
-                    query: store.query,
-                    queryType: store.queryType,
+                    // query: store.query,
+                    // queryType: store.queryType,
                     top5Lists: store.top5Lists,
                     currentList: null,
                     listMarkedForDeletion: payload
@@ -91,8 +91,8 @@ function GlobalStoreContextProvider(props) {
             }
             case GlobalStoreActionType.UNMARK_LIST_FOR_DELETION: {
                 return setStore({
-                    query: store.query,
-                    queryType: store.queryType,
+                    // query: store.query,
+                    // queryType: store.queryType,
                     top5Lists: store.top5Lists,
                     currentList: null,
                     listMarkedForDeletion: null
@@ -100,8 +100,8 @@ function GlobalStoreContextProvider(props) {
             }
             case GlobalStoreActionType.SET_CURRENT_LIST: {
                 return setStore({
-                    query: store.query,
-                    queryType: store.queryType,
+                    // query: store.query,
+                    // queryType: store.queryType,
                     top5Lists: store.top5Lists,
                     currentList: payload,
                     listMarkedForDeletion: null,
@@ -179,7 +179,7 @@ function GlobalStoreContextProvider(props) {
      * @param {QUERY_TYPE} queryType
      */
     store.loadTop5Lists = async function (query = queryState.query, queryType = queryState.queryType) {
-        console.log(queryState)
+        console.log({query: query, queryType: queryType})
         let response = await api.getTop5ListPairs({
             owner: auth.user.username,
             query: query,

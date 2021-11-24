@@ -18,10 +18,9 @@ export default function HomeScreen() {
     }
 
     useEffect(() => {
-        console.log('HomeScreen')
-        store.loadTop5Lists()
+        store.loadTop5Lists('', QUERY_TYPE.HOME)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []); // Empty Array tells React to run this function only once
+    }, []); // Empty Array tells React to run this function only once when this component is mounted
 
     function handleCreateNewList() {
         store.createNewList()

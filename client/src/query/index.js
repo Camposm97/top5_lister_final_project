@@ -11,7 +11,7 @@ export const QUERY_TYPE = {
 
 export const QueryActionType = {
     SET_QUERY: 'SET_QUERY',
-    SET_QUERY_TYPE: "SET_QUERY_TYPE"
+    SET_QUERY_TYPE: 'SET_QUERY_TYPE'
 }
 
 function QueryContextProvider(props) {

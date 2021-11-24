@@ -28,7 +28,7 @@ function GlobalStoreContextProvider(props) {
         listMarkedForDeletion: null,
     });
 
-    const history = useHistory();
+    // const history = useHistory();
     const { auth } = useContext(AuthContext);
     const { queryState } = useContext(QueryContext)
 
@@ -211,7 +211,7 @@ function GlobalStoreContextProvider(props) {
         let response = await api.deleteTop5ListById(listToDelete._id);
         if (response.data.success) {
             store.loadTop5Lists();
-            history.push("/");
+            // history.push("/");
         }
     }
 
@@ -300,6 +300,7 @@ function GlobalStoreContextProvider(props) {
 
     store.publishCurrentList = async function () {
         store.currentList.isPublished = true
+        store.updateTop5ListById(store.currentList)
     }
 
     return (

@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import { Box, FormControl, Grid, Menu, MenuItem, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import PersonSharpIcon from '@mui/icons-material/PersonSharp';
@@ -24,7 +23,7 @@ export default function NavigationBar() {
     // const [queryType, setQueryType] = useState(QUERY_TYPE.HOME)
     const { store } = useContext(GlobalStoreContext)
     const [alignment, setAlignment] = useState('home')
-    function updateAlignment(e, newAlignment) { 
+    function updateAlignment(e, newAlignment) {
         if (newAlignment !== null) {    // Enforce one button must always be on
             setAlignment(newAlignment)
         }
@@ -102,23 +101,22 @@ export default function NavigationBar() {
             >
                 <ToggleButton value='home' onClick={handleHomeClick}>
                     <Tooltip title='Home' arrow>
-                        <HomeSharpIcon fontSize='large' />
+                        <HomeSharpIcon />
                     </Tooltip>
                 </ToggleButton>
                 <ToggleButton value='all_lists' onClick={handleAllListsClick}>
                     <Tooltip title='All Lists' arrow>
-                        <GroupsSharpIcon fontSize='large' />
+                        <GroupsSharpIcon />
                     </Tooltip>
                 </ToggleButton>
                 <ToggleButton value='users' onClick={handleUsersClick}>
                     <Tooltip title='Users' arrow>
-
-                        <PersonSharpIcon fontSize='large' />
+                        <PersonSharpIcon />
                     </Tooltip>
                 </ToggleButton>
                 <ToggleButton value='community_lists' onClick={handleCommunityListsClick}>
                     <Tooltip title='Community Lists' arrow>
-                        <FunctionsSharpIcon fontSize='large' />
+                        <FunctionsSharpIcon />
                     </Tooltip>
                 </ToggleButton>
             </ToggleButtonGroup>
@@ -128,14 +126,16 @@ export default function NavigationBar() {
                     variant='outlined'
                     size='small'
                     onChange={handleQueryFieldOnChange}
-                    // onKeyPress={handleQueryFieldKeyPress}
+                // onKeyPress={handleQueryFieldKeyPress}
                 />
             </FormControl>
-            <Box sx={{ paddingLeft: '15px', display: 'flex', alignItems: 'center', }}>
-                <Typography><b>SORT BY</b></Typography>
-                <IconButton color='inherit' onClick={handleSortMenuClick}>
-                    <MenuIcon fontSize='large' />
-                </IconButton>
+            <Box sx={{ paddingLeft: '15px', display: 'flex', alignItems: 'center' }}>
+                <Typography sx={{marginRight: 1}}><b>SORT BY</b></Typography>
+                <ToggleButton value='list_sort_by' onClick={handleSortMenuClick}>
+                    {/* <IconButton color='inherit' onClick={handleSortMenuClick}> */}
+                    <MenuIcon />
+                    {/* </IconButton> */}
+                </ToggleButton>
             </Box>
             <Menu
                 anchorEl={anchorEl}

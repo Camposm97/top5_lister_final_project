@@ -28,8 +28,7 @@ export default function WorkspaceModal() {
   }
   const publish = () => {
     store.publishCurrentList()
-      .then(() => store.updateCurrentList()
-        .then(() => store.closeCurrentList()))
+        .then(() => store.closeCurrentList())
   }
 
   if (store.currentList) {

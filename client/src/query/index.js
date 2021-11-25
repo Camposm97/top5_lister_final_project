@@ -54,8 +54,12 @@ function QueryContextProvider(props) {
         })
     }
 
+    queryState.isCommunityLists = function () {
+        return queryState.queryType === QUERY_TYPE.COMMUNITY_LISTS
+    }
+
     return (
-        <QueryContext.Provider value={{queryState}}>
+        <QueryContext.Provider value={{ queryState }}>
             {props.children}
         </QueryContext.Provider>
     )

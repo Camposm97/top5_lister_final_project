@@ -13,11 +13,14 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import Top5ItemCard from './Top5ItemCard';
 import QueryContext, { QUERY_TYPE } from '../query';
 import AuthContext from '../auth';
+import { formatDate } from '../util/ListCardUtils';
+
 export default function ListCard(props) {
     const { auth } = useContext(AuthContext)
     const { queryState } = useContext(QueryContext)
     const { store } = useContext(GlobalStoreContext);
     const { top5List, expanded, handleAccorChangeCallback } = props;
+
     function addComment(event) {
         if (event.key === 'Enter') {
             let comment = event.target.value
@@ -48,52 +51,6 @@ export default function ListCard(props) {
         event.stopPropagation()
         store.markListForDeletion(id)
     }
-    function formatDate() {
-        let date = new Date(top5List.publishDate)
-        let strDate = null
-        switch (date.getUTCMonth()) {
-            case 0:
-                strDate = 'Jan'
-                break;
-            case 1:
-                strDate = 'Feb'
-                break;
-            case 2:
-                strDate = 'Mar'
-                break;
-            case 3:
-                strDate = 'Apr'
-                break;
-            case 4:
-                strDate = 'May'
-                break;
-            case 5:
-                strDate = 'Jun'
-                break;
-            case 6:
-                strDate = 'Jul'
-                break;
-            case 7:
-                strDate = 'Aug'
-                break;
-            case 8:
-                strDate = 'Sep'
-                break;
-            case 9:
-                strDate = 'Oct'
-                break;
-            case 10:
-                strDate = 'Nov'
-                break;
-            case 11:
-                strDate = 'Dec'
-                break;
-            default:
-                strDate = null
-        }
-        strDate = strDate + ' ' + date.getUTCDate() + ', ' + date.getUTCFullYear()
-        return strDate
-    }
 
     let elementA =
         <ListItem>
@@ -109,7 +66,7 @@ export default function ListCard(props) {
                 elementA =
                     <ListItem>
                         <Typography variant='caption' fontWeight='fontWeightBold'>Published:</Typography>
-                        <Typography flex={1} variant='caption' marginLeft={1} color='green'>{formatDate()}</Typography>
+                        <Typography flex={1} variant='caption' marginLeft={1} color='green'>{formatDate(top5List.publishDate)}</Typography>
                         <Typography variant='caption' fontWeight='fontWeightBold'>Views:</Typography>
                         <Typography variant='caption' marginLeft={1} marginRight={15} color='red'>{top5List.views}</Typography>
                     </ListItem>
@@ -186,11 +143,13 @@ export default function ListCard(props) {
                     key={'accor-summary-grid-' + top5List._id}
                     container direction='column'>
                     <ListItem>
-                        <Box sx={{ flexGrow: 1 }}>
-                            <Typography variant='h6' fontWeight='fontWeightBold' >
-                                {top5List.name}
-                            </Typography>
-                        </Box>
+                        <Typography
+                            flex={1}
+                            variant='h6'
+                            fontWeight='fontWeightBold'
+                        >
+                            {top5List.name}
+                        </Typography>
                         {socialElements}
                         <IconButton
                             disabled={(top5List.owner !== auth.user.username)}

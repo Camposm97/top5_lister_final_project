@@ -7,7 +7,7 @@ export default function Top5ItemCard(props) {
             key={'item-pub-' + i}
             sx={{ mb: 3 }}>
             <Typography
-                variant='h5' >
+                variant='h6' >
                 {i + '. ' + item}
             </Typography>
         </ListItem>

@@ -10,7 +10,12 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ExpandMore from '@mui/icons-material/ExpandMore'
+import ItemCard from './ItemCard';
+import QueryContext, { QUERY_TYPE } from '../query';
+import AuthContext from '../auth';
 export default function ListCard(props) {
+    const { auth } = useContext(AuthContext)
+    const { queryState } = useContext(QueryContext)
     const { store } = useContext(GlobalStoreContext);
     const { top5List, expanded, handleAccorChangeCallback } = props;
     function addComment(event) {
@@ -96,75 +101,84 @@ export default function ListCard(props) {
         </ListItem>
     let socialElements = <Box></Box>
     let accorDetailsElement = <Box></Box>
-    if (top5List.isPublished) {
-        elementA =
-            <ListItem>
-                <Typography variant='caption' fontWeight='fontWeightBold'>Published:</Typography>
-                <Typography flex={1} variant='caption' marginLeft={1} color='green'>{formatDate()}</Typography>
-                <Typography variant='caption' fontWeight='fontWeightBold'>Views:</Typography>
-                <Typography variant='caption' marginLeft={1} marginRight={15} color='red'>{top5List.views}</Typography>
-            </ListItem>
-        socialElements =
-            <Box>
-                <IconButton onClick={like}>
-                    <ThumbUpIcon color='primary' fontSize='large' />
-                    <Typography variant='h6' marginLeft={1} >{top5List.likes.length}</Typography>
-                </IconButton>
-                <IconButton onClick={dislike}>
-                    <ThumbDownIcon color='secondary' fontSize='large' />
-                    <Typography variant='h6' marginLeft={1} >{top5List.dislikes.length}</Typography>
-                </IconButton>
-            </Box>
-        let i = 0
-        let j = 0
-        accorDetailsElement =
-            <AccordionDetails>
-                <Grid
-                    key={'accor-details-grid-root-' + top5List._id + '-' + props.i}
-                    container direction='row'>
-                    <Grid
-                        key={'accor-details-grid-child-1-' + top5List._id + '-' + props.i}
-                        sx={{ flex: 1, mb: 1, boxShadow: 5 }}>
-                        <Card>
-                            <CardContent>
-                                <List>
-                                    {top5List.items.map(item => (
-                                        <ListItem key={'item-pub-' + i} sx={{ mb: 3 }}>
-                                            <Typography variant='h5' >{(++i) + '. ' + item}</Typography>
-                                        </ListItem>
-                                    ))}
-                                </List>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid
-                        key={'accor-details-grid-child-2-' + top5List._id + '-' + props.i}
-                        sx={{ flex: 1, ml: 1 }}>
+    switch (queryState.queryType) {
+        case QUERY_TYPE.COMMUNITY_LISTS:
+            break;
+        default:
+            if (top5List.isPublished) {
+                elementA =
+                    <ListItem>
+                        <Typography variant='caption' fontWeight='fontWeightBold'>Published:</Typography>
+                        <Typography flex={1} variant='caption' marginLeft={1} color='green'>{formatDate()}</Typography>
+                        <Typography variant='caption' fontWeight='fontWeightBold'>Views:</Typography>
+                        <Typography variant='caption' marginLeft={1} marginRight={15} color='red'>{top5List.views}</Typography>
+                    </ListItem>
+                socialElements =
+                    <Box>
+                        <IconButton onClick={like}>
+                            <ThumbUpIcon color='primary' fontSize='large' />
+                            <Typography variant='h6' marginLeft={1} >{top5List.likes.length}</Typography>
+                        </IconButton>
+                        <IconButton onClick={dislike}>
+                            <ThumbDownIcon color='secondary' fontSize='large' />
+                            <Typography variant='h6' marginLeft={1} >{top5List.dislikes.length}</Typography>
+                        </IconButton>
+                    </Box>
+                let i = 0
+                let j = 0
+
+                accorDetailsElement =
+                    <AccordionDetails>
                         <Grid
-                            key={'accor-details-grid-child-2-1-' + top5List._id + '-' + props.i}
-                            sx={{ ml: 1, mr: 1 }}>
-                            <TextField fullWidth label='Add Comment' onKeyPress={addComment} />
-                        </Grid>
-                        <Grid
-                            key={'accor-details-grid-child-2-2-' + top5List._id + '-' + props.i}
-                            sx={{ overflow: 'auto', height: 350 }}>
-                            {top5List.comments.map(comment => (
-                                <Card
-                                    key={'comment-' + top5List._id + '-' + (j++)} sx={{ flex: 1, m: 1, boxShadow: 5 }}>
+                            key={'accor-details-grid-root-' + top5List._id + '-' + props.i}
+                            container direction='row'>
+                            <Grid
+                                key={'accor-details-grid-child-1-' + top5List._id + '-' + props.i}
+                                sx={{ flex: 1, mb: 1, boxShadow: 5 }}>
+                                <Card>
                                     <CardContent>
-                                        <Typography variant='caption' color='blue'>{comment.username}</Typography>
-                                        <Typography variant='body2'>{comment.message}</Typography>
+                                        <List>
+                                            {top5List.items.map(item => (
+                                                <ItemCard
+                                                    key={'published-item-' + (i)}
+                                                    i={(++i)}
+                                                    item={item}
+                                                />
+                                            ))}
+                                        </List>
                                     </CardContent>
                                 </Card>
-                            ))}
+                            </Grid>
+                            <Grid
+                                key={'accor-details-grid-child-2-' + top5List._id + '-' + props.i}
+                                sx={{ flex: 1, ml: 1 }}>
+                                <Grid
+                                    key={'accor-details-grid-child-2-1-' + top5List._id + '-' + props.i}
+                                    sx={{ ml: 1, mr: 1 }}>
+                                    <TextField fullWidth label='Add Comment' onKeyPress={addComment} />
+                                </Grid>
+                                <Grid
+                                    key={'accor-details-grid-child-2-2-' + top5List._id + '-' + props.i}
+                                    sx={{ overflow: 'auto', height: 350 }}>
+                                    {top5List.comments.map(comment => (
+                                        <Card
+                                            key={'comment-' + top5List._id + '-' + (j++)} sx={{ flex: 1, m: 1, boxShadow: 5 }}>
+                                            <CardContent>
+                                                <Typography variant='caption' color='blue'>{comment.username}</Typography>
+                                                <Typography variant='body2'>{comment.message}</Typography>
+                                            </CardContent>
+                                        </Card>
+                                    ))}
+                                </Grid>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Grid>
-            </AccordionDetails>
+                    </AccordionDetails>
+            }
+
     }
     return (
         <Accordion
-            key={'accor-' + top5List.id}
+            key={'accor-' + top5List._id}
             expanded={expanded === top5List._id}
             onChange={handleAccorChangeCallback(top5List._id)}
             onClick={view}>
@@ -180,8 +194,15 @@ export default function ListCard(props) {
                         </Box>
                         {socialElements}
                         <IconButton
+                            disabled={(top5List.owner !== auth.user.username)}
                             onClick={(event) => { handleDeleteList(event, top5List._id) }}>
-                            <DeleteForeverIcon fontSize='large' style={{ color: 'red' }} />
+                            <DeleteForeverIcon
+                                fontSize='large'
+                                sx={{
+                                    color: 'red',
+                                    opacity: ((top5List.owner === auth.user.username)
+                                        && queryState.queryType === QUERY_TYPE.HOME ? 1 : 0)
+                                }} />
                         </IconButton>
                     </ListItem>
                     <ListItem>

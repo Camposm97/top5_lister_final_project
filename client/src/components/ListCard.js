@@ -10,7 +10,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import ItemCard from './ItemCard';
+import Top5ItemCard from './Top5ItemCard';
 import QueryContext, { QUERY_TYPE } from '../query';
 import AuthContext from '../auth';
 export default function ListCard(props) {
@@ -126,7 +126,6 @@ export default function ListCard(props) {
                     </Box>
                 let i = 0
                 let j = 0
-
                 accorDetailsElement =
                     <AccordionDetails>
                         <Grid
@@ -139,7 +138,7 @@ export default function ListCard(props) {
                                     <CardContent>
                                         <List>
                                             {top5List.items.map(item => (
-                                                <ItemCard
+                                                <Top5ItemCard
                                                     key={'published-item-' + (i)}
                                                     i={(++i)}
                                                     item={item}

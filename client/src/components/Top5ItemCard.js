@@ -1,9 +1,7 @@
 import { ListItem, Typography } from "@mui/material"
-// import { QUERY_TYPE } from "../query"
 
-export default function ItemCard(props) {
+export default function Top5ItemCard(props) {
     const { i, item } = props
-    
     return (
         <ListItem
             key={'item-pub-' + i}

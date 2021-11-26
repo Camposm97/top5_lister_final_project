@@ -105,40 +105,44 @@ deleteTop5List = async (req, res) => {
                     message: 'Top 5 List not found!',
                 })
             }
+            // console.log(top5List)
             Top5List.findOneAndDelete({ _id: req.params.id }, (err, callback) => {
                 if (err) {
-                    return res.status(404).json({
+                    return res.status(400).json({
                         err,
                         message: 'Failed to delete top 5 list ' + req.params.id,
                     })
                 }
-                console.log('Deleted ' + JSON.stringify(callback))
-                if (callback.isPublished) {
-                    Top5List.exists({
-                        name: {
-                            $regex: '^(' + callback.name + ')$',
-                            $options: 'i'
-                        },
-                        isPublished: true
-                    }).then((flag) => {
-                        console.log('flag=' + flag)
-                        if (flag) { // Update a Community List
-                            Top5CommunityList.findOne({
-                                name: {
-                                    $regex: '^(' + callback.name + ')$',
-                                    $options: 'i'
-                                }
-                            }, (err, commList) => {
-                                if (commList) {
-                                    updateTop5CommList(commList)
-                                }
-                            })
-                        } else { // Delete a Community List
-                            deleteCommListByName(callback.name)
-                        }
-                    })
+                // console.log(callback)
+                if (callback) {
+                    console.log('Deleted ' + JSON.stringify(callback))
+                    if (callback.isPublished) {
+                        Top5List.exists({
+                            name: {
+                                $regex: '^(' + callback.name + ')$',
+                                $options: 'i'
+                            },
+                            isPublished: true
+                        }).then((flag) => {
+                            console.log('flag=' + flag)
+                            if (flag) { // Update a Community List
+                                Top5CommunityList.findOne({
+                                    name: {
+                                        $regex: '^(' + callback.name + ')$',
+                                        $options: 'i'
+                                    }
+                                }, (err, commList) => {
+                                    if (commList) {
+                                        updateTop5CommList(commList)
+                                    }
+                                })
+                            } else { // Delete a Community List
+                                deleteCommListByName(callback.name)
+                            }
+                        })
+                    }
+                    return res.status(200).json({ success: true, data: callback })
                 }
-                return res.status(200).json({ success: true, data: callback })
             }).catch(err => console.log(err))
         }).catch(err => console.log(err))
     })

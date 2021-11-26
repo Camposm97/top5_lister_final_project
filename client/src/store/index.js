@@ -303,6 +303,53 @@ function GlobalStoreContextProvider(props) {
         store.updateTop5ListById(store.currentList)
     }
 
+    store.commentCommList = async (commList, comment) => {
+        commList.comments.unshift({
+            username: auth.user.username,
+            message: comment
+        })
+        store.updateCommListById(commList)
+    }
+
+    store.likeCommList = async (commList) => {
+        const username = auth.user.username
+        if (!commList.dislikes.includes(username)) {
+            if (commList.likes.includes(username)) {
+                commList.likes = commList.likes.filter(x => x !== username)
+            } else {
+                commList.likes.push(username)
+            }
+            store.updateCommListById(commList)
+        }
+    }
+
+    store.dislikeCommList = async (commList) => {
+        const username = auth.user.username
+        if (!commList.likes.includes(username)) {
+            if (commList.dislikes.includes(username)) {
+                commList.dislikes = commList.dislikes.filter(x => x !== username)
+            } else {
+                commList.dislikes.push(username)
+            }
+            store.updateCommListById(commList)
+        }
+    }
+
+    store.viewCommList = async (commList) => {
+        commList.views++
+        store.updateCommListById(commList)
+    }
+
+    store.updateCommListById = async function (commList) {
+        const response = await api.updateTop5CommunityListById(commList._id, commList)
+        if (response.data.success) {
+            storeReducer({
+                type: GlobalStoreActionType.LOAD_TOP_5_LISTS,
+                payload: store.top5Lists
+            })
+        }
+    }
+
     return (
         <GlobalStoreContext.Provider value={{ store }}>
             {props.children}

@@ -102,6 +102,41 @@ function updateTop5CommList(top5CommList) {
     })
 }
 
+updateTop5CommListById = async (req, res) => {
+    const body = req.body
+    if (!body) {
+        return res.status(400).json({
+            success: false,
+        })
+    }
+    Top5CommunityList.findOne({ _id: body._id }, (err, callback) => {
+        if (err) {
+            console.log(err)
+        }
+        if (callback) {
+            callback.likes = body.likes
+            callback.dislikes = body.dislikes
+            callback.views = body.views
+            callback.comments = body.comments
+            // console.log('updating comm list')
+            callback.save().then(() => {
+                // console.log('yeeee')
+                return res.status(200).json({
+                    success: true,
+                    message: 'Comm List Updated!'
+                })
+            }).catch(error => {
+                // console.log('ahhh')
+                return res.status(400).json({
+                    success: true,
+                    error,
+                    message: 'Failed to update comm list'
+                })
+            })
+        }
+    })
+}
+
 function deleteCommListByName(name) {
     Top5CommunityList.findOneAndDelete({
         name: {
@@ -162,5 +197,6 @@ module.exports = {
     createTop5CommList,
     // getTop5CommListsByName,
     updateTop5CommList,
+    updateTop5CommListById,
     deleteCommListByName,
 }

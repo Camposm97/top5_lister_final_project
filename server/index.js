@@ -20,7 +20,9 @@ app.use(cookieParser())
 
 // SETUP OUR OWN ROUTERS AS MIDDLEWARE
 const top5listsRouter = require('./routes/top5lists-router')
+const top5commlistsRouter = require('./routes/top5communitylists-router')
 app.use('/api', top5listsRouter)
+app.use('/api', top5commlistsRouter)
 
 // INITIALIZE OUR DATABASE OBJECT
 const db = require('./db')

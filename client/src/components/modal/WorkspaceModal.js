@@ -27,8 +27,33 @@ export default function WorkspaceModal() {
       .then(() => store.closeCurrentList())
   }
   const publish = () => {
-    store.publishCurrentList()
+    if (!duplicate() && validChars()) {
+      store.publishCurrentList()
         .then(() => store.closeCurrentList())
+    }
+  }
+
+  const duplicate = () => {
+    let items = store.currentList.items.map(x => x.toLowerCase())
+    let arr = []
+    for (let i in items) {
+      if (!arr.includes(items[i])) {
+        arr.push(items[i])
+      } else {
+        return true
+      }
+    }
+    return false
+  }
+
+  const validChars = () => {
+    for (let i in store.currentList.items) {
+      let item = store.currentList.items[i]
+      if (item === '?' || item === '') {
+        return false
+      }
+    }
+    return true
   }
 
   if (store.currentList) {

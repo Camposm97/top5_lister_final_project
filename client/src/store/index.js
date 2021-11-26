@@ -3,14 +3,11 @@ import { createContext, useContext, useState } from 'react'
 import api from '../api'
 import AuthContext from '../auth'
 import QueryContext from '../query'
-// import { QUERY_TYPE } from '../query'
 import Cookies from '../util/Cookies'
 
 export const GlobalStoreContext = createContext({});
 
 export const GlobalStoreActionType = {
-    // SET_QUERY: 'SET_QUERY',
-    // SET_QUERY_TYPE: "SET_QUERY_TYPE",
     CLOSE_CURRENT_LIST: "CLOSE_CURRENT_LIST",
     CREATE_NEW_LIST: "CREATE_NEW_LIST",
     LOAD_TOP_5_LISTS: "LOAD_TOP_5_LISTS",
@@ -21,8 +18,6 @@ export const GlobalStoreActionType = {
 
 function GlobalStoreContextProvider(props) {
     const [store, setStore] = useState({
-        // query: '',
-        // queryType: QUERY_TYPE.HOME,
         top5Lists: [],
         currentList: null,
         listMarkedForDeletion: null,
@@ -35,28 +30,8 @@ function GlobalStoreContextProvider(props) {
     const storeReducer = (action) => {
         const { type, payload } = action;
         switch (type) {
-            // case GlobalStoreActionType.SET_QUERY: {
-            //     return setStore({
-            //         query: payload,
-            //         queryType: store.queryType,
-            //         top5Lists: store.top5Lists,
-            //         currentList: null,
-            //         listMarkedForDeletion: null
-            //     })
-            // }
-            // case GlobalStoreActionType.SET_QUERY_TYPE: {
-            //     return setStore({
-            //         query: store.query,
-            //         queryType: payload,
-            //         top5Lists: store.top5Lists,
-            //         currentList: null,
-            //         listMarkedForDeletion: null
-            //     })
-            // }
             case GlobalStoreActionType.CLOSE_CURRENT_LIST: {
                 return setStore({
-                    // query: store.query,
-                    // queryType: store.queryType,
                     top5Lists: store.top5Lists,
                     currentList: null,
                     listMarkedForDeletion: null,
@@ -64,8 +39,6 @@ function GlobalStoreContextProvider(props) {
             }
             case GlobalStoreActionType.CREATE_NEW_LIST: {
                 return setStore({
-                    // query: store.query,
-                    // queryType: store.queryType,
                     top5Lists: store.top5Lists,
                     currentList: payload,
                     listMarkedForDeletion: null
@@ -73,8 +46,6 @@ function GlobalStoreContextProvider(props) {
             }
             case GlobalStoreActionType.LOAD_TOP_5_LISTS: {
                 return setStore({
-                    // query: store.query,
-                    // queryType: store.queryType,
                     top5Lists: payload,
                     currentList: null,
                     listMarkedForDeletion: null
@@ -82,8 +53,6 @@ function GlobalStoreContextProvider(props) {
             }
             case GlobalStoreActionType.MARK_LIST_FOR_DELETION: {
                 return setStore({
-                    // query: store.query,
-                    // queryType: store.queryType,
                     top5Lists: store.top5Lists,
                     currentList: null,
                     listMarkedForDeletion: payload
@@ -91,8 +60,6 @@ function GlobalStoreContextProvider(props) {
             }
             case GlobalStoreActionType.UNMARK_LIST_FOR_DELETION: {
                 return setStore({
-                    // query: store.query,
-                    // queryType: store.queryType,
                     top5Lists: store.top5Lists,
                     currentList: null,
                     listMarkedForDeletion: null
@@ -100,8 +67,6 @@ function GlobalStoreContextProvider(props) {
             }
             case GlobalStoreActionType.SET_CURRENT_LIST: {
                 return setStore({
-                    // query: store.query,
-                    // queryType: store.queryType,
                     top5Lists: store.top5Lists,
                     currentList: payload,
                     listMarkedForDeletion: null,
@@ -111,20 +76,6 @@ function GlobalStoreContextProvider(props) {
                 return store;
         }
     }
-
-    // store.setQuery = function (query) {
-    //     storeReducer({
-    //         type: GlobalStoreActionType.SET_QUERY,
-    //         payload: query
-    //     })
-    // }
-
-    // store.setQueryType = function (queryType) {
-    //     storeReducer({
-    //         type: GlobalStoreActionType.SET_QUERY_TYPE,
-    //         payload: queryType
-    //     })
-    // }
 
     store.closeCurrentList = async function () {
         storeReducer({
@@ -163,7 +114,6 @@ function GlobalStoreContextProvider(props) {
         } else {
             console.log("API FAILED TO CREATE A NEW LIST")
         }
-
     }
 
     store.clearTop5Lists = async function () {
@@ -179,7 +129,7 @@ function GlobalStoreContextProvider(props) {
      * @param {QUERY_TYPE} queryType
      */
     store.loadTop5Lists = async function (query = queryState.query, queryType = queryState.queryType) {
-        console.log({query: query, queryType: queryType})
+        console.log({ query: query, queryType: queryType })
         let response = await api.getTop5ListPairs({
             owner: auth.user.username,
             query: query,
@@ -348,6 +298,60 @@ function GlobalStoreContextProvider(props) {
                 payload: store.top5Lists
             })
         }
+    }
+
+    store.sortByNewest = () => {
+        let arr = store.top5Lists.sort((a, b) => {
+            if (a.publishDate == null || b.publishDate == null) {
+                return new Date(a.latestUpdate) - new Date(b.latestUpdate)
+            }
+            return new Date(a.publishDate) - new Date(b.publishDate)
+        })
+        storeReducer({
+            type: GlobalStoreActionType.LOAD_TOP_5_LISTS,
+            payload: arr
+        })
+    }
+
+    store.sortByOldest= () => {
+        let arr = store.top5Lists.sort((a, b) => {
+            if (a.publishDate == null || b.publishDate == null) {
+                return new Date(a.latestUpdate) - new Date(b.latestUpdate)
+            }
+            return new Date(b.publishDate) - new Date(a.publishDate)
+        })
+        storeReducer({
+            type: GlobalStoreActionType.LOAD_TOP_5_LISTS,
+            payload: arr
+        })
+    }
+
+    store.sortByViews = () => {
+        let arr = store.top5Lists.sort((a, b) => a.views < b.views ? 1 : -1)
+        storeReducer({
+            type: GlobalStoreActionType.LOAD_TOP_5_LISTS,
+            payload: arr
+        })
+    }
+
+    store.sortByLikes = () => {
+        let arr = store.top5Lists.sort((a, b) => {
+            return a.likes.length < b.likes.length ? 1 : -1
+        })
+        storeReducer({
+            type: GlobalStoreActionType.LOAD_TOP_5_LISTS,
+            payload: arr
+        })
+    }
+
+    store.sortByDislikes = () => {
+        let arr = store.top5Lists.sort((a, b) => {
+            return a.dislikes.length < b.dislikes.length ? 1 : -1
+        })
+        storeReducer({
+            type: GlobalStoreActionType.LOAD_TOP_5_LISTS,
+            payload: arr
+        })
     }
 
     return (

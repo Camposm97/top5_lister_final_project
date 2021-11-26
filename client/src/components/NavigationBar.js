@@ -19,8 +19,6 @@ export default function NavigationBar() {
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl);
     const { queryState } = useContext(QueryContext)
-    // const [query, setQuery] = useState('')
-    // const [queryType, setQueryType] = useState(QUERY_TYPE.HOME)
     const { store } = useContext(GlobalStoreContext)
     const [alignment, setAlignment] = useState('home')
     function updateAlignment(e, newAlignment) {
@@ -29,59 +27,44 @@ export default function NavigationBar() {
         }
     }
     function handleHomeClick() {
-        // setQueryType(QUERY_TYPE.HOME)
         queryState.setQueryType(QUERY_TYPE.HOME)
-        // store.setQueryType(QUERY_TYPE.HOME)
         store.loadTop5Lists(queryState.query, QUERY_TYPE.HOME)
     }
     function handleAllListsClick() {
-        // setQueryType(QUERY_TYPE.ALL_LISTS)
         queryState.setQueryType(QUERY_TYPE.ALL_LISTS)
-        // store.setQueryType(QUERY_TYPE.ALL_LISTS)
         store.loadTop5Lists(queryState.query, QUERY_TYPE.ALL_LISTS)
     }
     function handleUsersClick() {
-        // setQueryType(QUERY_TYPE.USERS)
         queryState.setQueryType(QUERY_TYPE.USERS)
-        // store.setQueryType(QUERY_TYPE.USERS)
         store.loadTop5Lists(queryState.query, QUERY_TYPE.USERS)
     }
     function handleCommunityListsClick() {
-        // setQueryType(QUERY_TYPE.COMMUNITY_LISTS)
         queryState.setQueryType(QUERY_TYPE.COMMUNITY_LISTS)
-        // store.setQueryType(QUERY_TYPE.COMMUNITY_LISTS)
         store.loadTop5Lists(queryState.query, QUERY_TYPE.COMMUNITY_LISTS)
     }
     function handleQueryFieldOnChange(event) {
         let query = event.target.value
-        // setQuery(event.target.value)
         queryState.setQuery(event.target.value)
-        // store.setQuery(query)
         store.loadTop5Lists(query, queryState.queryType)
     }
-    // function handleQueryFieldKeyPress(event) {
-    //     if (event.key === 'Enter') {
-    //         store.loadTop5Lists(queryState.query, queryState.queryType)
-    //     }
-    // }
     function handleSortByDateNewest() {
-        console.log('Sort by Date Newest')
+        store.sortByNewest()
         handleSortMenuClose()
     }
     function handleSortByDateOldest() {
-        console.log('Sort by Date Oldest')
+        store.sortByOldest()
         handleSortMenuClose()
     }
     function handleSortByViews() {
-        console.log('Sort by Views')
+        store.sortByViews()
         handleSortMenuClose()
     }
     function handleSortByLikes() {
-        console.log('Sort by Likes')
+        store.sortByLikes()
         handleSortMenuClose()
     }
     function handleSortByDislikes() {
-        console.log('Sort by Dislikes')
+        store.sortByDislikes()
         handleSortMenuClose()
     }
     function handleSortMenuClick(event) {
@@ -122,19 +105,21 @@ export default function NavigationBar() {
             </ToggleButtonGroup>
             <FormControl sx={{ flexGrow: 1, backgroundColor: 'white', borderRadius: 1 }}>
                 <TextField
-                    InputProps={{ startAdornment: (<InputAdornment position='start'><SearchSharpIcon /></InputAdornment>) }}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position='start'>
+                                <SearchSharpIcon />
+                            </InputAdornment>)
+                    }}
                     variant='outlined'
                     size='small'
                     onChange={handleQueryFieldOnChange}
-                // onKeyPress={handleQueryFieldKeyPress}
                 />
             </FormControl>
             <Box sx={{ paddingLeft: '15px', display: 'flex', alignItems: 'center' }}>
-                <Typography sx={{marginRight: 1}}><b>SORT BY</b></Typography>
+                <Typography sx={{ marginRight: 1 }}><b>SORT BY</b></Typography>
                 <ToggleButton value='list_sort_by' onClick={handleSortMenuClick}>
-                    {/* <IconButton color='inherit' onClick={handleSortMenuClick}> */}
                     <MenuIcon />
-                    {/* </IconButton> */}
                 </ToggleButton>
             </Box>
             <Menu

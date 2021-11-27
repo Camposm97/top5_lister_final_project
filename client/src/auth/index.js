@@ -133,6 +133,16 @@ function AuthContextProvider(props) {
         }
     }
 
+    auth.loginAsGuest = async function () {
+        authReducer({
+            type: AuthActionType.SET_LOGGED_IN,
+            payload: {
+                user: null,
+                loggedIn: true
+            }
+        })
+    }
+
     return (
         <AuthContext.Provider value={{auth}}>
             {props.children}

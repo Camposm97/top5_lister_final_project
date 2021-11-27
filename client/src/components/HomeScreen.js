@@ -8,8 +8,10 @@ import List from '@mui/material/List';
 import WorkspaceModal from './modal/WorkspaceModal'
 import DeleteListModal from './modal/DeleteListModal'
 import Top5CommunityListCard from './Top5CommunityListCard'
+import AuthContext from '../auth'
 
 export default function HomeScreen() {
+    const { auth } = useContext(AuthContext)
     const { queryState } = useContext(QueryContext)
     const { store } = useContext(GlobalStoreContext)
     const [expanded, setExpanded] = useState(false)
@@ -19,14 +21,20 @@ export default function HomeScreen() {
     }
 
     useEffect(() => {
-        store.loadTop5Lists('', QUERY_TYPE.HOME)
+        if (auth.user !== null) {
+            queryState.setQueryType(QUERY_TYPE.HOME)
+            store.loadTop5Lists('', QUERY_TYPE.HOME)
+        } else {
+            queryState.setQueryType(QUERY_TYPE.COMMUNITY_LISTS)
+            store.loadTop5Lists('', QUERY_TYPE.COMMUNITY_LISTS)
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); // Empty Array tells React to run this function only once when this component is mounted
 
-    function handleCreateNewList() {
+    const handleCreateNewList = () => {
         store.createNewList()
     }
-    function initStatusbar() {
+    const loadStatusbar = () => {
         switch (queryState.queryType) {
             case QUERY_TYPE.ALL_LISTS:
                 return (
@@ -61,8 +69,8 @@ export default function HomeScreen() {
         }
     }
 
-    let listCards = ''
-    let statusbar = initStatusbar()
+    let listCards = <div></div>
+    let statusbar = loadStatusbar()
 
     let i = 0
     if (store.top5Lists) {

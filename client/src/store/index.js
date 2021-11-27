@@ -130,11 +130,12 @@ function GlobalStoreContextProvider(props) {
      */
     store.loadTop5Lists = async function (query = queryState.query, queryType = queryState.queryType) {
         console.log({ query: query, queryType: queryType })
-        let response = await api.getTop5ListPairs({
+        let payload = auth.user ? {
             owner: auth.user.username,
             query: query,
             queryType: queryType
-        })
+        } : { query: query, queryType: queryType }
+        let response = await api.getTop5ListPairs(payload)
         if (response.data.success) {
             let top5Lists = response.data.top5Lists;
             storeReducer({
@@ -313,7 +314,7 @@ function GlobalStoreContextProvider(props) {
         })
     }
 
-    store.sortByOldest= () => {
+    store.sortByOldest = () => {
         let arr = store.top5Lists.sort((a, b) => {
             if (a.publishDate == null || b.publishDate == null) {
                 return new Date(a.latestUpdate) - new Date(b.latestUpdate)

@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom'
 import GlobalStoreContext from '../store';
 import AuthContext from '../auth';
@@ -20,6 +21,7 @@ export default function AppBanner() {
     const { auth } = useContext(AuthContext);
     const { store } = useContext(GlobalStoreContext);
     const [anchorEl, setAnchorEl] = useState(null);
+    const history = useHistory()
     const open = Boolean(anchorEl);
 
     const handleProfileMenuOpen = (event) => {
@@ -34,14 +36,13 @@ export default function AppBanner() {
         handleMenuClose()
         auth.logoutUser()
         store.clearTop5Lists()
-        // store.closeCurrentList()
     }
 
-    // const handleTop5L = () => {
-    //     if (!store.isListNameEditActive) {
-    //         store.closeCurrentList()
-    //     }
-    // }
+    const handleGuest = () => {
+        history.push('/')
+        auth.loginAsGuest()
+        handleMenuClose()
+    }
 
     const loggedOutMenu = (
         <Menu
@@ -53,8 +54,8 @@ export default function AppBanner() {
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
             <MenuItem onClick={handleMenuClose} component={Link} to={'/login/'} ><PersonIcon />Login</MenuItem>
-            <MenuItem onClick={handleMenuClose} component={Link} to='/register/'><PersonAddAlt1Icon />Create New Account</MenuItem>
-            <MenuItem onClick={handleMenuClose} component={Link} to='/guest/'><PersonSearchIcon />Continue as Guest</MenuItem>
+            <MenuItem onClick={handleMenuClose} component={Link} to={'/register/'}><PersonAddAlt1Icon />Create New Account</MenuItem>
+            <MenuItem onClick={handleGuest}><PersonSearchIcon />Continue as Guest</MenuItem>
         </Menu>
     )
     const loggedInMenu =
@@ -69,17 +70,13 @@ export default function AppBanner() {
             <MenuItem onClick={handleLogout}><MeetingRoomSharpIcon />Logout</MenuItem>
         </Menu>
 
-    // let editToolbar = "";
     let menu = loggedOutMenu;
     if (auth.loggedIn) {
         menu = loggedInMenu;
-        // if (store.currentList) {
-        //     editToolbar = <EditToolbar />;
-        // }
     }
 
     function getAccountMenu(loggedIn) {
-        if (loggedIn) {
+        if (loggedIn && auth.user !== null) {
             let firstInitial = auth.user.firstName.charAt(0).toUpperCase()
             let lastInitial = auth.user.lastName.charAt(0).toUpperCase()
             let initials = firstInitial + lastInitial;

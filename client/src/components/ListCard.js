@@ -152,14 +152,14 @@ export default function ListCard(props) {
                         </Typography>
                         {socialElements}
                         <IconButton
-                            disabled={(top5List.owner !== auth.user.username)}
+                            // disabled={(top5List.owner !== auth.user.username)}
                             onClick={(event) => { handleDeleteList(event, top5List._id) }}>
                             <DeleteForeverIcon
                                 fontSize='large'
                                 sx={{
                                     color: 'red',
-                                    opacity: ((top5List.owner === auth.user.username)
-                                        && queryState.queryType === QUERY_TYPE.HOME ? 1 : 0)
+                                    // opacity: ((top5List.owner === auth.user.username)
+                                    //     && queryState.queryType === QUERY_TYPE.HOME ? 1 : 0)
                                 }} />
                         </IconButton>
                     </ListItem>

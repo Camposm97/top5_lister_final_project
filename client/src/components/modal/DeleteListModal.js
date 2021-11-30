@@ -17,9 +17,10 @@ export default function DeleteListModal() {
 
     function deleteList() {
         store.deleteMarkedList()
+        closeDialog()
     }
 
-    let listName = '[List-Name]'
+    let listName = ''
     if (store.listMarkedForDeletion) {
         listName = store.listMarkedForDeletion.name
     }

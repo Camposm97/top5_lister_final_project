@@ -34,6 +34,7 @@ export default function Top5CommunityListCard(props) {
             expanded={expanded === commList._id}
             onChange={handleAccorChangeCallback(commList._id)}
             onClick={view}
+            sx={{ backgroundColor: '#e3f2fd' }}
         >
             <Top5CommunityListCardAccordionSummary
                 commList={commList}

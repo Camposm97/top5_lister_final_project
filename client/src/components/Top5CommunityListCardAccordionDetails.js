@@ -1,10 +1,20 @@
 import { AccordionDetails } from "@mui/material"
 import { Grid, Stack } from "@mui/material"
 import { Card, CardContent, TextField, Typography } from "@mui/material"
+import { useContext } from "react"
+import AuthContext from "../auth"
 import Top5CommunityItemCard from "./Top5CommunityItemCard"
 export default function Top5CommunityListCardAccordionDetails(props) {
     const { i, commList, commentCallback } = props
+    const { auth } = useContext(AuthContext)
     let j = 0, k = 0
+    let commentField = auth.user ?
+        <TextField
+            fullWidth
+            label='Add Comment'
+            sx={{ backgroundColor: '#ffffff', borderRadius: 1 }}
+            onKeyPress={commentCallback} /> 
+            : ''
     return (
         <AccordionDetails>
             <Grid
@@ -37,7 +47,12 @@ export default function Top5CommunityListCardAccordionDetails(props) {
                         key={'comm-accor-details-grid-child-2-1-' + commList._id + '-' + i}
                         ml={1} mr={1}
                     >
-                        <TextField fullWidth label='Add Comment' onKeyPress={commentCallback} />
+                        {commentField}
+                        {/* <TextField
+                            fullWidth
+                            label='Add Comment'
+                            sx={{ backgroundColor: '#ffffff', borderRadius: 1 }}
+                            onKeyPress={commentCallback} /> */}
                     </Grid>
                     <Grid
                         key={'comm-accor-details-grid-child-2-2-' + commList._id + '-' + i}

@@ -101,10 +101,10 @@ export default function WorkspaceModal() {
       <List>
         {store.currentList.items.map(item => (
           <ListItem key={'item-' + i}>
-            <Card style={{ paddingBlock: 15, paddingInline: 30, marginRight: 15 }}>
+            <Card style={{ paddingBlock: 15, paddingInline: 30, marginRight: 15}}>
               <Typography style={{ fontSize: 40 }}>{(i + 1) + '.'}</Typography>
             </Card>
-            <Card style={{ flex: 1 }}>
+            <Card style={{ flex: 1}}>
               <TextField
                 id={'item-' + (i++)}
                 // onKeyPress={handleOnKeyPress}

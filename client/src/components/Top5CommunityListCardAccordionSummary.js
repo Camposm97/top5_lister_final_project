@@ -25,17 +25,17 @@ export default function Top5CommunityListCardAccordionSummary(props) {
                         dislikeCallback={dislikeCallback}
                     />
                 </Stack>
-                <Stack direction='row' marginLeft={1} spacing={1} marginRight={8}>
-                    <Typography variant='caption'>
-                        Updated
+                <Stack direction='row' spacing={1} marginRight={8}>
+                    <Typography variant='caption' fontWeight='fontWeightBold'>
+                        Updated:
                     </Typography>
-                    <Typography variant='caption' flex={1}>
+                    <Typography variant='caption' flex={1} color='#2e7d32'>
                         {formatDate(commList.latestUpdate)}
                     </Typography>
-                    <Typography variant='caption'>
+                    <Typography variant='caption' fontWeight='fontWeightBold'>
                         Views:
                     </Typography>
-                    <Typography variant='caption'>
+                    <Typography variant='caption' color='red'>
                         {commList.views}
                     </Typography>
                 </Stack>

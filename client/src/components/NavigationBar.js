@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Box, FormControl, Grid, Menu, MenuItem, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -14,63 +14,75 @@ import { MENU_PAPER_PROPS } from '../util/CamposConsts';
 import GlobalStoreContext from '../store';
 import { QUERY_TYPE } from '../query';
 import QueryContext from '../query';
+import AuthContext from '../auth';
 
 export default function NavigationBar() {
+    const { auth } = useContext(AuthContext)
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl);
     const { queryState } = useContext(QueryContext)
     const { store } = useContext(GlobalStoreContext)
     const [alignment, setAlignment] = useState('home')
-    function updateAlignment(e, newAlignment) {
+
+    useEffect(() => {
+        if (auth.user) {
+            setAlignment('home')
+        } else {
+            setAlignment('community_lists')
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const updateAlignment = (e, newAlignment) => {
         if (newAlignment !== null) {    // Enforce one button must always be on
             setAlignment(newAlignment)
         }
     }
-    function handleHomeClick() {
+    const handleHomeClick = () => {
         queryState.setQueryType(QUERY_TYPE.HOME)
         store.loadTop5Lists(queryState.query, QUERY_TYPE.HOME)
     }
-    function handleAllListsClick() {
+    const handleAllListsClick = () => {
         queryState.setQueryType(QUERY_TYPE.ALL_LISTS)
         store.loadTop5Lists(queryState.query, QUERY_TYPE.ALL_LISTS)
     }
-    function handleUsersClick() {
+    const handleUsersClick = () => {
         queryState.setQueryType(QUERY_TYPE.USERS)
         store.loadTop5Lists(queryState.query, QUERY_TYPE.USERS)
     }
-    function handleCommunityListsClick() {
+    const handleCommunityListsClick = () => {
         queryState.setQueryType(QUERY_TYPE.COMMUNITY_LISTS)
         store.loadTop5Lists(queryState.query, QUERY_TYPE.COMMUNITY_LISTS)
     }
-    function handleQueryFieldOnChange(event) {
+    const handleQueryFieldOnChange = (event) => {
         let query = event.target.value
         queryState.setQuery(event.target.value)
         store.loadTop5Lists(query, queryState.queryType)
     }
-    function handleSortByDateNewest() {
+    const handleSortByDateNewest = () => {
         store.sortByNewest()
         handleSortMenuClose()
     }
-    function handleSortByDateOldest() {
+    const handleSortByDateOldest = () => {
         store.sortByOldest()
         handleSortMenuClose()
     }
-    function handleSortByViews() {
+    const handleSortByViews = () => {
         store.sortByViews()
         handleSortMenuClose()
     }
-    function handleSortByLikes() {
+    const handleSortByLikes = () => {
         store.sortByLikes()
         handleSortMenuClose()
     }
-    function handleSortByDislikes() {
+    const handleSortByDislikes = () => {
         store.sortByDislikes()
         handleSortMenuClose()
     }
-    function handleSortMenuClick(event) {
+    const handleSortMenuClick = (event) => {
         setAnchorEl(event.currentTarget);
     }
-    function handleSortMenuClose() {
+    const handleSortMenuClose = () => {
         setAnchorEl(null);
     }
     return (
@@ -82,7 +94,7 @@ export default function NavigationBar() {
                 exclusive
                 onChange={updateAlignment}
             >
-                <ToggleButton value='home' onClick={handleHomeClick}>
+                <ToggleButton value='home' onClick={handleHomeClick} disabled={!auth.user}>
                     <Tooltip title='Home' arrow>
                         <HomeSharpIcon />
                     </Tooltip>

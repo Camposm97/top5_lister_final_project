@@ -11,7 +11,7 @@ export const GlobalStoreActionType = {
     CLOSE_CURRENT_LIST: "CLOSE_CURRENT_LIST",
     CREATE_NEW_LIST: "CREATE_NEW_LIST",
     LOAD_TOP_5_LISTS: "LOAD_TOP_5_LISTS",
-    MARK_LIST_FOR_DELETION: "MARK_LIST_FOR_DELETION",
+    MARK_LIST_FOR_OPELETION: "MARK_LIST_FOR_DELETION",
     UNMARK_LIST_FOR_DELETION: "UNMARK_LIST_FOR_DELETION",
     SET_CURRENT_LIST: "SET_CURRENT_LIST",
 }
@@ -159,11 +159,13 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.deleteList = async function (listToDelete) {
-        let response = await api.deleteTop5ListById(listToDelete._id);
-        if (response.data.success) {
-            store.loadTop5Lists();
-            // history.push("/");
-        }
+        console.log('Deleting ' + JSON.stringify(listToDelete))
+        await api.deleteTop5ListById(listToDelete._id);
+        store.loadTop5Lists()
+        // if (response.data.success) {
+        //     store.loadTop5Lists();
+        //     // history.push("/");
+        // }
     }
 
     store.deleteMarkedList = async function () {

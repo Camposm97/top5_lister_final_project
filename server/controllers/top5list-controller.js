@@ -115,7 +115,7 @@ deleteTop5List = async (req, res) => {
                 }
                 // console.log(callback)
                 if (callback) {
-                    console.log('Deleted ' + JSON.stringify(callback))
+                    console.log('Deleted top5list ' + callback.name + ' by ' + callback.owner)
                     if (callback.isPublished) {
                         Top5List.exists({
                             name: {
@@ -132,6 +132,12 @@ deleteTop5List = async (req, res) => {
                                         $options: 'i'
                                     }
                                 }, (err, commList) => {
+                                    if (err) {
+                                        return res.status(400).json({
+                                            err,
+                                            message: 'Failed to delete top 5 list ' + req.params.id,
+                                        })
+                                    }
                                     if (commList) {
                                         updateTop5CommList(commList)
                                     }

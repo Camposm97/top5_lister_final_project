@@ -154,39 +154,42 @@ export default function Top5ListCard(props) {
     }
 
     return (
-        <Accordion
-            key={'accor-' + top5List._id}
-            expanded={expanded === top5List._id}
-            onChange={handleAccorChange(top5List._id)}
-            // onChange={handleAccorChangeCallback(top5List._id)}
-            onClick={view}
-            sx={{ backgroundColor: bgColor }}
-        >
-            <AccordionSummary expandIcon={<ExpandMore />}>
-                <Grid
-                    key={'accor-summary-grid-' + top5List._id}
-                    container direction='column'
+        <Card sx={{ mb: 1 }} >
+            <Accordion
+                key={'accor-' + top5List._id}
+                expanded={expanded === top5List._id}
+                onChange={handleAccorChange(top5List._id)}
+                // onChange={handleAccorChangeCallback(top5List._id)}
+                onClick={view}
+                sx={{ backgroundColor: bgColor }}
+            >
+                <AccordionSummary expandIcon={<ExpandMore />}>
+                    <Grid
+                        key={'accor-summary-grid-' + top5List._id}
+                        container direction='column'
 
-                >
-                    <Stack direction='row' alignItems='center' >
-                        <Typography
-                            flex={1}
-                            variant='h6'
-                            fontWeight='fontWeightBold'
-                        >
-                            {top5List.name}
-                        </Typography>
-                        {socialButtons}
-                        {trashButton}
-                    </Stack>
-                    <Stack direction='row'>
-                        <Typography variant='caption'>By:</Typography>
-                        <Typography variant='caption' color='blue' sx={{ ml: 1 }}>{top5List.owner}</Typography>
-                    </Stack>
-                    {statusElement}
-                </Grid >
-            </AccordionSummary>
-            {accorDetailsElement}
-        </Accordion >
+                    >
+                        <Stack direction='row' alignItems='center' >
+                            <Typography
+                                flex={1}
+                                variant='h6'
+                                fontWeight='fontWeightBold'
+                            >
+                                {top5List.name}
+                            </Typography>
+                            {socialButtons}
+                            {trashButton}
+                        </Stack>
+                        <Stack direction='row'>
+                            <Typography variant='caption'>By:</Typography>
+                            <Typography variant='caption' color='blue' sx={{ ml: 1 }}>{top5List.owner}</Typography>
+                        </Stack>
+                        {statusElement}
+                    </Grid >
+                </AccordionSummary>
+                {accorDetailsElement}
+            </Accordion >
+        </Card>
+
     )
 }

@@ -1,5 +1,5 @@
 
-import { Accordion } from "@mui/material"
+import { Accordion, Card } from "@mui/material"
 import { useState, useContext } from "react"
 import GlobalStoreContext from "../context/store"
 import Top5CommunityListCardAccordionDetails from "./Top5CommunityListCardAccordionDetails";
@@ -34,25 +34,27 @@ export default function Top5CommunityListCard(props) {
         }
     }
     return (
-        <Accordion
-            key={'comm-accor-' + commList._id}
-            expanded={expanded === commList._id}
-            onChange={handleAccorChange(commList._id)}
-            // onChange={handleAccorChangeCallback(commList._id)}
-            onClick={view}
-            sx={{ backgroundColor: '#e3f2fd' }}
-        >
-            <Top5CommunityListCardAccordionSummary
-                commList={commList}
-                likeCallback={like}
-                dislikeCallback={dislike}
-            />
-            <Top5CommunityListCardAccordionDetails
-                i={i}
-                commList={commList}
-                commentCallback={comment}
-            />
-            
-        </Accordion>
+        <Card sx={{ mb: 1 }} >
+            <Accordion
+                key={'comm-accor-' + commList._id}
+                expanded={expanded === commList._id}
+                onChange={handleAccorChange(commList._id)}
+                // onChange={handleAccorChangeCallback(commList._id)}
+                onClick={view}
+                sx={{ backgroundColor: '#e3f2fd' }}
+            >
+                <Top5CommunityListCardAccordionSummary
+                    commList={commList}
+                    likeCallback={like}
+                    dislikeCallback={dislike}
+                />
+                <Top5CommunityListCardAccordionDetails
+                    i={i}
+                    commList={commList}
+                    commentCallback={comment}
+                />
+
+            </Accordion>
+        </Card>
     )
 }

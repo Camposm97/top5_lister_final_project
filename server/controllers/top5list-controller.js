@@ -51,7 +51,10 @@ updateTop5List = async (req, res) => {
             } else {
                 top5List.name = body.name
                 top5List.items = body.items
-                top5List.isPublished = body.isPublished
+                
+                console.log('top5List: ' + top5List.isPublished)
+                console.log('body: ' + body.isPublished)
+                console.log(!top5List.isPublished && body.isPublished)
 
                 if (!top5List.isPublished && body.isPublished) { // if the top5List is not published and is going to be published
                     top5List.publishDate = Date.now()
@@ -72,6 +75,7 @@ updateTop5List = async (req, res) => {
                     })
                 }
 
+                top5List.isPublished = body.isPublished
                 top5List.comments = body.comments
                 top5List.likes = body.likes
                 top5List.dislikes = body.dislikes

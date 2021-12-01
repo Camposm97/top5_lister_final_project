@@ -23,7 +23,7 @@ export default function Top5ListCard(props) {
     const handleAccorChange = (panel) => (event, isExpanaded) => {
         setExpanded(isExpanaded ? panel : false)
     }
-    const addComment = (event) => {
+    const comment = (event) => {
         if (event.key === 'Enter') {
             let comment = event.target.value
             if (comment) {
@@ -74,7 +74,7 @@ export default function Top5ListCard(props) {
                 fullWidth
                 label='Add Comment'
                 sx={{ backgroundColor: '#ffffff', borderRadius: 1 }}
-                onKeyPress={addComment} />
+                onKeyPress={comment} />
             : ''
         statusElement =
             <Stack direction='row'>
@@ -180,7 +180,7 @@ export default function Top5ListCard(props) {
                         {trashButton}
                     </Stack>
                     <Stack direction='row'>
-                        <Typography variant='caption'>By</Typography>
+                        <Typography variant='caption'>By:</Typography>
                         <Typography variant='caption' color='blue' sx={{ ml: 1 }}>{top5List.owner}</Typography>
                     </Stack>
                     {statusElement}

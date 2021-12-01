@@ -1,14 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { GlobalStoreContext } from '../context/store'
 import QueryContext, { QUERY_TYPE } from '../context/query'
 import Top5ListCard from './Top5ListCard.js'
-import { Fab, Typography } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add';
+// import { Fab, Typography } from '@mui/material'
+// import AddIcon from '@mui/icons-material/Add';
 import List from '@mui/material/List';
 import WorkspaceModal from './modal/WorkspaceModal'
 import DeleteListModal from './modal/DeleteListModal'
 import Top5CommunityListCard from './Top5CommunityListCard'
 import AuthContext from '../context/auth'
+import Statusbar from './Statusbar'
 
 export default function HomeScreen() {
     const { auth } = useContext(AuthContext)
@@ -31,46 +32,50 @@ export default function HomeScreen() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); // Empty Array tells React to run this function only once when this component is mounted
 
-    const handleCreateNewList = () => {
+    const createList = () => {
         store.createNewList()
     }
-    const loadStatusbar = () => {
-        switch (queryState.queryType) {
-            case QUERY_TYPE.ALL_LISTS:
-                return (
-                    <div id="top5-statusbar">
-                        <Typography variant="h4">All Lists</Typography>
-                    </div>
-                )
-            case QUERY_TYPE.USERS:
-                return (
-                    <div id="top5-statusbar">
-                        <Typography variant="h4">Users</Typography>
-                    </div>
-                )
-            case QUERY_TYPE.COMMUNITY_LISTS:
-                return (
-                    <div id="top5-statusbar">
-                        <Typography variant="h4">Community Lists</Typography>
-                    </div>
-                )
-            default:
-                return (
-                    <div id="top5-statusbar">
-                        <Fab size='small'
-                            disabled={store.isListNameEditActive}
-                            color="primary"
-                            onClick={handleCreateNewList}>
-                            <AddIcon fontSize='medium' />
-                        </Fab>
-                        <Typography variant="h4">Your Lists</Typography>
-                    </div>
-                )
-        }
-    }
+    // const loadStatusbar = () => {
+    //     switch (queryState.queryType) {
+    //         case QUERY_TYPE.ALL_LISTS:
+    //             return (
+    //                 <div id="top5-statusbar">
+    //                     <Typography variant="h4">
+    //                         {queryState.query ? queryState.query + ' Lists' : 'All Lists'}
+    //                     </Typography>
+    //                 </div>
+    //             )
+    //         case QUERY_TYPE.USERS:
+    //             return (
+    //                 <div id="top5-statusbar">
+    //                     <Typography variant="h4">
+    //                         {queryState.query ? queryState.query + ' Lists' : 'Users'}
+    //                     </Typography>
+    //                 </div>
+    //             )
+    //         case QUERY_TYPE.COMMUNITY_LISTS:
+    //             return (
+    //                 <div id="top5-statusbar">
+    //                     <Typography variant="h4">{'Community Lists'}</Typography>
+    //                 </div>
+    //             )
+    //         default:
+    //             return (
+    //                 <div id="top5-statusbar">
+    //                     <Fab size='small'
+    //                         disabled={store.isListNameEditActive}
+    //                         color="primary"
+    //                         onClick={handleCreateNewList}>
+    //                         <AddIcon fontSize='medium' />
+    //                     </Fab>
+    //                     <Typography variant="h4">Your Lists</Typography>
+    //                 </div>
+    //             )
+    //     }
+    // }
 
     let listCards = <div></div>
-    let statusbar = loadStatusbar()
+    // let statusbar = loadStatusbar()
 
     let i = 0
     if (store.top5Lists) {
@@ -83,8 +88,8 @@ export default function HomeScreen() {
                                 key={top5List._id}
                                 i={(i++)}
                                 commList={top5List}
-                                // expanded={expanded}
-                                // handleAccorChangeCallback={handleAccorChange}
+                            // expanded={expanded}
+                            // handleAccorChangeCallback={handleAccorChange}
                             />)
                     } else {
                         return (
@@ -92,8 +97,8 @@ export default function HomeScreen() {
                                 i={(i++)}
                                 key={top5List._id}
                                 top5List={top5List}
-                                // expanded={expanded}
-                                // handleAccorChangeCallback={handleAccorChange}
+                            // expanded={expanded}
+                            // handleAccorChangeCallback={handleAccorChange}
                             />
                         )
                     }
@@ -107,7 +112,10 @@ export default function HomeScreen() {
             <div id="list-selector-list">
                 {listCards}
             </div>
-            {statusbar}
+            <Statusbar 
+                createListCallback={createList}
+            />
+            {/* {statusbar} */}
         </div>
     )
 }

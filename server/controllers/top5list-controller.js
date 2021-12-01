@@ -244,7 +244,7 @@ filterTop5Lists = async function (top5Lists, req) {
             }
             switch (queryType) {
                 case 'HOME':
-                    if (list.owner === owner) {
+                    if (list.owner === owner && list.name.toLowerCase().includes(query.toLowerCase())) {
                         results.push(top5List)
                     }
                     break;

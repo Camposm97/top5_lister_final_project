@@ -1,9 +1,9 @@
 import { createContext, useContext, useState } from 'react'
 // import { useHistory } from 'react-router-dom'
-import api from '../api'
+import api from '../../api'
 import AuthContext from '../auth'
 import QueryContext from '../query'
-import Cookies from '../util/Cookies'
+import Cookies from '../../util/Cookies'
 
 export const GlobalStoreContext = createContext({});
 
@@ -306,9 +306,9 @@ function GlobalStoreContextProvider(props) {
     store.sortByNewest = () => {
         let arr = store.top5Lists.sort((a, b) => {
             if (a.publishDate == null || b.publishDate == null) {
-                return new Date(a.latestUpdate) - new Date(b.latestUpdate)
+                return new Date(b.latestUpdate) - new Date(a.latestUpdate)
             }
-            return new Date(a.publishDate) - new Date(b.publishDate)
+            return new Date(b.publishDate) - new Date(a.publishDate)
         })
         storeReducer({
             type: GlobalStoreActionType.LOAD_TOP_5_LISTS,
@@ -321,7 +321,7 @@ function GlobalStoreContextProvider(props) {
             if (a.publishDate == null || b.publishDate == null) {
                 return new Date(a.latestUpdate) - new Date(b.latestUpdate)
             }
-            return new Date(b.publishDate) - new Date(a.publishDate)
+            return new Date(a.publishDate) - new Date(b.publishDate)
         })
         storeReducer({
             type: GlobalStoreActionType.LOAD_TOP_5_LISTS,

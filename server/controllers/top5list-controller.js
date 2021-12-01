@@ -53,7 +53,7 @@ updateTop5List = async (req, res) => {
                 top5List.items = body.items
                 top5List.isPublished = body.isPublished
 
-                if (top5List.isPublished) {
+                if (!top5List.isPublished && body.isPublished) { // if the top5List is not published and is going to be published
                     top5List.publishDate = Date.now()
                     // Check if we should create a community list or not when a list if published
                     Top5CommunityList.findOne({

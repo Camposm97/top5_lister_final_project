@@ -1,24 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { GlobalStoreContext } from '../store'
-import QueryContext, { QUERY_TYPE } from '../query'
-import ListCard from './ListCard.js'
+import { GlobalStoreContext } from '../context/store'
+import QueryContext, { QUERY_TYPE } from '../context/query'
+import Top5ListCard from './Top5ListCard.js'
 import { Fab, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import List from '@mui/material/List';
 import WorkspaceModal from './modal/WorkspaceModal'
 import DeleteListModal from './modal/DeleteListModal'
 import Top5CommunityListCard from './Top5CommunityListCard'
-import AuthContext from '../auth'
+import AuthContext from '../context/auth'
 
 export default function HomeScreen() {
     const { auth } = useContext(AuthContext)
     const { queryState } = useContext(QueryContext)
     const { store } = useContext(GlobalStoreContext)
-    const [expanded, setExpanded] = useState(false)
+    // const [expanded, setExpanded] = useState(false)
 
-    const handleAccorChange = (panel) => (event, isExpanaded) => {
-        setExpanded(isExpanaded ? panel : false)
-    }
+    // const handleAccorChange = (panel) => (event, isExpanaded) => {
+    //     setExpanded(isExpanaded ? panel : false)
+    // }
 
     useEffect(() => {
         if (auth.user !== null) {
@@ -83,17 +83,17 @@ export default function HomeScreen() {
                                 key={top5List._id}
                                 i={(i++)}
                                 commList={top5List}
-                                expanded={expanded}
-                                handleAccorChangeCallback={handleAccorChange}
+                                // expanded={expanded}
+                                // handleAccorChangeCallback={handleAccorChange}
                             />)
                     } else {
                         return (
-                            <ListCard
+                            <Top5ListCard
                                 i={(i++)}
                                 key={top5List._id}
                                 top5List={top5List}
-                                expanded={expanded}
-                                handleAccorChangeCallback={handleAccorChange}
+                                // expanded={expanded}
+                                // handleAccorChangeCallback={handleAccorChange}
                             />
                         )
                     }

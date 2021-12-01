@@ -1,5 +1,5 @@
-import { useContext } from 'react'
-import { GlobalStoreContext } from '../store'
+import { useState, useContext } from 'react'
+import { GlobalStoreContext } from '../context/store'
 import { List, Card, CardContent, Accordion, Button, Grid, Typography, TextField, Stack } from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -8,16 +8,21 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import SocialButtons from './SocialButtons';
 import Top5ItemCard from './Top5ItemCard';
-import QueryContext, { QUERY_TYPE } from '../query';
-import AuthContext from '../auth';
+import QueryContext, { QUERY_TYPE } from '../context/query';
+import AuthContext from '../context/auth';
 import { formatDate } from '../util/ListCardUtils';
 
-export default function ListCard(props) {
+export default function Top5ListCard(props) {
     const { auth } = useContext(AuthContext)
     const { queryState } = useContext(QueryContext)
-    const { store } = useContext(GlobalStoreContext);
-    const { top5List, expanded, handleAccorChangeCallback } = props;
+    const { store } = useContext(GlobalStoreContext)
+    // const { top5List, expanded, handleAccorChangeCallback } = props
+    const { top5List } = props
+    const [expanded, setExpanded] = useState(false)
     const bgColor = top5List.isPublished ? '#e3f2fd' : '#ffffff'
+    const handleAccorChange = (panel) => (event, isExpanaded) => {
+        setExpanded(isExpanaded ? panel : false)
+    }
     const addComment = (event) => {
         if (event.key === 'Enter') {
             let comment = event.target.value
@@ -152,7 +157,8 @@ export default function ListCard(props) {
         <Accordion
             key={'accor-' + top5List._id}
             expanded={expanded === top5List._id}
-            onChange={handleAccorChangeCallback(top5List._id)}
+            onChange={handleAccorChange(top5List._id)}
+            // onChange={handleAccorChangeCallback(top5List._id)}
             onClick={view}
             sx={{ backgroundColor: bgColor }}
         >

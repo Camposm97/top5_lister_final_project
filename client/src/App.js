@@ -1,15 +1,15 @@
 import './App.css';
 import { React } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { AuthContextProvider } from './auth';
-import { GlobalStoreContextProvider } from './store'
+import { AuthContextProvider } from './context/auth';
+import { GlobalStoreContextProvider } from './context/store'
 import {
     AppBanner,
     HomeWrapper,
     RegisterScreen,
 } from './components'
 import SignIn from './components/SignIn';
-import { QueryContextProvider } from './query';
+import { QueryContextProvider } from './context/query';
 
 const App = () => {
     return (

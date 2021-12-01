@@ -1,7 +1,7 @@
 import AppBanner from './AppBanner'
 import HomeScreen from './HomeScreen'
 import HomeWrapper from './HomeWrapper'
-import ListCard from './ListCard'
+import Top5ListCard from './Top5ListCard'
 import RegisterScreen from './RegisterScreen'
 import SplashScreen from './SplashScreen'
 /*
@@ -14,7 +14,7 @@ export {
     AppBanner, 
     HomeScreen,
     HomeWrapper,
-    ListCard, 
+    Top5ListCard, 
     RegisterScreen,
     SplashScreen
 }

@@ -2,7 +2,7 @@ import { AccordionDetails } from "@mui/material"
 import { Grid, Stack } from "@mui/material"
 import { Card, CardContent, TextField, Typography } from "@mui/material"
 import { useContext } from "react"
-import AuthContext from "../auth"
+import AuthContext from "../context/auth"
 import Top5CommunityItemCard from "./Top5CommunityItemCard"
 export default function Top5CommunityListCardAccordionDetails(props) {
     const { i, commList, commentCallback } = props

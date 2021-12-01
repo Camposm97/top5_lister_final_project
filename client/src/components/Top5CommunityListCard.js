@@ -1,13 +1,18 @@
 
 import { Accordion } from "@mui/material"
-import { useContext } from "react"
-import GlobalStoreContext from "../store"
+import { useState, useContext } from "react"
+import GlobalStoreContext from "../context/store"
 import Top5CommunityListCardAccordionDetails from "./Top5CommunityListCardAccordionDetails";
 import Top5CommunityListCardAccordionSummary from "./Top5CommunityListCardAccordionSummary";
 
 export default function Top5CommunityListCard(props) {
     const { store } = useContext(GlobalStoreContext)
-    const { i, commList, expanded, handleAccorChangeCallback } = props
+    // const { i, commList, expanded, handleAccorChangeCallback } = props
+    const { i, commList } = props
+    const [expanded, setExpanded] = useState(false)
+    const handleAccorChange = (panel) => (event, isExpanaded) => {
+        setExpanded(isExpanaded ? panel : false)
+    }
     const like = () => {
         store.likeCommList(commList)
     }
@@ -32,7 +37,8 @@ export default function Top5CommunityListCard(props) {
         <Accordion
             key={'comm-accor-' + commList._id}
             expanded={expanded === commList._id}
-            onChange={handleAccorChangeCallback(commList._id)}
+            onChange={handleAccorChange(commList._id)}
+            // onChange={handleAccorChangeCallback(commList._id)}
             onClick={view}
             sx={{ backgroundColor: '#e3f2fd' }}
         >

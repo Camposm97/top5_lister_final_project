@@ -19,37 +19,6 @@ function createTop5CommList(name) {
     })
 }
 
-// async function getTop5CommListsByName(results, query) {
-//     await Top5CommunityList.find({}, (err, callback) => {
-//         if (err) {
-//             console.log('shit')
-//         }
-//         if (callback) { // Return comm lists that contains query
-//             // console.log('callback=' + JSON.stringify(callback))
-//             for (let key in callback) {
-//                 let list = callback[key]
-//                 let commList = {
-//                     _id: list._id,
-//                     name: list.name,
-//                     items: list.items,
-//                     latestUpdate: list.latestUpdate,
-//                     comments: list.comments,
-//                     likes: list.likes,
-//                     dislikes: list.dislikes,
-//                     views: list.views
-//                 }
-//                 let flag = commList.name.toLowerCase().includes(query.toLowerCase())
-//                 console.log('name=' + commList.name.toLowerCase() + ', query=' + query + ', includes=' + (flag))
-//                 if (flag) {
-//                     // console.log(commList)
-//                     results.push(commList)
-//                 }
-//             }
-//         }
-//         // console.log('results=' + JSON.stringify(results))
-//     }).catch(err => console.log('faq'))
-// }
-
 function updateTop5CommList(top5CommList) {
     Top5List.find({
         name: {
@@ -82,23 +51,12 @@ function updateTop5CommList(top5CommList) {
                     srcList.dislikes = top5CommList.dislikes
                     srcList.views = top5CommList.views
                     srcList.save().then(() => {
-                        console.log('Saved Comm List: ')
+                        console.log('Saved/Updated Comm List: ')
                         console.log(srcList)
                     })
                 }
             })
         }
-        // else 
-        // { // No lists exist with same name of comm list, so delete it
-        //     Top5CommunityList.findOneAndDelete({
-        //         name: {
-        //             $regex: '^(' + top5CommList.name + ')$',
-        //             $options: 'i'
-        //         }
-        //     }, (err, srcList) => {
-        //         console.log('Deleted Comm List: ' + JSON.stringify(srcList))
-        //     })
-        // }
     })
 }
 
@@ -118,6 +76,7 @@ updateTop5CommListById = async (req, res) => {
             callback.dislikes = body.dislikes
             callback.views = body.views
             callback.comments = body.comments
+            callback.latestUpdate = body.latestUpdate
             // console.log('updating comm list')
             callback.save().then(() => {
                 // console.log('yeeee')
@@ -195,7 +154,6 @@ function computeItemScores(top5Lists) {
 
 module.exports = {
     createTop5CommList,
-    // getTop5CommListsByName,
     updateTop5CommList,
     updateTop5CommListById,
     deleteCommListByName,

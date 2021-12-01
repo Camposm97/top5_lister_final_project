@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom'
-import api from '../api'
-import { getCookie, setCookie } from '../util/Cookies'
+import api from '../../api'
+import { getCookie, setCookie } from '../../util/Cookies'
 
 const AuthContext = createContext();
 
@@ -65,7 +65,7 @@ function AuthContextProvider(props) {
         try {
             const res = await api.loginUser(payload)
             if (res.status === 200) {
-                history.push('/')
+                history.push('/') // Get out of login screen
                 authReducer({
                     type: AuthActionType.SET_LOGGED_IN,
                     payload: {
@@ -91,6 +91,7 @@ function AuthContextProvider(props) {
         authReducer({
             type: AuthActionType.SET_LOGGED_OUT
         })   
+        history.push('/') // Prevent user from logging back in by going back a page
     }
 
     auth.getLoggedIn = async function () {
@@ -121,7 +122,7 @@ function AuthContextProvider(props) {
                         user: res.data.user
                     }
                 })
-                history.push("/");
+                history.push("/") // Get out of register screen
             }
             return ''
         } catch (err) {

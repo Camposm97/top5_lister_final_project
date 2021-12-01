@@ -8,7 +8,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { SLIDE_UP_TRANSITION } from '../../util/CamposConsts';
 import { TextField } from '@mui/material';
-import { GlobalStoreContext } from '../../store'
+import { GlobalStoreContext } from '../../context/store'
 import Card from '@mui/material/Card';
 
 export default function WorkspaceModal() {

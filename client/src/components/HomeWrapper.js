@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import HomeScreen from './HomeScreen'
 import SplashScreen from './SplashScreen'
-import AuthContext from '../auth'
+import AuthContext from '../context/auth'
 import NavigationBar from './NavigationBar'
 
 export default function HomeWrapper() {

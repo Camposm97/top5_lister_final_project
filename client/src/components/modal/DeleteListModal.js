@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import GlobalStoreContext from '../../store';
+import GlobalStoreContext from '../../context/store';
 import { SLIDE_DOWN_TRANSITION } from '../../util/CamposConsts'
 
 export default function DeleteListModal() {

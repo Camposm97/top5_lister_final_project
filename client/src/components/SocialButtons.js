@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { useContext } from "react";
-import AuthContext from "../auth";
+import AuthContext from "../context/auth";
 
 export default function SocialButtons(props) {
     const { likes, dislikes, likeCallback, dislikeCallback } = props

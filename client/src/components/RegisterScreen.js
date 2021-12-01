@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import AuthContext from '../auth'
+import AuthContext from '../context/auth'
 import Copyright from './Copyright'
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -11,7 +11,7 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { GlobalStoreContext } from '../store'
+import { GlobalStoreContext } from '../context/store'
 import ErrorModal from './modal/ErrorModal'
 
 export default function RegisterScreen() {

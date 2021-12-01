@@ -11,10 +11,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
 import { MENU_PAPER_PROPS } from '../util/CamposConsts';
-import GlobalStoreContext from '../store';
-import { QUERY_TYPE } from '../query';
-import QueryContext from '../query';
-import AuthContext from '../auth';
+import GlobalStoreContext from '../context/store';
+import { QUERY_TYPE } from '../context/query';
+import QueryContext from '../context/query';
+import AuthContext from '../context/auth';
 
 export default function NavigationBar() {
     const { auth } = useContext(AuthContext)

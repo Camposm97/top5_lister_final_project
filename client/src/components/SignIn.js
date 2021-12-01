@@ -11,7 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useState, useContext } from 'react';
-import AuthContext from '../auth';
+import AuthContext from '../context/auth'
 import Copyright from './Copyright'
 import ErrorModal from './modal/ErrorModal'
 

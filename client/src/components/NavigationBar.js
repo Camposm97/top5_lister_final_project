@@ -7,7 +7,7 @@ import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import GroupsSharpIcon from '@mui/icons-material/GroupsSharp';
 import FunctionsSharpIcon from '@mui/icons-material/FunctionsSharp';
 import SearchSharpIcon from '@mui/icons-material/SearchSharp';
-import MenuIcon from '@mui/icons-material/Menu';
+import SortRoundedIcon from '@mui/icons-material/SortRounded';
 import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
 import { MENU_PAPER_PROPS } from '../util/CamposConsts';
@@ -131,7 +131,7 @@ export default function NavigationBar() {
             <Box sx={{ paddingLeft: '15px', display: 'flex', alignItems: 'center' }}>
                 <Typography sx={{ marginRight: 1 }}><b>SORT BY</b></Typography>
                 <ToggleButton value='list_sort_by' onClick={handleSortMenuClick}>
-                    <MenuIcon />
+                    <SortRoundedIcon />
                 </ToggleButton>
             </Box>
             <Menu

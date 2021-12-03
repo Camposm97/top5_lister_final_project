@@ -1,7 +1,7 @@
 
 import { Accordion, Card } from "@mui/material"
 import { useState, useContext } from "react"
-import GlobalStoreContext from "../context/store"
+import GlobalStoreContext from "../../context/store"
 import Top5CommunityListCardAccordionDetails from "./Top5CommunityListCardAccordionDetails";
 import Top5CommunityListCardAccordionSummary from "./Top5CommunityListCardAccordionSummary";
 

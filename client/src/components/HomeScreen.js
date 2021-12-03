@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from 'react'
 import { GlobalStoreContext } from '../context/store'
 import QueryContext, { QUERY_TYPE } from '../context/query'
-import Top5ListCard from './Top5ListCard.js'
+import Top5ListCard from './top5list/Top5ListCard.js'
 // import { Fab, Typography } from '@mui/material'
 // import AddIcon from '@mui/icons-material/Add';
 import List from '@mui/material/List';
 import WorkspaceModal from './modal/WorkspaceModal'
 import DeleteListModal from './modal/DeleteListModal'
-import Top5CommunityListCard from './Top5CommunityListCard'
+import Top5CommunityListCard from './top5communitylist/Top5CommunityListCard'
 import AuthContext from '../context/auth'
 import Statusbar from './Statusbar'
 

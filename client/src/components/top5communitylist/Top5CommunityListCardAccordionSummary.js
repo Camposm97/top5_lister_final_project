@@ -1,7 +1,7 @@
 import ExpandMore from "@mui/icons-material/ExpandMore"
 import { AccordionSummary, Grid, Stack, Typography } from "@mui/material"
-import SocialButtons from "./SocialButtons"
-import { formatDate } from "../util/ListCardUtils"
+import SocialButtons from "../SocialButtons"
+import { formatDate } from "../../util/ListCardUtils"
 export default function Top5CommunityListCardAccordionSummary(props) {
     const { commList, likeCallback, dislikeCallback } = props
     return (

@@ -1,22 +1,21 @@
 import { useState, useContext } from 'react'
-import { GlobalStoreContext } from '../context/store'
+import { GlobalStoreContext } from '../../context/store'
 import { List, Card, CardContent, Accordion, Button, Grid, Typography, TextField, Stack } from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import IconButton from '@mui/material/IconButton';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import SocialButtons from './SocialButtons';
+import SocialButtons from '../SocialButtons';
 import Top5ItemCard from './Top5ItemCard';
-import QueryContext, { QUERY_TYPE } from '../context/query';
-import AuthContext from '../context/auth';
-import { formatDate } from '../util/ListCardUtils';
+import QueryContext, { QUERY_TYPE } from '../../context/query';
+import AuthContext from '../../context/auth';
+import { formatDate } from '../../util/ListCardUtils';
 
 export default function Top5ListCard(props) {
     const { auth } = useContext(AuthContext)
     const { queryState } = useContext(QueryContext)
     const { store } = useContext(GlobalStoreContext)
-    // const { top5List, expanded, handleAccorChangeCallback } = props
     const { top5List } = props
     const [expanded, setExpanded] = useState(false)
     const bgColor = top5List.isPublished ? '#e3f2fd' : '#ffffff'
@@ -47,7 +46,7 @@ export default function Top5ListCard(props) {
             store.view(top5List)
         }
     }
-    const handleDeleteList = (event, id) => {
+    const deleteList = (event, id) => {
         event.stopPropagation()
         store.markListForDeletion(id)
     }
@@ -63,8 +62,8 @@ export default function Top5ListCard(props) {
         if (auth.user.username === top5List.owner) {
             trashButton =
                 <IconButton
-                    onClick={(event) => { handleDeleteList(event, top5List._id) }}>
-                    <DeleteForeverIcon />
+                    onClick={(event) => { deleteList(event, top5List._id) }}>
+                    <DeleteIcon />
                 </IconButton>
         }
     }
@@ -153,43 +152,51 @@ export default function Top5ListCard(props) {
             </AccordionDetails>
     }
 
-    return (
-        <Card sx={{ mb: 1 }} >
-            <Accordion
-                key={'accor-' + top5List._id}
-                expanded={expanded === top5List._id}
-                onChange={handleAccorChange(top5List._id)}
-                // onChange={handleAccorChangeCallback(top5List._id)}
-                onClick={view}
-                sx={{ backgroundColor: bgColor }}
-            >
-                <AccordionSummary expandIcon={<ExpandMore />}>
-                    <Grid
-                        key={'accor-summary-grid-' + top5List._id}
-                        container direction='column'
+    let listCardHeader =
+        <Grid
+            key={'accor-summary-grid-' + top5List._id}
+            container direction='column'
+        >
+            <Stack direction='row' alignItems='center' >
+                <Typography
+                    flex={1}
+                    variant='h6'
+                    fontWeight='fontWeightBold'
+                >
+                    {top5List.name}
+                </Typography>
+                {socialButtons}
+                {trashButton}
+            </Stack>
+            <Stack direction='row'>
+                <Typography variant='caption'>By:</Typography>
+                <Typography variant='caption' color='blue' sx={{ ml: 1 }}>{top5List.owner}</Typography>
+            </Stack>
+            {statusElement}
+        </Grid >
 
-                    >
-                        <Stack direction='row' alignItems='center' >
-                            <Typography
-                                flex={1}
-                                variant='h6'
-                                fontWeight='fontWeightBold'
-                            >
-                                {top5List.name}
-                            </Typography>
-                            {socialButtons}
-                            {trashButton}
-                        </Stack>
-                        <Stack direction='row'>
-                            <Typography variant='caption'>By:</Typography>
-                            <Typography variant='caption' color='blue' sx={{ ml: 1 }}>{top5List.owner}</Typography>
-                        </Stack>
-                        {statusElement}
-                    </Grid >
-                </AccordionSummary>
-                {accorDetailsElement}
-            </Accordion >
+    let listCard =
+        <Card sx={{ mb: 1, p: 2 }} >
+            {listCardHeader}
         </Card>
 
-    )
+    if (top5List.isPublished) {
+        listCard =
+            <Card sx={{ mb: 1 }} >
+                <Accordion
+                    key={'accor-' + top5List._id}
+                    expanded={expanded === top5List._id}
+                    onChange={handleAccorChange(top5List._id)}
+                    onClick={view}
+                    sx={{ backgroundColor: bgColor }}
+                >
+                    <AccordionSummary expandIcon={<ExpandMore />}>
+                        {listCardHeader}
+                    </AccordionSummary>
+                    {accorDetailsElement}
+                </Accordion >
+            </Card>
+    }
+
+    return listCard
 }

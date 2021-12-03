@@ -1,7 +1,7 @@
 import AppBanner from './AppBanner'
 import HomeScreen from './HomeScreen'
 import HomeWrapper from './HomeWrapper'
-import Top5ListCard from './Top5ListCard'
+import Top5ListCard from './top5list/Top5ListCard'
 import RegisterScreen from './RegisterScreen'
 import SplashScreen from './SplashScreen'
 /*

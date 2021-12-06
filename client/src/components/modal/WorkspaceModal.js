@@ -101,10 +101,10 @@ export default function WorkspaceModal() {
       <List>
         {store.currentList.items.map(item => (
           <ListItem key={'item-' + i}>
-            <Card style={{ paddingBlock: 15, paddingInline: 30, marginRight: 15}}>
+            <Card style={{ paddingBlock: 15, paddingInline: 30, marginRight: 15 }}>
               <Typography style={{ fontSize: 40 }}>{(i + 1) + '.'}</Typography>
             </Card>
-            <Card style={{ flex: 1}}>
+            <Card style={{ flex: 1 }}>
               <TextField
                 id={'item-' + (i++)}
                 // onKeyPress={handleOnKeyPress}
@@ -118,30 +118,28 @@ export default function WorkspaceModal() {
       </List>
   }
   return (
-    <div>
-      <Dialog
-        fullScreen
-        open={Boolean(store.currentList)}
-        TransitionComponent={SLIDE_UP_TRANSITION}
-      >
-        <AppBar sx={{ position: 'relative' }}>
-          <Toolbar>
-            <Typography variant='h6' sx={{ ml: 2, flex: 1 }}>Workspace</Typography>
-            <Button color="inherit" onClick={save} disabled={dis.save}>
-              Save
-            </Button>
-            <Button color='inherit' onClick={publish} disabled={dis.pub || duplicateItems()}>
-              Publish
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <Card style={{ backgroundColor: theme.palette.primary, margin: 30 }}>
-          <List>
-            {listTitleElement}
-            {top5itemElements}
-          </List>
-        </Card>
-      </Dialog>
-    </div>
+    <Dialog
+      fullScreen
+      open={Boolean(store.currentList)}
+      TransitionComponent={SLIDE_UP_TRANSITION}
+    >
+      <AppBar sx={{ position: 'relative' }}>
+        <Toolbar>
+          <Typography variant='h6' sx={{ ml: 2, flex: 1 }}>Workspace</Typography>
+          <Button color="inherit" onClick={save} disabled={dis.save}>
+            Save
+          </Button>
+          <Button color='inherit' onClick={publish} disabled={dis.pub || duplicateItems()}>
+            Publish
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Card style={{ backgroundColor: theme.palette.primary, margin: 30 }}>
+        <List>
+          {listTitleElement}
+          {top5itemElements}
+        </List>
+      </Card>
+    </Dialog>
   );
 }

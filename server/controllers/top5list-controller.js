@@ -221,7 +221,7 @@ filterTop5Lists = async function (top5Lists, req) {
                     dislikes: list.dislikes,
                     views: list.views
                 }
-                let flag = commList.name.toLowerCase().includes(query.toLowerCase())
+                let flag = commList.name.toLowerCase().startsWith(query.toLowerCase())
                 console.log('name=' + commList.name.toLowerCase()
                     + ', query=' + query
                     + ', includes=' + (flag))

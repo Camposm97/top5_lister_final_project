@@ -18,17 +18,17 @@ export default function SocialButtons(props) {
         dislikeCallback()
     }
     return (
-        <Stack direction='row' alignItems='center' spacing={1}>
+        <Stack direction='row' alignItems='center'>
             <IconButton onClick={like} disabled={!auth.user}>
                 <ThumbUpIcon />
             </IconButton>
-            <Typography>
+            <Typography mr={5}>
                 {likes}
             </Typography>
             <IconButton onClick={dislike} disabled={!auth.user}>
                 <ThumbDownIcon />
             </IconButton>
-            <Typography>
+            <Typography mr={5}>
                 {dislikes}
             </Typography>
         </Stack>

@@ -196,7 +196,7 @@ getTop5ListPairs = async (req, res) => {
                 return res.status(200).json({ success: true, top5Lists: results });
             })
         }
-    }).catch(err => console.log('fuck!'))
+    }).catch(err => console.log('Failed to get top 5 list pairs!'))
 }
 
 filterTop5Lists = async function (top5Lists, req) {
@@ -248,17 +248,17 @@ filterTop5Lists = async function (top5Lists, req) {
             }
             switch (queryType) {
                 case 'HOME':
-                    if (list.owner === owner && list.name.toLowerCase().includes(query.toLowerCase())) {
+                    if (list.owner === owner && list.name.toLowerCase().startsWith(query.toLowerCase())) {
                         results.push(top5List)
                     }
                     break;
                 case 'ALL_LISTS':
-                    if (list.name.toLowerCase().includes(query.toLowerCase()) && list.isPublished) {
+                    if (list.name.toLowerCase().startsWith(query.toLowerCase()) && list.isPublished) {
                         results.push(top5List);
                     }
                     break;
                 case 'USERS':
-                    if (list.owner.toLowerCase().includes(query.toLowerCase()) && list.isPublished) {
+                    if (list.owner.toLowerCase().startsWith(query.toLowerCase()) && list.isPublished) {
                         results.push(top5List);
                     }
                     break;

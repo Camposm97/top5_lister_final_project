@@ -1,0 +1,596 @@
+[{
+  "_id": {
+    "$oid": "61aeb3276a5e1949d0e5f59e"
+  },
+  "items": [
+    "Batman",
+    "Robinhood",
+    "Godzilla",
+    "Iron Giant",
+    "Mr. L"
+  ],
+  "likes": [],
+  "dislikes": [
+    "Mr. Password",
+    "Dozer",
+    "Camposm"
+  ],
+  "name": "Movies",
+  "owner": "CamposmWasTaken",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T01:07:14.413Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aed1316a5e1949d0e5fed6"
+      },
+      "username": "Mr. Bean",
+      "message": "Iron Giant is valid"
+    },
+    {
+      "_id": {
+        "$oid": "61aebdd36a5e1949d0e5fa4f"
+      },
+      "username": "Camposm",
+      "message": "DELETE NOW"
+    },
+    {
+      "_id": {
+        "$oid": "61aebdd36a5e1949d0e5fa50"
+      },
+      "username": "Camposm",
+      "message": "LOL WTF"
+    },
+    {
+      "_id": {
+        "$oid": "61aebd9e6a5e1949d0e5fa21"
+      },
+      "username": "Dozer",
+      "message": "Agreed"
+    },
+    {
+      "_id": {
+        "$oid": "61aeb89d6a5e1949d0e5f853"
+      },
+      "username": "Mr. Password",
+      "message": "Some of these aren't real movies..."
+    }
+  ],
+  "views": 14,
+  "createdAt": {
+    "$date": "2021-12-07T01:04:39.818Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:12:49.129Z"
+  },
+  "__v": 22
+},{
+  "_id": {
+    "$oid": "61aeb3df6a5e1949d0e5f611"
+  },
+  "items": [
+    "Iron Giant",
+    "Godzilla",
+    "Star Wars Episode V",
+    "Austin Powers: International Man of Mystery",
+    "Ghostbusters"
+  ],
+  "likes": [
+    "Dozer",
+    "Camposm"
+  ],
+  "dislikes": [
+    "Mr. Password"
+  ],
+  "name": "Movies",
+  "owner": "Camposm",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T01:10:43.649Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aebfd26a5e1949d0e5fbc7"
+      },
+      "username": "Camposm",
+      "message": "Thank you :)"
+    },
+    {
+      "_id": {
+        "$oid": "61aebdaa6a5e1949d0e5fa28"
+      },
+      "username": "Dozer",
+      "message": "Iron Giant #1"
+    },
+    {
+      "_id": {
+        "$oid": "61aeb88f6a5e1949d0e5f850"
+      },
+      "username": "Mr. Password",
+      "message": "Star Wars Episode V is underrated"
+    }
+  ],
+  "views": 10,
+  "createdAt": {
+    "$date": "2021-12-07T01:07:43.962Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:12:50.971Z"
+  },
+  "__v": 17
+},{
+  "_id": {
+    "$oid": "61aeb49f6a5e1949d0e5f65a"
+  },
+  "items": [
+    "Wendy's Double Baconator",
+    "Hot Dog",
+    "Bacon",
+    "French Fries",
+    "Pancakes"
+  ],
+  "likes": [
+    "Dozer"
+  ],
+  "dislikes": [
+    "Mr. Password",
+    "Camposm"
+  ],
+  "name": "Food",
+  "owner": "Dozer",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T01:15:26.366Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aeb8816a5e1949d0e5f84d"
+      },
+      "username": "Mr. Password",
+      "message": "Digusting"
+    }
+  ],
+  "views": 8,
+  "createdAt": {
+    "$date": "2021-12-07T01:10:55.584Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T01:52:03.166Z"
+  },
+  "__v": 14
+},{
+  "_id": {
+    "$oid": "61aeb50f6a5e1949d0e5f680"
+  },
+  "items": [
+    "American Sniper",
+    "Austin Powers: International Man of Mystery",
+    "Godzilla",
+    "Iron Giant",
+    "My Hero Academia: World Heroes"
+  ],
+  "likes": [
+    "Mr. Password",
+    "Dozer"
+  ],
+  "dislikes": [],
+  "name": "Movies",
+  "owner": "Dozer",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T01:14:45.544Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aeb8736a5e1949d0e5f83b"
+      },
+      "username": "Mr. Password",
+      "message": "Good choice, but Austin Powers should be #1"
+    }
+  ],
+  "views": 9,
+  "createdAt": {
+    "$date": "2021-12-07T01:12:47.387Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T01:52:03.790Z"
+  },
+  "__v": 11
+},{
+  "_id": {
+    "$oid": "61aeb5d36a5e1949d0e5f74a"
+  },
+  "items": [
+    "French Fries",
+    "Dumplings",
+    "Ramen",
+    "Potatoes",
+    "Celery"
+  ],
+  "likes": [
+    "Mr. Password"
+  ],
+  "dislikes": [
+    "Dozer"
+  ],
+  "name": "Food",
+  "owner": "Mr. Password",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T01:17:29.549Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aebdbb6a5e1949d0e5fa34"
+      },
+      "username": "Dozer",
+      "message": "Hippo crypt"
+    }
+  ],
+  "views": 3,
+  "createdAt": {
+    "$date": "2021-12-07T01:16:03.534Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T01:49:47.493Z"
+  },
+  "__v": 8
+},{
+  "_id": {
+    "$oid": "61aeb66e6a5e1949d0e5f785"
+  },
+  "items": [
+    "Grape",
+    "Apple",
+    "Mango",
+    "Strawberry",
+    "Tomato"
+  ],
+  "likes": [
+    "Mr. Password"
+  ],
+  "dislikes": [
+    "Dozer"
+  ],
+  "name": "Fruits",
+  "owner": "Mr. Password",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T01:24:04.613Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aebd6b6a5e1949d0e5f9d2"
+      },
+      "username": "Dozer",
+      "message": "Tomato is not a fruit!"
+    }
+  ],
+  "views": 8,
+  "createdAt": {
+    "$date": "2021-12-07T01:18:38.246Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T01:48:27.715Z"
+  },
+  "__v": 4
+},{
+  "_id": {
+    "$oid": "61aeb7b76a5e1949d0e5f7f9"
+  },
+  "items": [
+    "White",
+    "Blue",
+    "Black",
+    "Red",
+    "Purple"
+  ],
+  "likes": [
+    "Mr. Password"
+  ],
+  "dislikes": [
+    "Dozer"
+  ],
+  "name": "Colors",
+  "owner": "Mr. Password",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T01:33:33.825Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aebe776a5e1949d0e5fb0c"
+      },
+      "username": "Camposm",
+      "message": "Red is soy beta"
+    },
+    {
+      "_id": {
+        "$oid": "61aebe776a5e1949d0e5fb0d"
+      },
+      "username": "Camposm",
+      "message": "White is cooler"
+    },
+    {
+      "_id": {
+        "$oid": "61aebd626a5e1949d0e5f9cd"
+      },
+      "username": "Dozer",
+      "message": "Red is better"
+    }
+  ],
+  "views": 2,
+  "createdAt": {
+    "$date": "2021-12-07T01:24:07.689Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T01:52:55.597Z"
+  },
+  "__v": 9
+},{
+  "_id": {
+    "$oid": "61aeb9ac6a5e1949d0e5f8d6"
+  },
+  "items": [
+    "?",
+    "?",
+    "?",
+    "?",
+    "?"
+  ],
+  "likes": [],
+  "dislikes": [],
+  "name": "Soda",
+  "owner": "Mr. Password",
+  "isPublished": false,
+  "publishDate": null,
+  "comments": [],
+  "views": 0,
+  "createdAt": {
+    "$date": "2021-12-07T01:32:28.831Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T01:32:41.322Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61aebe4c6a5e1949d0e5fad6"
+  },
+  "items": [
+    "White",
+    "Black",
+    "Blue",
+    "Red",
+    "Green"
+  ],
+  "likes": [],
+  "dislikes": [],
+  "name": "Colors",
+  "owner": "Camposm",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T01:52:25.934Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aebe6a6a5e1949d0e5fb02"
+      },
+      "username": "Camposm",
+      "message": "first..."
+    }
+  ],
+  "views": 5,
+  "createdAt": {
+    "$date": "2021-12-07T01:52:12.776Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T01:58:29.979Z"
+  },
+  "__v": 5
+},{
+  "_id": {
+    "$oid": "61aec0cc6a5e1949d0e5fc5a"
+  },
+  "items": [
+    "Pink",
+    "Blue",
+    "Purple",
+    "Yellow",
+    "Orange"
+  ],
+  "likes": [],
+  "dislikes": [],
+  "name": "Colors",
+  "owner": "Salice",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T02:03:05.302Z"
+  },
+  "comments": [],
+  "views": 0,
+  "createdAt": {
+    "$date": "2021-12-07T02:02:52.113Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T02:03:05.303Z"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "61aed0246a5e1949d0e5fcbf"
+  },
+  "items": [
+    "White",
+    "Blue",
+    "Red",
+    "Black",
+    "Green"
+  ],
+  "likes": [],
+  "dislikes": [],
+  "name": "Colors",
+  "owner": "Mr. Bean",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T03:08:39.348Z"
+  },
+  "comments": [],
+  "views": 0,
+  "createdAt": {
+    "$date": "2021-12-07T03:08:20.639Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:08:39.349Z"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "61aed06e6a5e1949d0e5fd63"
+  },
+  "items": [
+    "Pear",
+    "Strawberry",
+    "Apple",
+    "Mango",
+    "Orange"
+  ],
+  "likes": [],
+  "dislikes": [],
+  "name": "Fruits",
+  "owner": "Mr. Bean",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T03:10:08.510Z"
+  },
+  "comments": [],
+  "views": 0,
+  "createdAt": {
+    "$date": "2021-12-07T03:09:34.595Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:10:08.510Z"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "61aed0b86a5e1949d0e5fd9f"
+  },
+  "items": [
+    "Dumplings",
+    "Ramen",
+    "French Fries",
+    "Cheese Burger",
+    "Pho"
+  ],
+  "likes": [],
+  "dislikes": [],
+  "name": "Food",
+  "owner": "Mr. Bean",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T03:11:18.586Z"
+  },
+  "comments": [],
+  "views": 0,
+  "createdAt": {
+    "$date": "2021-12-07T03:10:48.144Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:11:18.587Z"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "61aed13f6a5e1949d0e5feed"
+  },
+  "items": [
+    "Celery",
+    "Carrot",
+    "Lettuce",
+    "Broccoli",
+    "Cauliflower"
+  ],
+  "likes": [],
+  "dislikes": [],
+  "name": "Vegetables",
+  "owner": "Mr. Bean",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T03:13:54.130Z"
+  },
+  "comments": [],
+  "views": 0,
+  "createdAt": {
+    "$date": "2021-12-07T03:13:03.768Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:13:54.131Z"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "61aed17b6a5e1949d0e5ff1e"
+  },
+  "items": [
+    "Dr. Pepper",
+    "Inca Cola",
+    "Melon Soda",
+    "Mountain Dew",
+    "Pepsi"
+  ],
+  "likes": [],
+  "dislikes": [],
+  "name": "Soda",
+  "owner": "Mr. Bean",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T03:14:41.417Z"
+  },
+  "comments": [],
+  "views": 2,
+  "createdAt": {
+    "$date": "2021-12-07T03:14:03.236Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:15:13.654Z"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "61aed2036a5e1949d0e5ff88"
+  },
+  "items": [
+    "Blue",
+    "Black",
+    "White",
+    "Purple",
+    "Red"
+  ],
+  "likes": [],
+  "dislikes": [],
+  "name": "Colors",
+  "owner": "CamposmWasTaken",
+  "isPublished": true,
+  "publishDate": {
+    "$date": "2021-12-07T03:16:36.929Z"
+  },
+  "comments": [],
+  "views": 0,
+  "createdAt": {
+    "$date": "2021-12-07T03:16:19.199Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:16:36.930Z"
+  },
+  "__v": 1
+}]

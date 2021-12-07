@@ -1,7 +1,7 @@
 export function formatDate(string) {
     let date = new Date(string)
     let strDate = null
-    switch (date.getUTCMonth()) {
+    switch (date.getMonth()) {
         case 0:
             strDate = 'Jan'
             break;
@@ -41,6 +41,6 @@ export function formatDate(string) {
         default:
             strDate = null
     }
-    strDate = strDate + ' ' + date.getUTCDate() + ', ' + date.getUTCFullYear()
+    strDate = strDate + ' ' + date.getDate() + ', ' + date.getFullYear()
     return strDate
 }

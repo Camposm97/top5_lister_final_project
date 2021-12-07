@@ -43,7 +43,7 @@ export default function WorkspaceModal() {
     store.currentList.items[index] = newText
 
     if (newText === '') {
-      setDis({ save: true, pub: false || duplicateItems() })
+      setDis({ save: true, pub: true || duplicateItems() })
     } else {
       setDis({ save: false, pub: duplicateItems() })
     }

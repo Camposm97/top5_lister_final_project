@@ -1,0 +1,510 @@
+[{
+  "_id": {
+    "$oid": "61aeafb76a5e1949d0e5f4c0"
+  },
+  "likes": [
+    "Mr. Password",
+    "Dozer",
+    "Mr. Bean"
+  ],
+  "dislikes": [],
+  "name": "Movies",
+  "items": [
+    {
+      "_id": {
+        "$oid": "61aeb5856a5e1949d0e5f6a4"
+      },
+      "name": "Godzilla",
+      "score": 10
+    },
+    {
+      "_id": {
+        "$oid": "61aeb5856a5e1949d0e5f6a5"
+      },
+      "name": "Iron Giant",
+      "score": 9
+    },
+    {
+      "_id": {
+        "$oid": "61aeb5856a5e1949d0e5f6a6"
+      },
+      "name": "Austin Powers: International Man of Mystery",
+      "score": 6
+    },
+    {
+      "_id": {
+        "$oid": "61aeb5856a5e1949d0e5f6a7"
+      },
+      "name": "Batman",
+      "score": 5
+    },
+    {
+      "_id": {
+        "$oid": "61aeb5856a5e1949d0e5f6a8"
+      },
+      "name": "American Sniper",
+      "score": 5
+    }
+  ],
+  "latestUpdate": {
+    "$date": "2021-12-07T01:14:45.549Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aebe156a5e1949d0e5fa89"
+      },
+      "username": "Camposm",
+      "message": "Iron Giant is good. Well said."
+    },
+    {
+      "_id": {
+        "$oid": "61aebd236a5e1949d0e5f977"
+      },
+      "username": "Dozer",
+      "message": "Iron Giant is good. Keep it there."
+    },
+    {
+      "_id": {
+        "$oid": "61aeb8d06a5e1949d0e5f88b"
+      },
+      "username": "Mr. Password",
+      "message": "I never saw Godzilla, but maybe one day"
+    }
+  ],
+  "views": 27,
+  "createdAt": {
+    "$date": "2021-12-07T00:49:59.856Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:15:21.279Z"
+  },
+  "__v": 27
+},{
+  "_id": {
+    "$oid": "61aeb5ae6a5e1949d0e5f6e4"
+  },
+  "likes": [
+    "Dozer"
+  ],
+  "dislikes": [
+    "Mr. Password",
+    "Camposm",
+    "Mr. Bean"
+  ],
+  "name": "Food",
+  "items": [
+    {
+      "_id": {
+        "$oid": "61aed0d66a5e1949d0e5fda5"
+      },
+      "name": "French Fries",
+      "score": 10
+    },
+    {
+      "_id": {
+        "$oid": "61aed0d66a5e1949d0e5fda6"
+      },
+      "name": "Dumplings",
+      "score": 9
+    },
+    {
+      "_id": {
+        "$oid": "61aed0d66a5e1949d0e5fda7"
+      },
+      "name": "Ramen",
+      "score": 7
+    },
+    {
+      "_id": {
+        "$oid": "61aed0d66a5e1949d0e5fda8"
+      },
+      "name": "Wendy's Double Baconator",
+      "score": 5
+    },
+    {
+      "_id": {
+        "$oid": "61aed0d66a5e1949d0e5fda9"
+      },
+      "name": "Hot Dog",
+      "score": 4
+    }
+  ],
+  "latestUpdate": {
+    "$date": "2021-12-07T03:11:18.591Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aed1076a5e1949d0e5fe01"
+      },
+      "username": "Mr. Bean",
+      "message": "Upvote Dumplings two more times PLEASE"
+    },
+    {
+      "_id": {
+        "$oid": "61aebf906a5e1949d0e5fba1"
+      },
+      "username": "Camposm",
+      "message": "Downvote Wendy's Double Baconator please. There's no need for fast food here."
+    },
+    {
+      "_id": {
+        "$oid": "61aebe2d6a5e1949d0e5faa2"
+      },
+      "username": "Camposm",
+      "message": "Dumplings #1 plex"
+    },
+    {
+      "_id": {
+        "$oid": "61aebd256a5e1949d0e5f97b"
+      },
+      "username": "Dozer",
+      "message": "No dont upvote frnech f ries plz!"
+    },
+    {
+      "_id": {
+        "$oid": "61aeb8e86a5e1949d0e5f890"
+      },
+      "username": "Mr. Password",
+      "message": "Someone make more Food lists, get rid of french fries!"
+    }
+  ],
+  "views": 19,
+  "createdAt": {
+    "$date": "2021-12-07T01:15:26.368Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:15:20.972Z"
+  },
+  "__v": 28
+},{
+  "_id": {
+    "$oid": "61aeb7b46a5e1949d0e5f7dd"
+  },
+  "likes": [
+    "Mr. Password",
+    "Camposm"
+  ],
+  "dislikes": [
+    "Dozer"
+  ],
+  "name": "Fruits",
+  "items": [
+    {
+      "_id": {
+        "$oid": "61aed0906a5e1949d0e5fd69"
+      },
+      "name": "Apple",
+      "score": 7
+    },
+    {
+      "_id": {
+        "$oid": "61aed0906a5e1949d0e5fd6a"
+      },
+      "name": "Strawberry",
+      "score": 6
+    },
+    {
+      "_id": {
+        "$oid": "61aed0906a5e1949d0e5fd6b"
+      },
+      "name": "Grape",
+      "score": 5
+    },
+    {
+      "_id": {
+        "$oid": "61aed0906a5e1949d0e5fd6c"
+      },
+      "name": "Mango",
+      "score": 5
+    },
+    {
+      "_id": {
+        "$oid": "61aed0906a5e1949d0e5fd6d"
+      },
+      "name": "Pear",
+      "score": 5
+    }
+  ],
+  "latestUpdate": {
+    "$date": "2021-12-07T03:10:08.515Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aed0ac6a5e1949d0e5fd91"
+      },
+      "username": "Mr. Bean",
+      "message": "I personally prefer pear"
+    },
+    {
+      "_id": {
+        "$oid": "61aebe2a6a5e1949d0e5fa9c"
+      },
+      "username": "Camposm",
+      "message": "!!isFruit(tomato)"
+    },
+    {
+      "_id": {
+        "$oid": "61aebe2a6a5e1949d0e5fa9d"
+      },
+      "username": "Camposm",
+      "message": "Tomato is not not a fruit"
+    },
+    {
+      "_id": {
+        "$oid": "61aebd266a5e1949d0e5f97f"
+      },
+      "username": "Dozer",
+      "message": "Yes, tomatoes are fruits..."
+    },
+    {
+      "_id": {
+        "$oid": "61aeb8f76a5e1949d0e5f898"
+      },
+      "username": "Mr. Password",
+      "message": "Tomatos are fruits?"
+    }
+  ],
+  "views": 18,
+  "createdAt": {
+    "$date": "2021-12-07T01:24:04.615Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:15:20.693Z"
+  },
+  "__v": 26
+},{
+  "_id": {
+    "$oid": "61aeb9ed6a5e1949d0e5f90b"
+  },
+  "likes": [
+    "Mr. Password",
+    "Dozer"
+  ],
+  "dislikes": [],
+  "name": "Colors",
+  "items": [
+    {
+      "_id": {
+        "$oid": "61aed2146a5e1949d0e5ff8e"
+      },
+      "name": "Blue",
+      "score": 20
+    },
+    {
+      "_id": {
+        "$oid": "61aed2146a5e1949d0e5ff8f"
+      },
+      "name": "White",
+      "score": 18
+    },
+    {
+      "_id": {
+        "$oid": "61aed2146a5e1949d0e5ff90"
+      },
+      "name": "Black",
+      "score": 13
+    },
+    {
+      "_id": {
+        "$oid": "61aed2146a5e1949d0e5ff91"
+      },
+      "name": "Red",
+      "score": 8
+    },
+    {
+      "_id": {
+        "$oid": "61aed2146a5e1949d0e5ff92"
+      },
+      "name": "Purple",
+      "score": 6
+    }
+  ],
+  "latestUpdate": {
+    "$date": "2021-12-07T03:16:36.935Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aed22a6a5e1949d0e5ffbe"
+      },
+      "username": "CamposmWasTaken",
+      "message": "You are welcome"
+    },
+    {
+      "_id": {
+        "$oid": "61aed22a6a5e1949d0e5ffbf"
+      },
+      "username": "CamposmWasTaken",
+      "message": "Bloo back on top :)"
+    },
+    {
+      "_id": {
+        "$oid": "61aed0666a5e1949d0e5fd56"
+      },
+      "username": "Mr. Bean",
+      "message": "I prefer white and blue on my car"
+    },
+    {
+      "_id": {
+        "$oid": "61aed0666a5e1949d0e5fd57"
+      },
+      "username": "Mr. Bean",
+      "message": "White and blue is a good color match"
+    },
+    {
+      "_id": {
+        "$oid": "61aebe1b6a5e1949d0e5fa93"
+      },
+      "username": "Camposm",
+      "message": "Second..."
+    },
+    {
+      "_id": {
+        "$oid": "61aebd1e6a5e1949d0e5f970"
+      },
+      "username": "Dozer",
+      "message": "First!"
+    }
+  ],
+  "views": 16,
+  "createdAt": {
+    "$date": "2021-12-07T01:33:33.827Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:16:58.853Z"
+  },
+  "__v": 27
+},{
+  "_id": {
+    "$oid": "61aed1726a5e1949d0e5fef2"
+  },
+  "likes": [
+    "Mr. Bean"
+  ],
+  "dislikes": [],
+  "name": "Vegetables",
+  "items": [
+    {
+      "_id": {
+        "$oid": "61aed1726a5e1949d0e5fef5"
+      },
+      "name": "Celery",
+      "score": 5
+    },
+    {
+      "_id": {
+        "$oid": "61aed1726a5e1949d0e5fef6"
+      },
+      "name": "Carrot",
+      "score": 4
+    },
+    {
+      "_id": {
+        "$oid": "61aed1726a5e1949d0e5fef7"
+      },
+      "name": "Lettuce",
+      "score": 3
+    },
+    {
+      "_id": {
+        "$oid": "61aed1726a5e1949d0e5fef8"
+      },
+      "name": "Broccoli",
+      "score": 2
+    },
+    {
+      "_id": {
+        "$oid": "61aed1726a5e1949d0e5fef9"
+      },
+      "name": "Cauliflower",
+      "score": 1
+    }
+  ],
+  "latestUpdate": {
+    "$date": "2021-12-07T03:13:54.138Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aed1b36a5e1949d0e5ff44"
+      },
+      "username": "Mr. Bean",
+      "message": "Carrot is good for your eyes"
+    }
+  ],
+  "views": 2,
+  "createdAt": {
+    "$date": "2021-12-07T03:13:54.133Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:15:20.122Z"
+  },
+  "__v": 4
+},{
+  "_id": {
+    "$oid": "61aed1a16a5e1949d0e5ff23"
+  },
+  "likes": [],
+  "dislikes": [],
+  "name": "Soda",
+  "items": [
+    {
+      "_id": {
+        "$oid": "61aed1a16a5e1949d0e5ff26"
+      },
+      "name": "Dr. Pepper",
+      "score": 5
+    },
+    {
+      "_id": {
+        "$oid": "61aed1a16a5e1949d0e5ff27"
+      },
+      "name": "Inca Cola",
+      "score": 4
+    },
+    {
+      "_id": {
+        "$oid": "61aed1a16a5e1949d0e5ff28"
+      },
+      "name": "Melon Soda",
+      "score": 3
+    },
+    {
+      "_id": {
+        "$oid": "61aed1a16a5e1949d0e5ff29"
+      },
+      "name": "Mountain Dew",
+      "score": 2
+    },
+    {
+      "_id": {
+        "$oid": "61aed1a16a5e1949d0e5ff2a"
+      },
+      "name": "Pepsi",
+      "score": 1
+    }
+  ],
+  "latestUpdate": {
+    "$date": "2021-12-07T03:14:41.422Z"
+  },
+  "comments": [
+    {
+      "_id": {
+        "$oid": "61aed1bb6a5e1949d0e5ff49"
+      },
+      "username": "Mr. Bean",
+      "message": "Dr. P #1 :)"
+    }
+  ],
+  "views": 3,
+  "createdAt": {
+    "$date": "2021-12-07T03:14:41.419Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:15:19.783Z"
+  },
+  "__v": 3
+}]

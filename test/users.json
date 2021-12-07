@@ -1,0 +1,97 @@
+[{
+  "_id": {
+    "$oid": "61ae93f18a91f61c904f6497"
+  },
+  "firstName": "Michael",
+  "lastName": "Campos",
+  "email": "michael.campos@stonybrook.edu",
+  "username": "Camposm",
+  "passwordHash": "$2a$10$5wjDUQl3FkPbHiQmQn8O.OSCxYhbTIUcFfOO1DW0zLfX6uT5L.hbW",
+  "createdAt": {
+    "$date": "2021-12-06T22:51:29.836Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-06T22:51:29.836Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61aeafd66a5e1949d0e5f4e2"
+  },
+  "firstName": "Jon",
+  "lastName": "Doe",
+  "email": "jon.doe@stonybrook.edu",
+  "username": "Dozer",
+  "passwordHash": "$2a$10$X/0wTDtGJ1Yt9SeDUljfNuNChDO5nX424TkewhKeXDlsCLjQ0b7zK",
+  "createdAt": {
+    "$date": "2021-12-07T00:50:30.241Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T00:50:30.241Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61aeb29c6a5e1949d0e5f50f"
+  },
+  "firstName": "Adam",
+  "lastName": "Stark",
+  "email": "adam.stark@stonybrook.edu",
+  "username": "Mr. Password",
+  "passwordHash": "$2a$10$VTk6.th9f2G79fMdAsUuE.o074yXMCXexJBdguj9T9zYgAAD8jczK",
+  "createdAt": {
+    "$date": "2021-12-07T01:02:20.847Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T01:02:20.847Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61aeb3246a5e1949d0e5f59a"
+  },
+  "firstName": "Michael",
+  "lastName": "Campos",
+  "email": "darkpro1000@live.com",
+  "username": "CamposmWasTaken",
+  "passwordHash": "$2a$10$LY.mSeTGO2cLBCdJLyJPeOqPiwaNuoRWcRjxjCOH7/42glR8F5Za2",
+  "createdAt": {
+    "$date": "2021-12-07T01:04:36.910Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T01:04:36.910Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61aec0c76a5e1949d0e5fc56"
+  },
+  "firstName": "Alice",
+  "lastName": "Smith",
+  "email": "alice.smith@gmail.com",
+  "username": "Salice",
+  "passwordHash": "$2a$10$tAUmtQwflH.B8jUHfF/X3uFv/pTZQ5p30mEjpn2Emyd1Ukl283d.O",
+  "createdAt": {
+    "$date": "2021-12-07T02:02:47.827Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T02:02:47.827Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61aed01f6a5e1949d0e5fcb3"
+  },
+  "firstName": "Michael",
+  "lastName": "Allen",
+  "email": "michael.allen@live.com",
+  "username": "Mr. Bean",
+  "passwordHash": "$2a$10$Msekkquh6Wgfh8NzSO1JC.cXxQXpAIIXZE5baecrs.ie4FpOXhLIq",
+  "createdAt": {
+    "$date": "2021-12-07T03:08:15.646Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-07T03:08:15.646Z"
+  },
+  "__v": 0
+}]
